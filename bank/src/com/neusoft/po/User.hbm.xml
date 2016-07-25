@@ -31,7 +31,7 @@
         <property name="createBank" type="string">
             <column name="create_bank" length="50" not-null="true" />
         </property>
-        <set name="creditCards" inverse="true">
+        <set name="creditCards" inverse="true" lazy="false">
             <key>
                 <column name="user_id" not-null="true" />
             </key>

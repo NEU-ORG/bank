@@ -2,9 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="default" extends="struts-default">
-
 		<interceptors>
-
 			<interceptor name="auth"
 				class="com.neusoft.interceptor.AuthInterceptor"></interceptor>
 			<interceptor-stack name="mystack">
@@ -12,7 +10,7 @@
 				<interceptor-ref name="auth"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
-
+		
 		<action name="loginAction" class="com.neusoft.action.LoginAction">
 			<result name="success">/main.jsp</result>
 			<result name="admin">/admin.jsp</result>
@@ -25,4 +23,5 @@
 			<result name="success">/sign_in.jsp</result>
 		</action>
 	</package>
+	<include file="creditCardStruts.xml"></include>
 </struts>    

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="creditCard" extends="struts-default">
+		<action name="creditCard_*" class="com.neusoft.action.CreditCardAction" method="{1}">
+			<result name="info">my_credit_card.jsp</result>
+		</action>
+	</package>
+</struts>    

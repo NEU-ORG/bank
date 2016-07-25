@@ -1,15 +1,12 @@
 package com.neusoft.action;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+
 public class LoginAction implements SessionAware{
 	public String execute() {
-//		for(Map.Entry<String, Object> entry: session.entrySet()){
-//			System.out.println("->"+entry.getKey()+entry.getValue());
-//		}
 		String result;
 		if(userName!=null&&userName.equals("admin")&&password.equals("admin")){
 			session.put("loginInfo",userName);
