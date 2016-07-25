@@ -19,6 +19,7 @@ public class CreditCardAction extends ActionSupport{
 		String userName = (String) session.get("loginInfo");
 		User user = (User) userDao.findByProperty("userName", userName).get(0);
 		session.put("creditCards", user.getCreditCards());
+		session.put("user", user);
 		return "info";
 	}
 

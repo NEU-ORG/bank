@@ -25,9 +25,10 @@
 		<a href="creditCard_checedBill.action">已出账单查询<br/></a>
 		<a href="creditCard_unchecedBill.action">未出账单查询<br/></a>
 		<a href="creditCard_score.action">积分查询<br/></a>
-		<c:forEach var="card" items="${creditCards}">
+		<c:forEach var="card" items="${user.creditCards}">
 			<c:out value="num:${card.cardNumber}"></c:out>
 			<c:out value="name:${card.name}"></c:out>
+			<c:out value="name:${card.type}"></c:out>
 		</c:forEach>
 	</div>
 	</div>

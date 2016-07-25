@@ -2,8 +2,19 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="creditCard" extends="struts-default">
-		<action name="creditCard_*" class="com.neusoft.action.CreditCardAction" method="{1}">
-			<result name="info">my_credit_card.jsp</result>
+		<interceptors>
+			<interceptor name="auth"
+				class="com.neusoft.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="auth"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<action name="creditCard_*" class="com.neusoft.action.CreditCardAction"
+			method="{1}">
+			<interceptor-ref name="mystack"></interceptor-ref>
+			<result name="info">/WEB-INF/jsp/my_credit_card.jsp</result>
+			<result name="login">sign_in.jsp</result>
 		</action>
 	</package>
 </struts>    
