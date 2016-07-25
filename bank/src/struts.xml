@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-<package name="default" extends="struts-default">
+	<package name="default" extends="struts-default">
+
+		<interceptors>
+
+			<interceptor name="auth"
+				class="com.neusoft.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="auth"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
 		<action name="loginAction" class="com.neusoft.action.LoginAction">
 			<result name="success">/main.jsp</result>
 			<result name="admin">/admin.jsp</result>
+			<result name="error">/sign_in.jsp</result>
 		</action>
 		<action name="createAccountAction" class="com.neusoft.action.CreateAccountAction">
 			<result name="success">/admin.jsp</result>
