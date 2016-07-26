@@ -21,10 +21,7 @@
 		<a >可用额度设置？？？<br/></a><br/>
 	</div>
 	<div style="float:left">
-		<a href="creditCard_creditLimit.action">可用额度查询<br/></a>
-		<a href="creditCard_checedBill.action">已出账单查询<br/></a>
-		<a href="creditCard_unchecedBill.action">未出账单查询<br/></a>
-		<a href="creditCard_score.action">积分查询<br/></a>
+		<h1>激活信用卡</h1>
 	</div>
 	</div>
 </body>
