@@ -22,7 +22,19 @@
 	</div>
 	<div style="float:left">
 		<h1>修改查询密码</h1>
+		<form action="creditCard_changeSPassword">
+			原密码:<input type="password" name="oldPassword"><br/>
+			新密码:<input type="password" name="newPassword"><br/>
+			确认密码:<input type="password" name="checkPassword"><br/>
+			<input type="submit" value="修改密码">
+		</form>
 		<h1>修改交易密码</h1>
+		<form action="creditCard_changeTpassword">
+			原密码:<input type="password" name="oldPassword"><br/>
+			新密码:<input type="password" name="newPassword"><br/>
+			确认密码:<input type="password" name="checkPassword"><br/>
+			<input type="submit" value="修改密码">
+		</form>
 	</div>
 	</div>
 </body>

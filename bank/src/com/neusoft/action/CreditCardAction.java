@@ -51,6 +51,13 @@ public class CreditCardAction extends ActionSupport{
 	public String score() {// »ý·Ö²éÑ¯
 		return "score";
 	}
-	
+	public String changeSPassword(){
+		
+		return "change_password";
+	}
+	public String changeTPassword(){
+		
+		return "change_password";
+	}
 
 }
