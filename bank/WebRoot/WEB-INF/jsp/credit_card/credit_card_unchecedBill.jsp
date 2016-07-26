@@ -21,7 +21,27 @@
 		<a >可用额度设置？？？<br/></a><br/>
 	</div>
 	<div style="float:left">
-		<h1>积分查询</h1>
+		<a href="creditCard_creditLimit.action">可用额度查询<br/></a>
+		<a href="creditCard_checedBill.action">已出账单查询<br/></a>
+		<a href="creditCard_unchecedBill.action">未出账单查询<br/></a>
+		<a href="creditCard_score.action">积分查询<br/></a>
+	</div>
+	<div style="float:left">
+		<h1>未出账单查询</h1>
+		<c:forEach var="card" items="${user.creditCards}">
+			<c:out value="卡号：${card.cardNumber}"></c:out><br/>
+			<c:forEach var="detail" items="${card.billDetails}">
+				<c:out value="${detail.recordDate}"></c:out>
+				<c:out value="${detail.transactionTime}"></c:out>
+				<c:out value="${detail.amountPaid}"></c:out>
+				<c:out value="${detail.amountReceived}"></c:out>
+				<c:out value="${detail.currency}"></c:out>
+				<c:out value="${detail.type}"></c:out>
+				<c:out value="${detail.location}"></c:out>
+				<c:out value="${detail.summary}"></c:out>
+			</c:forEach>
+			<br/>
+		</c:forEach>
 	</div>
 	</div>
 </body>

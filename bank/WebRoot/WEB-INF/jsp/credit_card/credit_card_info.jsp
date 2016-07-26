@@ -21,8 +21,24 @@
 		<a >可用额度设置？？？<br/></a><br/>
 	</div>
 	<div style="float:left">
-		<h1>未出账单查询</h1>
+		<a href="creditCard_creditLimit.action">可用额度查询<br/></a>
+		<a href="creditCard_checedBill.action">已出账单查询<br/></a>
+		<a href="creditCard_unchecedBill.action">未出账单查询<br/></a>
+		<a href="creditCard_score.action">积分查询<br/></a>
 	</div>
-	</div>
+	<div style="float:left">
+		<h1>信用卡信息</h1>
+		<c:if test="${empty user.creditCards}">
+			<a>您还未拥有信用卡！！</a><br />
+			<a href="creditCard_apply.action">申请信用卡</a><br/>
+		</c:if>
+		<c:forEach var="card" items="${user.creditCards}">
+			<c:out value="卡号：${card.cardNumber}"></c:out><br />
+			<c:out value="类型：${card.type}"></c:out><br />
+			<c:out value="已用额度：${card.balance}"></c:out><br />
+			<c:out value="币种：${card.currency}"></c:out><br />
+			<c:out value="状态：${card.status}"></c:out><br />
+			<c:out value="账单日：每月${card.statementDate}号"></c:out><br /><br/>
+		</c:forEach>
 </body>
 </html>

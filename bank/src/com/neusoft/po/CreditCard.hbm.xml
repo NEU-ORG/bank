@@ -49,13 +49,13 @@
         <property name="score" type="long">
             <column name="score" precision="10" scale="0" not-null="true" />
         </property>
-        <set name="billDetails" inverse="true">
+        <set name="billDetails" inverse="true" lazy="false">
             <key>
                 <column name="credit_card_id" not-null="true" />
             </key>
             <one-to-many class="com.neusoft.po.BillDetail" />
         </set>
-        <set name="creditCardBills" inverse="true">
+        <set name="creditCardBills" inverse="true" lazy="false">
             <key>
                 <column name="credit_card_id" not-null="true" />
             </key>
