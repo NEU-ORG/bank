@@ -3,20 +3,14 @@
 
 <struts>
 
-	<constant name="struts.objectfactory" value="spring" />
-
-	<package name="AccountQueryAction" namespace="/" extends="struts-default">
-		<action name="AccountQueryAction" class="com.neusoft.action.AccountList">
-			<result name="success">/accountlist.jsp</result>
-			<result name="error">/index.jsp</result>
-		</action>
-	</package>
+	<!-- <constant name="struts.objectfactory" value="spring" /> -->
 	
-	<package name="AccountAddAction" namespace="/" extends="struts-default">
-		<action name="AccountAddAction" class="com.neusoft.action.accountAddAction">
-			<result name="success">/accountlist.jsp</result>
-			<result name="input">/accountadd.jsp</result>
-			<!--<result name="error">/index.jsp</result>-->
+	<package name="accountAction" namespace="/" extends="struts-default">
+		<action name="account_*" class="com.neusoft.action.AccountAction"
+				method="{1}">
+				<result name="list">/WEB-INF/jsp/my_account.jsp</result>
+				<result name="input">/index.jsp</result>
+				<result name="error">/index.jsp</result>
 		</action>
 	</package>
 
