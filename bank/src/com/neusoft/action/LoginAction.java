@@ -1,8 +1,15 @@
 package com.neusoft.action;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.neusoft.dao.UserDAO;
+import com.neusoft.po.User;
+import com.opensymphony.xwork2.ActionContext;
 
 
 public class LoginAction implements SessionAware{
@@ -13,8 +20,21 @@ public class LoginAction implements SessionAware{
 			result = "admin";
 			
 		}else if(userName!=null&&userName.equals(password)){
-			session.put("loginInfo",userName);
-			result = "success";
+			ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+			UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			List users = userDao.findByProperty("userName", userName);
+			if(users.isEmpty()){
+				//no user called userName.
+				result = "error";
+			}else if(users.size()!=1){
+				//error, cant't have any user with same userName.
+				result = "error";
+			}else{
+				session.put("user", users.get(0));
+				session.put("loginInfo",userName);
+				result = "success";
+			}
 		}else{
 			session.put("loginError","用户名或密码不正确！！");
 			result = "error";

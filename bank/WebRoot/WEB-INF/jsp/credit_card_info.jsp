@@ -26,6 +26,7 @@
 		<a href="creditCard_unchecedBill.action">未出账单查询<br/></a>
 		<a href="creditCard_score.action">积分查询<br/></a>
 	</div>
+	<iframe src="sign_in.jsp" name="iframe_a"></iframe>
 	</div>
 </body>
 </html>
