@@ -14,7 +14,7 @@
 	<a href="account_list.action">account_list</a>
 	<br />
 
-	<form name="alist">
+	<form id="alists" name="alist" display="nones">
 		<table>
 			<tr>
 				<td>id</td>
@@ -33,6 +33,7 @@
 				<td>available_balance</td>
 			</tr>
 			<s:iterator value="#request.accountList">
+
 				<tr>
 					<td><s:property value="id" /></td>
 					<td><s:property value="name" /></td>

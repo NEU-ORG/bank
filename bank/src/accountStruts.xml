@@ -8,6 +8,7 @@
 	<package name="accountAction" namespace="/" extends="struts-default">
 		<action name="account_*" class="com.neusoft.action.AccountAction"
 				method="{1}">
+				<result name="info">/WEB-INF/jsp/my_account.jsp</result>
 				<result name="list">/WEB-INF/jsp/my_account.jsp</result>
 				<result name="input">/index.jsp</result>
 				<result name="error">/index.jsp</result>
