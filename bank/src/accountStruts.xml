@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+	<constant name="struts.objectfactory" value="spring" />
+
+	<package name="AccountQueryAction" namespace="/" extends="struts-default">
+		<action name="AccountQueryAction" class="com.neusoft.action.AccountList">
+			<result name="success">/accountlist.jsp</result>
+			<result name="error">/index.jsp</result>
+		</action>
+	</package>
+	
+	<package name="AccountAddAction" namespace="/" extends="struts-default">
+		<action name="AccountAddAction" class="com.neusoft.action.accountAddAction">
+			<result name="success">/accountlist.jsp</result>
+			<result name="input">/accountadd.jsp</result>
+			<!--<result name="error">/index.jsp</result>-->
+		</action>
+	</package>
+
+</struts>

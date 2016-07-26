@@ -29,4 +29,5 @@
 		
 	</package>
 	<include file="creditCardStruts.xml"></include>
+	<include file="accountStruts.xml"></include>
 </struts>    
