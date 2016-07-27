@@ -24,8 +24,8 @@ public class Account implements java.io.Serializable {
 	private boolean isSigned;
 	private String status;
 	private String type;
-	private long balance;
-	private long availableBalance;
+	private Double balance;
+	private Double availableBalance;
 	private Set transactionDetails = new HashSet(0);
 
 	// Constructors
@@ -38,7 +38,7 @@ public class Account implements java.io.Serializable {
 	public Account(User user, String accountNumber, String withdrawalPassword,
 			String transactionPassword, String currency, String createBank,
 			Date createDate, boolean isSigned, String status, String type,
-			long balance, long availableBalance) {
+			Double balance, Double availableBalance) {
 		this.user = user;
 		this.accountNumber = accountNumber;
 		this.withdrawalPassword = withdrawalPassword;
@@ -57,8 +57,8 @@ public class Account implements java.io.Serializable {
 	public Account(User user, String name, String accountNumber,
 			String withdrawalPassword, String transactionPassword,
 			String currency, String createBank, Date createDate,
-			boolean isSigned, String status, String type, long balance,
-			long availableBalance, Set transactionDetails) {
+			boolean isSigned, String status, String type, Double balance,
+			Double availableBalance, Set transactionDetails) {
 		this.user = user;
 		this.name = name;
 		this.accountNumber = accountNumber;
@@ -173,19 +173,19 @@ public class Account implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public long getBalance() {
+	public Double getBalance() {
 		return this.balance;
 	}
 
-	public void setBalance(long balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 
-	public long getAvailableBalance() {
+	public Double getAvailableBalance() {
 		return this.availableBalance;
 	}
 
-	public void setAvailableBalance(long availableBalance) {
+	public void setAvailableBalance(Double availableBalance) {
 		this.availableBalance = availableBalance;
 	}
 

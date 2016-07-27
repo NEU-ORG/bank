@@ -11,36 +11,19 @@
 	<h1>我的账户 0.0</h1>
 	<br />
 
-	<a href="account_list.action">account_list</a>
-	<br />
-
-	<form id="alists" name="alist" display="nones">
-		<table>
-			<tr>
-				<td>id</td>
-				<td>name</td>
-				<td>user.getId()</td>
-				<td>account_number</td>
-				<td>withdrawal_password</td>
-				<td>transaction_password</td>
-				<td>currency</td>
-				<td>create_bank</td>
-				<td>create_date</td>
-				<td>is_signed</td>
-				<td>status</td>
-				<td>type</td>
-				<td>balance</td>
-				<td>available_balance</td>
-			</tr>
+	<div id="controler">
+		<a id="alist_action" href="account_list.action">account_list</a> <br />
+		<a id="alist_create_win" href="account_create_win.action">account_create</a>
+	</div>
+		<table id="alist_show">
 			<s:iterator value="#request.accountList">
-
 				<tr>
 					<td><s:property value="id" /></td>
 					<td><s:property value="name" /></td>
 					<td><s:property value="user.getId()" /></td>
 					<td><s:property value="accountNumber" /></td>
-					<td><s:property value="withdrawalPassword" /></td>
-					<td><s:property value="transactionPassword" /></td>
+					<%-- <td><s:property value="withdrawalPassword" /></td>
+					<td><s:property value="transactionPassword" /></td> --%>
 					<td><s:property value="currency" /></td>
 					<td><s:property value="createBank" /></td>
 					<td><s:property value="createDate" /></td>
@@ -52,7 +35,6 @@
 				</tr>
 			</s:iterator>
 		</table>
-	</form>
 
 </body>
 </html>
