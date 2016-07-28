@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC
+  		"-//OpenSymphony Group//XWork Validator 1.0.3//EN"
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.3.dtd">
+  		
+<validators>
+
+	<field name="accountNumber">
+		<!-- type值为校验器名，requiredstring：非空字符串校验器 -->
+		<field-validator type="requiredstring">
+			<message>账户不能为空</message>
+		</field-validator>
+	</field>
+	
+	<field name="transactionPassword">
+		<field-validator type="requiredstring">
+			<message>password can not be empty</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="minLength">6</param>
+			<param name="maxLength">20</param>
+			<message>password length should between 6 and 20</message>
+		</field-validator>
+	</field>
+	
+	<field name="retransactionPassword">
+		<field-validator type="fieldexpression">
+            <!-- 表达式要写在   <![CDATA[]]>   内 -->
+            <param name="expression"><![CDATA[retransactionPassword==transactionPassword]]></param>
+            <message>两次密码不一至</message>
+        </field-validator>
+	</field>
+	
+</validators>

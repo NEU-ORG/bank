@@ -28,8 +28,9 @@
 <body>
 	<h1>登录页面</h1>
 	<form action="loginAction.action" method="post">
-		用户名：<input type="text" name="userName" /><br /> 密码：<input
-			type="password" name="password" /> <input type="submit" value="登录"><br />
+		用户名：<input type="text" name="userName" value="lzn"/><br /> 
+		密码：<input type="password" name="password" value="lzn"/> 
+		<input type="submit" value="登录"><br />
 	</form>
 	<a href="forget_username.jsp">忘记用户名</a>
 	<a href="forget_password.jsp">忘记密码</a>
