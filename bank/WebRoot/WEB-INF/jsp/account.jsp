@@ -16,6 +16,7 @@
 
 	<div id="controler">
 		<a id="alist_action" href="account_list.action">account_list</a> <br />
+		<a id="alistjson" href="AccountJsonAction">accountjson</a> <br />
 		<a id="alist_create_win" href="account_create_win.action">account_create</a>
 	</div>
 		<table id="alist_show">
