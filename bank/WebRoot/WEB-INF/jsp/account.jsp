@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<%-- <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> --%>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,6 +16,7 @@
 
 	<div id="controler">
 		<a id="alist_action" href="account_list.action">account_list</a> <br />
+		<a id="alistjson" href="AccountJsonAction">accountjson</a> <br />
 		<a id="alist_create_win" href="account_create_win.action">account_create</a>
 	</div>
 		<table id="alist_show">
@@ -35,6 +39,7 @@
 				</tr>
 			</s:iterator>
 		</table>
+		<div id="account_create_div"></div>
 
 </body>
 </html>
