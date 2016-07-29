@@ -11,11 +11,11 @@
         </global-results>
 		<action name="account_*" class="com.neusoft.action.AccountAction"
 				method="{1}">
-				<result name="info">/WEB-INF/jsp/my_account.jsp</result>
-				<result name="list">/WEB-INF/jsp/my_account.jsp</result>
+				<result name="info">/WEB-INF/jsp/account.jsp</result>
+				<result name="list">/WEB-INF/jsp/account.jsp</result>
 				<result name="create_win">/WEB-INF/jsp/account_create.jsp</result>
-				<result name="create">/WEB-INF/jsp/my_account.jsp</result>
-				<result name="return">/WEB-INF/jsp/my_account.jsp</result>
+				<result name="create">/WEB-INF/jsp/account.jsp</result>
+				<result name="return">/WEB-INF/jsp/account.jsp</result>
 				<result name="input">/WEB-INF/jsp/account_create.jsp</result>
 		</action>
 	</package>

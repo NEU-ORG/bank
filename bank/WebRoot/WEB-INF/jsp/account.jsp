@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<%-- <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> --%>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -35,6 +38,7 @@
 				</tr>
 			</s:iterator>
 		</table>
+		<div id="account_create_div"></div>
 
 </body>
 </html>
