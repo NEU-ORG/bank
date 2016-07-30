@@ -55,6 +55,11 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+		<bean id="userManager" class="com.neusoft.bo.UserManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	<bean id="UserDAO" class="com.neusoft.dao.UserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />

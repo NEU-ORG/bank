@@ -40,6 +40,7 @@ public class LoginAction implements SessionAware{
 			result = "error";
 		}
 		return result;
+		
 	}
 	
 	public String getUserName() {
