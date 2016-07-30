@@ -22,12 +22,11 @@ public class AccountAction extends ActionSupport {
 	private String retransactionPassword;
 
 	private ApplicationContext ctx;
-
-	private AccountDAO accountDao;
+	private AccountDAO accountDAO;
 
 	public void init() {
 		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		accountDao = (AccountDAO) ctx.getBean("AccountDAO");
+		accountDAO = (AccountDAO) ctx.getBean("AccountDAO");
 	}
 
 	public void destroy() {
@@ -40,7 +39,7 @@ public class AccountAction extends ActionSupport {
 	public String list() {
 		try {
 			init();
-			accountList = accountDao.findAll();
+			accountList = accountDAO.findAll();
 
 			Map request = (Map) ActionContext.getContext().get("request");
 			request.put("accountList", accountList);
@@ -71,10 +70,7 @@ public class AccountAction extends ActionSupport {
 
 	public String create() {
 		try {
-			ApplicationContext ctx = new ClassPathXmlApplicationContext(
-					"applicationContext.xml");
-			AccountDAO accountDao = (AccountDAO) ctx.getBean("AccountDAO");
-
+			init();
 			UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
 
 			Account newAccount = new Account();
@@ -100,11 +96,11 @@ public class AccountAction extends ActionSupport {
 					+ newAccount.getStatus() + "\nbalance:"
 					+ newAccount.getBalance());
 
-			accountDao.attachDirty(newAccount);
+			accountDAO.attachDirty(newAccount);
 
 		} catch (RuntimeException re) {
 			System.out.println("error");
-			// throw re;
+			throw re;
 			// return "error";
 		}
 		return "create";
