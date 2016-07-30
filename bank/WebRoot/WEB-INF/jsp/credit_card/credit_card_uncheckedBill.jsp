@@ -21,7 +21,17 @@
 		<a >可用额度设置？？？<br/></a><br/>
 	</div>
 	<div style="float:left">
-		<h1>激活信用卡</h1>
+		<h1>未出账单查询</h1>
+		<c:forEach var="detail" items="${uncheckedBill}">
+			<c:out value="${detail.recordDate}"></c:out>
+			<c:out value="${detail.transactionTime}"></c:out>
+			<c:out value="${detail.amountPaid}"></c:out>
+			<c:out value="${detail.amountReceived}"></c:out>
+			<c:out value="${detail.currency}"></c:out>
+			<c:out value="${detail.type}"></c:out>
+			<c:out value="${detail.location}"></c:out>
+			<c:out value="${detail.summary}"></c:out><br/>
+		</c:forEach>	
 	</div>
 	</div>
 </body>

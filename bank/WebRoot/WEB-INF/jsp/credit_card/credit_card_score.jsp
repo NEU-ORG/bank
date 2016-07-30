@@ -16,8 +16,8 @@
 		<a href="creditCard_application_progress.action">申请进度查询</a><br/>
 		<a href="creditCard_report_loss.action">卡片挂失</a><br/>
 		<a href="creditCard_active.action">卡片激活</a><br/>
-		<a href="creditCard_change_password.action">交易密码修改</a><br/>
-		<a href="creditCard_change_password.action">查询密码修改</a><br/>
+		<a href="creditCard_changeTPassword.action">交易密码修改<br/></a>
+		<a href="creditCard_changeSPassword.action">查询密码修改<br/></a>
 		<a >可用额度设置？？？</a><br/>
 	</div>
 	<div style="float:left">

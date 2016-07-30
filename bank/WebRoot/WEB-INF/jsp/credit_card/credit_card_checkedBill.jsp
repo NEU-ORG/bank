@@ -21,7 +21,11 @@
 		<a >可用额度设置？？？<br/></a><br/>
 	</div>
 	<div style="float:left">
-		<h1>激活信用卡</h1>
+		<h1>已出账单查询</h1>
+		<c:out value="${checkedBill.statementDate}"></c:out>
+		<c:out value="${checkedBill.dueDate}"></c:out>
+		<c:out value="${checkedBill.statementBalance}"></c:out>
+		<c:out value="${checkedBill.minPayment}"></c:out><br/>
 	</div>
 	</div>
 </body>

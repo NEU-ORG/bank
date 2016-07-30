@@ -3,7 +3,8 @@
 
 <hibernate-reverse-engineering>
 
-	<table name="account" catalog="bank">
+
+<table name="account" catalog="bank">
 		<primary-key>
 			<generator class="increment"></generator>
 		</primary-key>

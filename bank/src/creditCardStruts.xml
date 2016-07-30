@@ -13,6 +13,7 @@
 		<action name="creditCard_*" class="com.neusoft.action.CreditCardAction"
 			method="{1}">
 			<interceptor-ref name="mystack"></interceptor-ref>
+			<result name="backMain">/WEB-INF/jsp/main.jsp</result>
 			<result name="{1}">/WEB-INF/jsp/credit_card/credit_card_{1}.jsp</result>
 			<result name="login">sign_in.jsp</result>
 		</action>

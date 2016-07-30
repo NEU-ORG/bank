@@ -1,18 +1,31 @@
 package com.neusoft.action;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.neusoft.bo.CreditCardManager;
 import com.neusoft.dao.UserDAO;
+import com.neusoft.po.CreditCardBill;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class CreditCardAction extends ActionSupport{
+public class CreditCardAction extends ActionSupport {
+	private int creditCardID;
+	private CreditCardManager creditCardManager;// auto DI ???
 
 	public String info() {
+		Set cards = creditCardManager.getCardInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("creditCards", cards);
 		return "info";
 	}
 
@@ -32,32 +45,49 @@ public class CreditCardAction extends ActionSupport{
 		return "active";
 	}
 
-	public String change_password() {// 密码修改
-		return "change_password";
+	public String checkedBill() {// 已出账单查询
+		System.out.println(creditCardID);
+		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
+		CreditCardBill checkedBill = creditCardManager.getCheckedBill(creditCardID);
+		request.put("checkedBill",checkedBill);
+		return "checkedBill";
 	}
 
-	public String creditLimit() {//
-		return "creditLimit";
-	}
-
-	public String checedBill() {// 已出账单查询
-		return "checedBill";
-	}
-
-	public String unchecedBill() {// 未出账单查询
-		return "unchecedBill";
-	}
-
-	public String score() {// 积分查询
-		return "score";
-	}
-	public String changeSPassword(){
+	public String uncheckedBill() {//need to check user<->card relationship;
+		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
 		
-		return "change_password";
+		Set uncheckedBill = creditCardManager.getUncheckedBill(creditCardID);
+		request.put("uncheckedBill", uncheckedBill);
+		return "uncheckedBill";
 	}
-	public String changeTPassword(){
-		
-		return "change_password";
+
+	public String changeSPassword() {
+
+		return "changeSPassword";
+	}
+
+	public String changeTPassword() {
+
+		return "changeTPassword";
+	}
+	public String returnMain(){
+		return "backMain";
+	}
+
+	public CreditCardManager getCreditCardManager() {
+		return creditCardManager;
+	}
+
+	public void setCreditCardManager(CreditCardManager creditCardManager) {
+		this.creditCardManager = creditCardManager;
+	}
+
+	public int getCreditCardID() {
+		return creditCardID;
+	}
+
+	public void setCreditCardID(int creditCardID) {
+		this.creditCardID = creditCardID;
 	}
 
 }

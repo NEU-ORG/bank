@@ -32,7 +32,7 @@
 				<value>com/neusoft/po/CreditCardBill.hbm.xml</value>
 				<value>com/neusoft/po/PayeeList.hbm.xml</value>
 				<value>com/neusoft/po/BillDetail.hbm.xml</value>
-			</list>
+				</list>
 		</property>
 	</bean>
 	<bean id="transactionManager"
@@ -40,7 +40,11 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	
+	<bean id="creditCardManager"
+		class="com.neusoft.bo.CreditCardManager">
+		<property name="userDao" ref="UserDAO" />
+		<property name="creditCardDao" ref="CreditCardDAO" />
+	</bean>
 	<bean id="TransactionDetailDAO" class="com.neusoft.dao.TransactionDetailDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />

@@ -22,18 +22,75 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	 <link rel="stylesheet" href="material.min.css">
+    <script src="material.min.js"></script>
+    <style>
+    .mdl-card {
+        margin-top: 100px;
+        margin-right: auto;
+        margin-left: auto;
+
+    }
+    
+</style>
 
 </head>
 
 <body>
-	<h1>登录页面</h1>
-	<form action="loginAction.action" method="post">
-		用户名：<input type="text" name="userName" value="lzn"/><br /> 
-		密码：<input type="password" name="password" value="lzn"/> 
-		<input type="submit" value="登录"><br />
-	</form>
-	<a href="forget_username.jsp">忘记用户名</a>
-	<a href="forget_password.jsp">忘记密码</a>
-	<a href="sign_up.jsp">注册</a>
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header portfolio-header">
+            <div class="mdl-layout__header-row "></div>
+
+        </header>
+
+        <main class="mdl-layout__content">
+
+            <div class="demo-card-wide mdl-card mdl-shadow--8dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">登录</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <form action="loginAction.action" id＝"form" method="post">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="sample3" name="userName">
+                            <label class="mdl-textfield__label" for="sample3">用户名...</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="password" id="sample3" name="password">
+                            <label class="mdl-textfield__label" for="sample3">密码...</label>
+
+                        </div>
+                        <div class="mdl-card__actions">
+                            <a href="forget_username.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记用户名</a>
+                            <a href="forget_password.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记密码</a>
+                            <button onclick="document.getElementById('form').submit()" class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="float: right;">登录</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="mdl-card__menu">
+                    <button onclick="location='sign_up.jsp'" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    注册
+                    </button>
+                </div>
+            </div>
+        </main>
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">Simple portfolio website</div>
+            </div>
+            <div class="mdl-mini-footer__right-section">
+                <ul class="mdl-mini-footer__link-list">
+                    <li>
+                        <a href="#">Help</a>
+                    </li>
+                    <li>
+                        <a href="#">Privacy & Terms</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </main>
+</div>
 </body>
 </html>
