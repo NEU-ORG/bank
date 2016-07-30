@@ -17,6 +17,12 @@
 			</result>
 		</action>
 		
+		<action name="getUserAccounts" class="com.neusoft.action.JsonAction" method="getUserAccounts">
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		
 	</package>
 
 </struts>
