@@ -7,6 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.neusoft.bo.UserManager;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -19,7 +20,7 @@ public class LoginAction implements SessionAware{
 			session.put("loginInfo",userName);
 			result = "admin";
 			
-		}else if(userName!=null&&userName.equals(password)){
+		}else if(userName!=null&&userManager.checkOutLogin(userName, password)){
 			ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 			UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
 			Map<String,Object> session = ActionContext.getContext().getSession();
@@ -62,6 +63,7 @@ public class LoginAction implements SessionAware{
 	}
 	private String userName;
 	private String password;
+	private UserManager userManager;
 	private Map<String, Object> session;
 	public Map<String, Object> getSession() {
 		return session;
