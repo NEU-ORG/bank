@@ -16,6 +16,11 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class SignUpAction {
 	public String execute(){
+		System.out.println("1212"+realName);
+		System.out.println("444"+idNumber);
+		System.out.println("555"+cardNumber);
+/*		System.out.println(""+);
+		System.out.println(""+);*/
 		Map request = (Map) ActionContext.getContext().get("request");
 		ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
@@ -23,13 +28,12 @@ public class SignUpAction {
 		if(userManager.checkOutRegister(realName, idNumber, cardNumber,
 				userName, password))
 		{
-			System.out.println("4");
 			return "success";
 		}
 		else
 		{
-			System.out.println("5");
-			request.put("ErrorMessage", "×¢²áÐÅÏ¢´íÎó");
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			session.put("ErrorMessage", "×¢²áÐÅÏ¢´íÎó");
 			return "error1";
 		}
 	}

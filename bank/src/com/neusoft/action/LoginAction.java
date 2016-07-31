@@ -7,6 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.neusoft.bo.UserManager;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -19,22 +20,15 @@ public class LoginAction implements SessionAware{
 			session.put("loginInfo",userName);
 			result = "admin";
 			
-		}else if(userName!=null&&userName.equals(password)){
-			ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-			UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
+		}else if(userName!=null&&userManager.checkOutLogin(userName, password)){
+			System.out.println("444");
 			Map<String,Object> session = ActionContext.getContext().getSession();
-			List users = userDao.findByProperty("userName", userName);
-			if(users.isEmpty()){
-				//no user called userName.
-				result = "error";
-			}else if(users.size()!=1){
-				//error, cant't have any user with same userName.
-				result = "error";
-			}else{
-				session.put("user", users.get(0));
+			if(!(session.get("loginError")==null))
+			{
+				session.remove("loginError");
+			}
 				session.put("loginInfo",userName);
 				result = "success";
-			}
 		}else{
 			session.put("loginError","用户名或密码不正确！！");
 			result = "error";
@@ -43,6 +37,14 @@ public class LoginAction implements SessionAware{
 		
 	}
 	
+	public UserManager getUserManager() {
+		return userManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -62,6 +64,7 @@ public class LoginAction implements SessionAware{
 	}
 	private String userName;
 	private String password;
+	private UserManager userManager;
 	private Map<String, Object> session;
 	public Map<String, Object> getSession() {
 		return session;

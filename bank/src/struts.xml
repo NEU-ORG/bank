@@ -28,6 +28,7 @@
 		</action>
 		<action name="signUp" class="com.neusoft.action.SignUpAction">
 			<result name="success">/sign_in.jsp</result>
+			<result name="error1">/sign_up.jsp</result>
 		</action>
 		
 	</package>
