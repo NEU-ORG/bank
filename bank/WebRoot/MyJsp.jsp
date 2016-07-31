@@ -58,39 +58,7 @@
             </div>
         </header>
         <main class="mdl-layout__content">
-        	<h1>主页面</h1>
-	<a href="my_info.jsp">查询个人信息</a><br/>
-	<a href="change_username.jsp">修改登录名</a><br/>
-	<a href="change_password.jsp">修改登录密码</a><br/>
-	<a href="account_info.action">我的账户</a><br/>
-	<a href="creditCard_info.action">我的信用卡</a><br/>
-	<a href="transfer.jsp">转账</a><br/>
-	<a href="pay_for_utilites.jsp">缴费</a><br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
+        	<iframe src="account_info.action"></iframe>
 	<footer class="mdl-mini-footer">
                 <div class="mdl-mini-footer__left-section">
                     <div class="mdl-logo">Simple portfolio website</div>

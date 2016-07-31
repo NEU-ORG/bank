@@ -35,6 +35,10 @@ public class AccountAction extends ActionSupport {
 	public String info() {
 		return "info";
 	}
+	
+	public String payment_win() {
+		return "payment_win";
+	}
 
 	public String list() {
 		try {

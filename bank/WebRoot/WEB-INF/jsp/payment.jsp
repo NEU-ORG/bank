@@ -6,7 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="material.min.css" />
-    <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css" />
+<script type="text/javascript" charset="utf8" src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$("$documnet").ready(function() {
+	$("#show-dialog").click(function() {
+		alert("click");
+	});
+});
+</script>
 </head>
 <body>
 	 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
@@ -58,40 +66,22 @@
             </div>
         </header>
         <main class="mdl-layout__content">
-        	<h1>主页面</h1>
-	<a href="my_info.jsp">查询个人信息</a><br/>
-	<a href="change_username.jsp">修改登录名</a><br/>
-	<a href="change_password.jsp">修改登录密码</a><br/>
-	<a href="account_info.action">我的账户</a><br/>
-	<a href="creditCard_info.action">我的信用卡</a><br/>
-	<a href="transfer.jsp">转账</a><br/>
-	<a href="pay_for_utilites.jsp">缴费</a><br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<footer class="mdl-mini-footer">
+        	<h1>自助缴费</h1>
+        	<div class="mdl-grid portfolio-max-width">
+        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp">
+					<div class="mdl-card__media">
+                        <img class="article-image" src=" images/example-blog02.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                    	话费充值业务
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button id="show-dialog" type="button" class="mdl-button">充值</button>
+                    </div>
+                </div>
+            </div>
+	
+			<footer class="mdl-mini-footer">
                 <div class="mdl-mini-footer__left-section">
                     <div class="mdl-logo">Simple portfolio website</div>
                 </div>

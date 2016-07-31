@@ -16,6 +16,7 @@
 			<result name="list">/WEB-INF/jsp/account.jsp</result>
 			<result name="create_win">/WEB-INF/jsp/account_create.jsp</result>
 			<result name="create">/WEB-INF/jsp/account.jsp</result>
+			<result name="payment_win">/WEB-INF/jsp/payment.jsp</result>
 			<result name="return">/WEB-INF/jsp/account.jsp</result>
 			<result name="input">/WEB-INF/jsp/account_create.jsp</result>
 		</action>
