@@ -21,21 +21,14 @@ public class LoginAction implements SessionAware{
 			result = "admin";
 			
 		}else if(userName!=null&&userManager.checkOutLogin(userName, password)){
-			ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-			UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
+			System.out.println("444");
 			Map<String,Object> session = ActionContext.getContext().getSession();
-			List users = userDao.findByProperty("userName", userName);
-			if(users.isEmpty()){
-				//no user called userName.
-				result = "error";
-			}else if(users.size()!=1){
-				//error, cant't have any user with same userName.
-				result = "error";
-			}else{
-				session.put("user", users.get(0));
+			if(!(session.get("loginError")==null))
+			{
+				session.remove("loginError");
+			}
 				session.put("loginInfo",userName);
 				result = "success";
-			}
 		}else{
 			session.put("loginError","用户名或密码不正确！！");
 			result = "error";
@@ -44,6 +37,14 @@ public class LoginAction implements SessionAware{
 		
 	}
 	
+	public UserManager getUserManager() {
+		return userManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
