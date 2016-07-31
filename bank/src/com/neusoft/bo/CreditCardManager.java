@@ -14,7 +14,6 @@ import com.neusoft.dao.CreditCardDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.BillDetail;
 import com.neusoft.po.CreditCard;
-import com.neusoft.po.CreditCardBill;
 import com.neusoft.po.User;
 
 public class CreditCardManager {
@@ -43,21 +42,22 @@ public class CreditCardManager {
 	public void changeTPasssword(Integer cardID,String password){
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
-			creditCard.setPassword(password);
+			creditCard.setTransactionPassword(password);
 			creditCardDao.save(creditCard);
 		}
 	}
 	public void changeSPassword(Integer cardID,String password){
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
-			creditCard.setPassword(password);
+			creditCard.setTransactionPassword(password);
 			creditCardDao.save(creditCard);
 		}
 	}
-	public CreditCardBill getCheckedBill(Integer cardID){
+	public void getCheckedBill(Integer cardID){
 		CreditCard creditCard = creditCardDao.findById(cardID);
-		Set<BillDetail> billDetails = creditCard.getBillDetails();
-		return null;
+		if(creditCard!=null){
+			Set<BillDetail> billDetails = creditCard.getBillDetails();
+		}
 	}
 	public Set<BillDetail> getUncheckedBill(Integer cardID){
 		CreditCard creditCard = creditCardDao.findById(cardID);
@@ -67,7 +67,7 @@ public class CreditCardManager {
 		Date date = new Date(a.get(Calendar.YEAR)-1900,a.get(Calendar.MONTH),creditCard.getStatementDate());
 		System.out.println(date);
 		for(BillDetail detail : billDetails){
-			if(detail.getRecordDate().after(date)){
+			if(detail.getTransactionTime().after(date)){
 				uncheckedBill.add((BillDetail) detail);
 			}
 		}

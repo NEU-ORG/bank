@@ -6,39 +6,33 @@
 -->
 <hibernate-mapping>
     <class name="com.neusoft.po.BillDetail" table="bill_detail" catalog="bank">
-        <id name="id" type="integer">
+        <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="increment"></generator>
         </id>
         <many-to-one name="creditCard" class="com.neusoft.po.CreditCard" fetch="select">
-            <column name="credit_card_id" not-null="true" />
+            <column name="creditCardId" not-null="true" />
         </many-to-one>
-        <property name="recordDate" type="date">
-            <column name="record_date" length="10" not-null="true" />
+        <property name="transactionTime" type="java.sql.Timestamp">
+            <column name="transactionTime" length="19" />
         </property>
-        <property name="transactionTime" type="timestamp">
-            <column name="transaction_time" length="19" not-null="true" />
+        <property name="type" type="java.lang.String">
+            <column name="type" length="3" />
         </property>
-        <property name="type" type="string">
-            <column name="type" length="10" />
+        <property name="message" type="java.lang.String">
+            <column name="message" length="50" />
         </property>
-        <property name="location" type="string">
-            <column name="location" length="20" />
+        <property name="currency" type="java.lang.String">
+            <column name="currency" length="4" not-null="true" />
         </property>
-        <property name="currency" type="string">
-            <column name="currency" length="10" not-null="true" />
+        <property name="amountPaid" type="java.lang.Double">
+            <column name="amount_paid" precision="10" not-null="true" />
         </property>
-        <property name="amountPaid" type="long">
-            <column name="amount_paid" precision="10" scale="0" not-null="true" />
+        <property name="amountReceived" type="java.lang.Double">
+            <column name="amount_received" precision="10" not-null="true" />
         </property>
-        <property name="amountReceived" type="long">
-            <column name="amount_received" precision="10" scale="0" not-null="true" />
-        </property>
-        <property name="balance" type="long">
-            <column name="balance" precision="10" scale="0" not-null="true" />
-        </property>
-        <property name="summary" type="string">
-            <column name="summary" length="20" />
+        <property name="balance" type="java.lang.Double">
+            <column name="balance" precision="10" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

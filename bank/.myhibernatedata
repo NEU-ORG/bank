@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Fri Jul 29 10:50:39 GMT+08:00 2016
+#Sun Jul 31 18:59:50 GMT+08:00 2016
 genBasicCompId=false
 sessionFactoryName=com.neu.po.HibernateSessionFactory
 profile=
@@ -9,12 +9,12 @@ detectM2M=false
 reStrategyClass=
 detectO2O=false
 springDaoFile=src/applicationContext.xml
-useJavaTypes=false
+useJavaTypes=true
 keyGenerator=increment
 genVersionTag=false
 sessionFactoryId=sessionFactory
 basePersistenceClass=
 genAnnotations=false
-reSettingsFile=/bank/hibernate.reveng.xml
+reSettingsFile=/bank/WebRoot/hibernate.reveng.xml
 configFile=/bank/src/applicationContext.xml
 createConfigFile=true

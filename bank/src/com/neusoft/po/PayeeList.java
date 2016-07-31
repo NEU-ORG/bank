@@ -9,9 +9,9 @@ public class PayeeList implements java.io.Serializable {
 	// Fields
 
 	private Integer id;
-	private Integer payeeIdNumber;
+	private Account account;
+	private User user;
 	private String payeeName;
-	private String payeeAccount;
 
 	// Constructors
 
@@ -20,11 +20,10 @@ public class PayeeList implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public PayeeList(Integer payeeIdNumber, String payeeName,
-			String payeeAccount) {
-		this.payeeIdNumber = payeeIdNumber;
+	public PayeeList(Account account, User user, String payeeName) {
+		this.account = account;
+		this.user = user;
 		this.payeeName = payeeName;
-		this.payeeAccount = payeeAccount;
 	}
 
 	// Property accessors
@@ -37,12 +36,20 @@ public class PayeeList implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getPayeeIdNumber() {
-		return this.payeeIdNumber;
+	public Account getAccount() {
+		return this.account;
 	}
 
-	public void setPayeeIdNumber(Integer payeeIdNumber) {
-		this.payeeIdNumber = payeeIdNumber;
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getPayeeName() {
@@ -51,14 +58,6 @@ public class PayeeList implements java.io.Serializable {
 
 	public void setPayeeName(String payeeName) {
 		this.payeeName = payeeName;
-	}
-
-	public String getPayeeAccount() {
-		return this.payeeAccount;
-	}
-
-	public void setPayeeAccount(String payeeAccount) {
-		this.payeeAccount = payeeAccount;
 	}
 
 }

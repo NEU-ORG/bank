@@ -12,7 +12,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.bo.CreditCardManager;
 import com.neusoft.dao.UserDAO;
-import com.neusoft.po.CreditCardBill;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -48,8 +47,8 @@ public class CreditCardAction extends ActionSupport {
 	public String checkedBill() {// 已出账单查询
 		System.out.println(creditCardID);
 		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
-		CreditCardBill checkedBill = creditCardManager.getCheckedBill(creditCardID);
-		request.put("checkedBill",checkedBill);
+		//CreditCardBill checkedBill = creditCardManager.getCheckedBill(creditCardID);
+		//request.put("checkedBill",checkedBill);
 		return "checkedBill";
 	}
 

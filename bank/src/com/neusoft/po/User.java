@@ -1,6 +1,6 @@
 package com.neusoft.po;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,14 +13,20 @@ public class User implements java.io.Serializable {
 	// Fields
 
 	private Integer id;
+	private Address address;
+	private Bank bank;
 	private String userName;
 	private String password;
 	private String phoneNumber;
 	private String realName;
 	private String idNumber;
-	private Date createDate;
-	private String createBank;
+	private Timestamp createDate;
+	private String isSigned;
+	private String email;
+	private String postCode;
+	private Set payeeLists = new HashSet(0);
 	private Set creditCards = new HashSet(0);
+	private Set applycreditcards = new HashSet(0);
 	private Set accounts = new HashSet(0);
 
 	// Constructors
@@ -30,29 +36,35 @@ public class User implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public User(String userName, String password, String phoneNumber,
-			String realName, String idNumber, Date createDate, String createBank) {
-		this.userName = userName;
-		this.password = password;
+	public User(Bank bank, String phoneNumber, String realName,
+			String idNumber, String isSigned) {
+		this.bank = bank;
 		this.phoneNumber = phoneNumber;
 		this.realName = realName;
 		this.idNumber = idNumber;
-		this.createDate = createDate;
-		this.createBank = createBank;
+		this.isSigned = isSigned;
 	}
 
 	/** full constructor */
-	public User(String userName, String password, String phoneNumber,
-			String realName, String idNumber, Date createDate,
-			String createBank, Set creditCards, Set accounts) {
+	public User(Address address, Bank bank, String userName, String password,
+			String phoneNumber, String realName, String idNumber,
+			Timestamp createDate, String isSigned, String email,
+			String postCode, Set payeeLists, Set creditCards,
+			Set applycreditcards, Set accounts) {
+		this.address = address;
+		this.bank = bank;
 		this.userName = userName;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.realName = realName;
 		this.idNumber = idNumber;
 		this.createDate = createDate;
-		this.createBank = createBank;
+		this.isSigned = isSigned;
+		this.email = email;
+		this.postCode = postCode;
+		this.payeeLists = payeeLists;
 		this.creditCards = creditCards;
+		this.applycreditcards = applycreditcards;
 		this.accounts = accounts;
 	}
 
@@ -64,6 +76,22 @@ public class User implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Address getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Bank getBank() {
+		return this.bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 	public String getUserName() {
@@ -106,20 +134,44 @@ public class User implements java.io.Serializable {
 		this.idNumber = idNumber;
 	}
 
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return this.createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getCreateBank() {
-		return this.createBank;
+	public String getIsSigned() {
+		return this.isSigned;
 	}
 
-	public void setCreateBank(String createBank) {
-		this.createBank = createBank;
+	public void setIsSigned(String isSigned) {
+		this.isSigned = isSigned;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPostCode() {
+		return this.postCode;
+	}
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
+	public Set getPayeeLists() {
+		return this.payeeLists;
+	}
+
+	public void setPayeeLists(Set payeeLists) {
+		this.payeeLists = payeeLists;
 	}
 
 	public Set getCreditCards() {
@@ -128,6 +180,14 @@ public class User implements java.io.Serializable {
 
 	public void setCreditCards(Set creditCards) {
 		this.creditCards = creditCards;
+	}
+
+	public Set getApplycreditcards() {
+		return this.applycreditcards;
+	}
+
+	public void setApplycreditcards(Set applycreditcards) {
+		this.applycreditcards = applycreditcards;
 	}
 
 	public Set getAccounts() {

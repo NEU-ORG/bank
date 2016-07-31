@@ -25,13 +25,13 @@
     </ul>
     <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="credit-card">
-        <li class="mdl-menu__item">信用卡查询</li>
-        <li class="mdl-menu__item">查询密码设置</li>
-        <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">交易密码设置</li>
+        <li onclick="location='creditCard_info.action'" class="mdl-menu__item">信用卡查询</li>
+        <li onclick="location='creditCard_changeSPassword.action'" class="mdl-menu__item">查询密码设置</li>
+        <li onclick="location='creditCard_changeTPassword.action'" class="mdl-menu__item mdl-menu__item--full-bleed-divider">交易密码设置</li>
 
-        <li class="mdl-menu__item">申请信用卡</li>
-        <li class="mdl-menu__item">申请进度查询</li>
-        <li class="mdl-menu__item">信用卡激活</li>
+        <li onclick="location='creditCard_apply.action'" class="mdl-menu__item">申请信用卡</li>
+        <li onclick="location='creditCard_application_progress.action'" class="mdl-menu__item">申请进度查询</li>
+        <li onclick="location='creditCard_active.action'" class="mdl-menu__item">信用卡激活</li>
     </ul>
     <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="pay">

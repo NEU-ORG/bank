@@ -5,19 +5,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Account entity. @author MyEclipse Persistence Tools
+ * Companyaccount entity. @author MyEclipse Persistence Tools
  */
 
-public class Account implements java.io.Serializable {
+public class Companyaccount implements java.io.Serializable {
 
 	// Fields
 
 	private Integer id;
-	private User user;
+	private Company company;
 	private Bank bank;
 	private String name;
 	private String accountNumber;
-	private String withdrawalPassword;
 	private String transactionPassword;
 	private String currency;
 	private Timestamp createDate;
@@ -26,47 +25,23 @@ public class Account implements java.io.Serializable {
 	private String type;
 	private Double balance;
 	private Double availableBalance;
-	private Set payeeLists = new HashSet(0);
-	private Set transactionDetailsForAccountId = new HashSet(0);
-	private Set transactionDetailsForTargetAccount = new HashSet(0);
+	private Set companytransactiondetailsForTargetAccount = new HashSet(0);
+	private Set companytransactiondetailsForAccountId = new HashSet(0);
 
 	// Constructors
 
 	/** default constructor */
-	public Account() {
+	public Companyaccount() {
 	}
 
 	/** minimal constructor */
-	public Account(User user, Bank bank, String accountNumber,
-			String withdrawalPassword, String transactionPassword,
-			String currency, String isSigned, String status, String type,
-			Double balance, Double availableBalance) {
-		this.user = user;
+	public Companyaccount(Company company, Bank bank, String accountNumber,
+			String transactionPassword, String currency, Timestamp createDate,
+			String isSigned, String status, String type, Double balance,
+			Double availableBalance) {
+		this.company = company;
 		this.bank = bank;
 		this.accountNumber = accountNumber;
-		this.withdrawalPassword = withdrawalPassword;
-		this.transactionPassword = transactionPassword;
-		this.currency = currency;
-		this.isSigned = isSigned;
-		this.status = status;
-		this.type = type;
-		this.balance = balance;
-		this.availableBalance = availableBalance;
-	}
-
-	/** full constructor */
-	public Account(User user, Bank bank, String name, String accountNumber,
-			String withdrawalPassword, String transactionPassword,
-			String currency, Timestamp createDate, String isSigned,
-			String status, String type, Double balance,
-			Double availableBalance, Set payeeLists,
-			Set transactionDetailsForAccountId,
-			Set transactionDetailsForTargetAccount) {
-		this.user = user;
-		this.bank = bank;
-		this.name = name;
-		this.accountNumber = accountNumber;
-		this.withdrawalPassword = withdrawalPassword;
 		this.transactionPassword = transactionPassword;
 		this.currency = currency;
 		this.createDate = createDate;
@@ -75,9 +50,29 @@ public class Account implements java.io.Serializable {
 		this.type = type;
 		this.balance = balance;
 		this.availableBalance = availableBalance;
-		this.payeeLists = payeeLists;
-		this.transactionDetailsForAccountId = transactionDetailsForAccountId;
-		this.transactionDetailsForTargetAccount = transactionDetailsForTargetAccount;
+	}
+
+	/** full constructor */
+	public Companyaccount(Company company, Bank bank, String name,
+			String accountNumber, String transactionPassword, String currency,
+			Timestamp createDate, String isSigned, String status, String type,
+			Double balance, Double availableBalance,
+			Set companytransactiondetailsForTargetAccount,
+			Set companytransactiondetailsForAccountId) {
+		this.company = company;
+		this.bank = bank;
+		this.name = name;
+		this.accountNumber = accountNumber;
+		this.transactionPassword = transactionPassword;
+		this.currency = currency;
+		this.createDate = createDate;
+		this.isSigned = isSigned;
+		this.status = status;
+		this.type = type;
+		this.balance = balance;
+		this.availableBalance = availableBalance;
+		this.companytransactiondetailsForTargetAccount = companytransactiondetailsForTargetAccount;
+		this.companytransactiondetailsForAccountId = companytransactiondetailsForAccountId;
 	}
 
 	// Property accessors
@@ -90,12 +85,12 @@ public class Account implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return this.user;
+	public Company getCompany() {
+		return this.company;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	public Bank getBank() {
@@ -120,14 +115,6 @@ public class Account implements java.io.Serializable {
 
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
-	}
-
-	public String getWithdrawalPassword() {
-		return this.withdrawalPassword;
-	}
-
-	public void setWithdrawalPassword(String withdrawalPassword) {
-		this.withdrawalPassword = withdrawalPassword;
 	}
 
 	public String getTransactionPassword() {
@@ -194,30 +181,22 @@ public class Account implements java.io.Serializable {
 		this.availableBalance = availableBalance;
 	}
 
-	public Set getPayeeLists() {
-		return this.payeeLists;
+	public Set getCompanytransactiondetailsForTargetAccount() {
+		return this.companytransactiondetailsForTargetAccount;
 	}
 
-	public void setPayeeLists(Set payeeLists) {
-		this.payeeLists = payeeLists;
+	public void setCompanytransactiondetailsForTargetAccount(
+			Set companytransactiondetailsForTargetAccount) {
+		this.companytransactiondetailsForTargetAccount = companytransactiondetailsForTargetAccount;
 	}
 
-	public Set getTransactionDetailsForAccountId() {
-		return this.transactionDetailsForAccountId;
+	public Set getCompanytransactiondetailsForAccountId() {
+		return this.companytransactiondetailsForAccountId;
 	}
 
-	public void setTransactionDetailsForAccountId(
-			Set transactionDetailsForAccountId) {
-		this.transactionDetailsForAccountId = transactionDetailsForAccountId;
-	}
-
-	public Set getTransactionDetailsForTargetAccount() {
-		return this.transactionDetailsForTargetAccount;
-	}
-
-	public void setTransactionDetailsForTargetAccount(
-			Set transactionDetailsForTargetAccount) {
-		this.transactionDetailsForTargetAccount = transactionDetailsForTargetAccount;
+	public void setCompanytransactiondetailsForAccountId(
+			Set companytransactiondetailsForAccountId) {
+		this.companytransactiondetailsForAccountId = companytransactiondetailsForAccountId;
 	}
 
 }

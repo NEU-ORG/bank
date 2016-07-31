@@ -1,6 +1,6 @@
 package com.neusoft.po;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * BillDetail entity. @author MyEclipse Persistence Tools
@@ -12,15 +12,13 @@ public class BillDetail implements java.io.Serializable {
 
 	private Integer id;
 	private CreditCard creditCard;
-	private Date recordDate;
-	private Date transactionTime;
+	private Timestamp transactionTime;
 	private String type;
-	private String location;
+	private String message;
 	private String currency;
-	private long amountPaid;
-	private long amountReceived;
-	private long balance;
-	private String summary;
+	private Double amountPaid;
+	private Double amountReceived;
+	private Double balance;
 
 	// Constructors
 
@@ -29,12 +27,9 @@ public class BillDetail implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public BillDetail(CreditCard creditCard, Date recordDate,
-			Date transactionTime, String currency, long amountPaid,
-			long amountReceived, long balance) {
+	public BillDetail(CreditCard creditCard, String currency,
+			Double amountPaid, Double amountReceived, Double balance) {
 		this.creditCard = creditCard;
-		this.recordDate = recordDate;
-		this.transactionTime = transactionTime;
 		this.currency = currency;
 		this.amountPaid = amountPaid;
 		this.amountReceived = amountReceived;
@@ -42,20 +37,17 @@ public class BillDetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BillDetail(CreditCard creditCard, Date recordDate,
-			Date transactionTime, String type, String location,
-			String currency, long amountPaid, long amountReceived,
-			long balance, String summary) {
+	public BillDetail(CreditCard creditCard, Timestamp transactionTime,
+			String type, String message, String currency, Double amountPaid,
+			Double amountReceived, Double balance) {
 		this.creditCard = creditCard;
-		this.recordDate = recordDate;
 		this.transactionTime = transactionTime;
 		this.type = type;
-		this.location = location;
+		this.message = message;
 		this.currency = currency;
 		this.amountPaid = amountPaid;
 		this.amountReceived = amountReceived;
 		this.balance = balance;
-		this.summary = summary;
 	}
 
 	// Property accessors
@@ -76,19 +68,11 @@ public class BillDetail implements java.io.Serializable {
 		this.creditCard = creditCard;
 	}
 
-	public Date getRecordDate() {
-		return this.recordDate;
-	}
-
-	public void setRecordDate(Date recordDate) {
-		this.recordDate = recordDate;
-	}
-
-	public Date getTransactionTime() {
+	public Timestamp getTransactionTime() {
 		return this.transactionTime;
 	}
 
-	public void setTransactionTime(Date transactionTime) {
+	public void setTransactionTime(Timestamp transactionTime) {
 		this.transactionTime = transactionTime;
 	}
 
@@ -100,12 +84,12 @@ public class BillDetail implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public String getLocation() {
-		return this.location;
+	public String getMessage() {
+		return this.message;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public String getCurrency() {
@@ -116,36 +100,28 @@ public class BillDetail implements java.io.Serializable {
 		this.currency = currency;
 	}
 
-	public long getAmountPaid() {
+	public Double getAmountPaid() {
 		return this.amountPaid;
 	}
 
-	public void setAmountPaid(long amountPaid) {
+	public void setAmountPaid(Double amountPaid) {
 		this.amountPaid = amountPaid;
 	}
 
-	public long getAmountReceived() {
+	public Double getAmountReceived() {
 		return this.amountReceived;
 	}
 
-	public void setAmountReceived(long amountReceived) {
+	public void setAmountReceived(Double amountReceived) {
 		this.amountReceived = amountReceived;
 	}
 
-	public long getBalance() {
+	public Double getBalance() {
 		return this.balance;
 	}
 
-	public void setBalance(long balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
-	}
-
-	public String getSummary() {
-		return this.summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
 	}
 
 }

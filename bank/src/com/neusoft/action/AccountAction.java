@@ -80,12 +80,12 @@ public class AccountAction extends ActionSupport {
 			newAccount.setWithdrawalPassword("123456");
 			newAccount.setCurrency("RMB");
 			newAccount.setStatus("normal");
-			newAccount.setIsSigned(true);
+	//------>		//newAccount.setIsSigned(true);
 			newAccount.setType("huo");
 			// Timestamp t = new Timestamp(new Date().getTime());
 			// System.out.println("t:"+t);
 			// newAccount.setCreateDate(t);
-			newAccount.setCreateBank("renminbank");
+	//------------		newAccount.setCreateBank("renminbank");
 			newAccount.setBalance(0.00);
 			newAccount.setAvailableBalance(0.00);
 

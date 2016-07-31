@@ -12,23 +12,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neusoft.po.CreditCardBill;
+import com.neusoft.po.Companytransactiondetail;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * CreditCardBill entities. Transaction control of the save(), update() and
- * delete() operations can directly support Spring container-managed
- * transactions or they can be augmented to handle user-managed Spring
- * transactions. Each of these methods provides additional information for how
- * to configure it for the desired type of transaction control.
+ * Companytransactiondetail entities. Transaction control of the save(),
+ * update() and delete() operations can directly support Spring
+ * container-managed transactions or they can be augmented to handle
+ * user-managed Spring transactions. Each of these methods provides additional
+ * information for how to configure it for the desired type of transaction
+ * control.
  * 
- * @see com.neusoft.po.CreditCardBill
+ * @see com.neusoft.po.Companytransactiondetail
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-public class CreditCardBillDAO {
+public class CompanytransactiondetailDAO {
 	private static final Logger log = LoggerFactory
-			.getLogger(CreditCardBillDAO.class);
+			.getLogger(CompanytransactiondetailDAO.class);
 
 	private SessionFactory sessionFactory;
 
@@ -44,8 +45,8 @@ public class CreditCardBillDAO {
 		// do nothing
 	}
 
-	public void save(CreditCardBill transientInstance) {
-		log.debug("saving CreditCardBill instance");
+	public void save(Companytransactiondetail transientInstance) {
+		log.debug("saving Companytransactiondetail instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -55,8 +56,8 @@ public class CreditCardBillDAO {
 		}
 	}
 
-	public void delete(CreditCardBill persistentInstance) {
-		log.debug("deleting CreditCardBill instance");
+	public void delete(Companytransactiondetail persistentInstance) {
+		log.debug("deleting Companytransactiondetail instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -66,11 +67,11 @@ public class CreditCardBillDAO {
 		}
 	}
 
-	public CreditCardBill findById(java.lang.Integer id) {
-		log.debug("getting CreditCardBill instance with id: " + id);
+	public Companytransactiondetail findById(java.lang.Integer id) {
+		log.debug("getting Companytransactiondetail instance with id: " + id);
 		try {
-			CreditCardBill instance = (CreditCardBill) getCurrentSession().get(
-					"com.neusoft.po.CreditCardBill", id);
+			Companytransactiondetail instance = (Companytransactiondetail) getCurrentSession()
+					.get("com.neusoft.po.Companytransactiondetail", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -78,11 +79,11 @@ public class CreditCardBillDAO {
 		}
 	}
 
-	public List findByExample(CreditCardBill instance) {
-		log.debug("finding CreditCardBill instance by example");
+	public List findByExample(Companytransactiondetail instance) {
+		log.debug("finding Companytransactiondetail instance by example");
 		try {
 			List results = getCurrentSession()
-					.createCriteria("com.neusoft.po.CreditCardBill")
+					.createCriteria("com.neusoft.po.Companytransactiondetail")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -94,10 +95,10 @@ public class CreditCardBillDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding CreditCardBill instance with property: "
+		log.debug("finding Companytransactiondetail instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from CreditCardBill as model where model."
+			String queryString = "from Companytransactiondetail as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -109,9 +110,9 @@ public class CreditCardBillDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all CreditCardBill instances");
+		log.debug("finding all Companytransactiondetail instances");
 		try {
-			String queryString = "from CreditCardBill";
+			String queryString = "from Companytransactiondetail";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -120,11 +121,12 @@ public class CreditCardBillDAO {
 		}
 	}
 
-	public CreditCardBill merge(CreditCardBill detachedInstance) {
-		log.debug("merging CreditCardBill instance");
+	public Companytransactiondetail merge(
+			Companytransactiondetail detachedInstance) {
+		log.debug("merging Companytransactiondetail instance");
 		try {
-			CreditCardBill result = (CreditCardBill) getCurrentSession().merge(
-					detachedInstance);
+			Companytransactiondetail result = (Companytransactiondetail) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -133,8 +135,8 @@ public class CreditCardBillDAO {
 		}
 	}
 
-	public void attachDirty(CreditCardBill instance) {
-		log.debug("attaching dirty CreditCardBill instance");
+	public void attachDirty(Companytransactiondetail instance) {
+		log.debug("attaching dirty Companytransactiondetail instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -144,8 +146,8 @@ public class CreditCardBillDAO {
 		}
 	}
 
-	public void attachClean(CreditCardBill instance) {
-		log.debug("attaching clean CreditCardBill instance");
+	public void attachClean(Companytransactiondetail instance) {
+		log.debug("attaching clean Companytransactiondetail instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -156,8 +158,9 @@ public class CreditCardBillDAO {
 		}
 	}
 
-	public static CreditCardBillDAO getFromApplicationContext(
+	public static CompanytransactiondetailDAO getFromApplicationContext(
 			ApplicationContext ctx) {
-		return (CreditCardBillDAO) ctx.getBean("CreditCardBillDAO");
+		return (CompanytransactiondetailDAO) ctx
+				.getBean("CompanytransactiondetailDAO");
 	}
 }

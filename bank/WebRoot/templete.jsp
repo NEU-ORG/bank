@@ -1,14 +1,16 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>MDL-Static Website</title>
-    <link rel="stylesheet" href="material.min.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="material.min.css" />
     <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+	 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="my-account">
         <li class="mdl-menu__item" onclick="location='about.html'">帐户查询</li>
         <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">账户挂失</li>
@@ -24,13 +26,13 @@
     </ul>
     <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="credit-card">
-        <li class="mdl-menu__item">信用卡查询</li>
-        <li class="mdl-menu__item">查询密码设置</li>
-        <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">交易密码设置</li>
+        <li onclick="location='creditCard_info.action'" class="mdl-menu__item">信用卡查询</li>
+        <li onclick="location='creditCard_changeSPassword.action'" class="mdl-menu__item">查询密码设置</li>
+        <li onclick="location='creditCard_changeTPassword.action'" class="mdl-menu__item mdl-menu__item--full-bleed-divider">交易密码设置</li>
 
-        <li class="mdl-menu__item">申请信用卡</li>
-        <li class="mdl-menu__item">申请进度查询</li>
-        <li class="mdl-menu__item">信用卡激活</li>
+        <li onclick="location='creditCard_apply.action'" class="mdl-menu__item">申请信用卡</li>
+        <li onclick="location='creditCard_application_progress.action'" class="mdl-menu__item">申请进度查询</li>
+        <li onclick="location='creditCard_active.action'" class="mdl-menu__item">信用卡激活</li>
     </ul>
     <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="pay">
@@ -57,7 +59,46 @@
             </div>
         </header>
         <main class="mdl-layout__content">
-            <footer class="mdl-mini-footer">
+        <div style="float:left">
+		<h1>未出账单查询</h1>
+		<c:forEach var="detail" items="${uncheckedBill}">
+			<c:out value="${detail.recordDate}"></c:out>
+			<c:out value="${detail.transactionTime}"></c:out>
+			<c:out value="${detail.amountPaid}"></c:out>
+			<c:out value="${detail.amountReceived}"></c:out>
+			<c:out value="${detail.currency}"></c:out>
+			<c:out value="${detail.type}"></c:out>
+			<c:out value="${detail.location}"></c:out>
+			<c:out value="${detail.summary}"></c:out><br/>
+		</c:forEach>	
+	</div>
+        
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<footer class="mdl-mini-footer">
                 <div class="mdl-mini-footer__left-section">
                     <div class="mdl-logo">Simple portfolio website</div>
                 </div>
@@ -68,9 +109,10 @@
                     </ul>
                 </div>
             </footer>
+            
         </main>
+        
     </div>
     <script src="material.min.js"></script>
 </body>
-
 </html>

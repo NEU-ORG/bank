@@ -3,16 +3,17 @@ package com.neusoft.po;
 import java.sql.Timestamp;
 
 /**
- * TransactionDetail entity. @author MyEclipse Persistence Tools
+ * Companytransactiondetail entity. @author MyEclipse Persistence Tools
  */
 
-public class TransactionDetail implements java.io.Serializable {
+public class Companytransactiondetail implements java.io.Serializable {
 
 	// Fields
 
 	private Integer id;
-	private Account accountByTargetAccount;
-	private Account accountByAccountId;
+	private Companyaccount companyaccountByTargetAccount;
+	private Companyaccount companyaccountByAccountId;
+	private Companyoperator companyoperator;
 	private Timestamp transactionTime;
 	private Double amountPaid;
 	private Double amountReceived;
@@ -24,13 +25,14 @@ public class TransactionDetail implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public TransactionDetail() {
+	public Companytransactiondetail() {
 	}
 
 	/** minimal constructor */
-	public TransactionDetail(Account accountByAccountId, Double amountPaid,
-			Double amountReceived, Double balance, String currency) {
-		this.accountByAccountId = accountByAccountId;
+	public Companytransactiondetail(Companyaccount companyaccountByAccountId,
+			Double amountPaid, Double amountReceived, Double balance,
+			String currency) {
+		this.companyaccountByAccountId = companyaccountByAccountId;
 		this.amountPaid = amountPaid;
 		this.amountReceived = amountReceived;
 		this.balance = balance;
@@ -38,12 +40,15 @@ public class TransactionDetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TransactionDetail(Account accountByTargetAccount,
-			Account accountByAccountId, Timestamp transactionTime,
+	public Companytransactiondetail(
+			Companyaccount companyaccountByTargetAccount,
+			Companyaccount companyaccountByAccountId,
+			Companyoperator companyoperator, Timestamp transactionTime,
 			Double amountPaid, Double amountReceived, Double balance,
 			String currency, String type, String message) {
-		this.accountByTargetAccount = accountByTargetAccount;
-		this.accountByAccountId = accountByAccountId;
+		this.companyaccountByTargetAccount = companyaccountByTargetAccount;
+		this.companyaccountByAccountId = companyaccountByAccountId;
+		this.companyoperator = companyoperator;
 		this.transactionTime = transactionTime;
 		this.amountPaid = amountPaid;
 		this.amountReceived = amountReceived;
@@ -63,20 +68,30 @@ public class TransactionDetail implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Account getAccountByTargetAccount() {
-		return this.accountByTargetAccount;
+	public Companyaccount getCompanyaccountByTargetAccount() {
+		return this.companyaccountByTargetAccount;
 	}
 
-	public void setAccountByTargetAccount(Account accountByTargetAccount) {
-		this.accountByTargetAccount = accountByTargetAccount;
+	public void setCompanyaccountByTargetAccount(
+			Companyaccount companyaccountByTargetAccount) {
+		this.companyaccountByTargetAccount = companyaccountByTargetAccount;
 	}
 
-	public Account getAccountByAccountId() {
-		return this.accountByAccountId;
+	public Companyaccount getCompanyaccountByAccountId() {
+		return this.companyaccountByAccountId;
 	}
 
-	public void setAccountByAccountId(Account accountByAccountId) {
-		this.accountByAccountId = accountByAccountId;
+	public void setCompanyaccountByAccountId(
+			Companyaccount companyaccountByAccountId) {
+		this.companyaccountByAccountId = companyaccountByAccountId;
+	}
+
+	public Companyoperator getCompanyoperator() {
+		return this.companyoperator;
+	}
+
+	public void setCompanyoperator(Companyoperator companyoperator) {
+		this.companyoperator = companyoperator;
 	}
 
 	public Timestamp getTransactionTime() {

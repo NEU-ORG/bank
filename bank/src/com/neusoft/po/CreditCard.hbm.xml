@@ -6,60 +6,60 @@
 -->
 <hibernate-mapping>
     <class name="com.neusoft.po.CreditCard" table="credit_card" catalog="bank">
-        <id name="id" type="integer">
+        <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="increment"></generator>
         </id>
         <many-to-one name="user" class="com.neusoft.po.User" fetch="select">
-            <column name="user_id" not-null="true" />
+            <column name="userId" not-null="true" />
         </many-to-one>
-        <property name="cardNumber" type="string">
-            <column name="card_number" length="20" not-null="true" />
+        <many-to-one name="bank" class="com.neusoft.po.Bank" fetch="select">
+            <column name="createBank" not-null="true" />
+        </many-to-one>
+        <property name="cardNumber" type="java.lang.String">
+            <column name="cardNumber" length="20" not-null="true" />
         </property>
-        <property name="name" type="string">
+        <property name="name" type="java.lang.String">
             <column name="name" length="20" />
         </property>
-        <property name="type" type="string">
+        <property name="type" type="java.lang.String">
             <column name="type" length="10" not-null="true" />
         </property>
-        <property name="currency" type="string">
-            <column name="currency" length="10" not-null="true" />
+        <property name="currency" type="java.lang.String">
+            <column name="currency" length="4" not-null="true" />
         </property>
-        <property name="creditLimit" type="long">
-            <column name="credit_limit" precision="10" scale="0" not-null="true" />
+        <property name="creditLimit" type="java.lang.Double">
+            <column name="creditLimit" precision="10" not-null="true" />
         </property>
-        <property name="password" type="string">
-            <column name="password" length="20" not-null="true" />
+        <property name="queryPassword" type="java.lang.String">
+            <column name="QueryPassword" length="20" not-null="true" />
         </property>
-        <property name="balance" type="long">
-            <column name="balance" precision="10" scale="0" not-null="true" />
+        <property name="transactionPassword" type="java.lang.String">
+            <column name="transactionPassword" length="20" not-null="true" />
         </property>
-        <property name="createBank" type="string">
-            <column name="create_bank" length="50" not-null="true" />
+        <property name="balance" type="java.lang.Double">
+            <column name="balance" precision="10" not-null="true" />
         </property>
-        <property name="statementDate" type="integer">
-            <column name="statement_date" not-null="true" />
+        <property name="statementDate" type="java.lang.Integer">
+            <column name="statementDate" not-null="true" />
         </property>
-        <property name="status" type="string">
-            <column name="status" length="10" not-null="true" />
+        <property name="status" type="java.lang.String">
+            <column name="status" length="9" not-null="true" />
         </property>
-        <property name="dueDate" type="integer">
-            <column name="due_date" not-null="true" />
+        <property name="dueDate" type="java.lang.Integer">
+            <column name="dueDate" not-null="true" />
         </property>
-        <property name="score" type="long">
-            <column name="score" precision="10" scale="0" not-null="true" />
+        <property name="score" type="java.lang.Double">
+            <column name="score" precision="10" not-null="true" />
+        </property>
+        <property name="isSigned" type="java.lang.String">
+            <column name="isSigned" length="8" not-null="true" />
         </property>
         <set name="billDetails" inverse="true" lazy="false">
             <key>
-                <column name="credit_card_id" not-null="true" />
+                <column name="creditCardId" not-null="true" />
             </key>
             <one-to-many class="com.neusoft.po.BillDetail" />
-        </set>
-        <set name="creditCardBills" inverse="true" lazy="false">
-            <key>
-                <column name="credit_card_id" not-null="true" />
-            </key>
-            <one-to-many class="com.neusoft.po.CreditCardBill" />
         </set>
     </class>
 </hibernate-mapping>

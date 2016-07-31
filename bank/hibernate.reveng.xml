@@ -2,41 +2,4 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-
-
-<table name="account" catalog="bank">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-	<table name="bill_detail" catalog="bank">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-	<table name="credit_card_bill" catalog="bank">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-	<table name="credit_card" catalog="bank">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-	<table name="payee_list" catalog="bank">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-	<table name="transaction_detail" catalog="bank">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-<table name="user" catalog="bank">
-	<primary-key>
-		<generator class="increment"></generator>
-	</primary-key>
-</table>
 </hibernate-reverse-engineering>

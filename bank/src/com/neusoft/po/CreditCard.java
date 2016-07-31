@@ -13,20 +13,21 @@ public class CreditCard implements java.io.Serializable {
 
 	private Integer id;
 	private User user;
+	private Bank bank;
 	private String cardNumber;
 	private String name;
 	private String type;
 	private String currency;
-	private long creditLimit;
-	private String password;
-	private long balance;
-	private String createBank;
+	private Double creditLimit;
+	private String queryPassword;
+	private String transactionPassword;
+	private Double balance;
 	private Integer statementDate;
 	private String status;
 	private Integer dueDate;
-	private long score;
+	private Double score;
+	private String isSigned;
 	private Set billDetails = new HashSet(0);
-	private Set creditCardBills = new HashSet(0);
 
 	// Constructors
 
@@ -35,44 +36,48 @@ public class CreditCard implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public CreditCard(User user, String cardNumber, String type,
-			String currency, long creditLimit, String password, long balance,
-			String createBank, Integer statementDate, String status,
-			Integer dueDate, long score) {
+	public CreditCard(User user, Bank bank, String cardNumber, String type,
+			String currency, Double creditLimit, String queryPassword,
+			String transactionPassword, Double balance, Integer statementDate,
+			String status, Integer dueDate, Double score, String isSigned) {
 		this.user = user;
+		this.bank = bank;
 		this.cardNumber = cardNumber;
 		this.type = type;
 		this.currency = currency;
 		this.creditLimit = creditLimit;
-		this.password = password;
+		this.queryPassword = queryPassword;
+		this.transactionPassword = transactionPassword;
 		this.balance = balance;
-		this.createBank = createBank;
 		this.statementDate = statementDate;
 		this.status = status;
 		this.dueDate = dueDate;
 		this.score = score;
+		this.isSigned = isSigned;
 	}
 
 	/** full constructor */
-	public CreditCard(User user, String cardNumber, String name, String type,
-			String currency, long creditLimit, String password, long balance,
-			String createBank, Integer statementDate, String status,
-			Integer dueDate, long score, Set billDetails, Set creditCardBills) {
+	public CreditCard(User user, Bank bank, String cardNumber, String name,
+			String type, String currency, Double creditLimit,
+			String queryPassword, String transactionPassword, Double balance,
+			Integer statementDate, String status, Integer dueDate,
+			Double score, String isSigned, Set billDetails) {
 		this.user = user;
+		this.bank = bank;
 		this.cardNumber = cardNumber;
 		this.name = name;
 		this.type = type;
 		this.currency = currency;
 		this.creditLimit = creditLimit;
-		this.password = password;
+		this.queryPassword = queryPassword;
+		this.transactionPassword = transactionPassword;
 		this.balance = balance;
-		this.createBank = createBank;
 		this.statementDate = statementDate;
 		this.status = status;
 		this.dueDate = dueDate;
 		this.score = score;
+		this.isSigned = isSigned;
 		this.billDetails = billDetails;
-		this.creditCardBills = creditCardBills;
 	}
 
 	// Property accessors
@@ -91,6 +96,14 @@ public class CreditCard implements java.io.Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Bank getBank() {
+		return this.bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 	public String getCardNumber() {
@@ -125,36 +138,36 @@ public class CreditCard implements java.io.Serializable {
 		this.currency = currency;
 	}
 
-	public long getCreditLimit() {
+	public Double getCreditLimit() {
 		return this.creditLimit;
 	}
 
-	public void setCreditLimit(long creditLimit) {
+	public void setCreditLimit(Double creditLimit) {
 		this.creditLimit = creditLimit;
 	}
 
-	public String getPassword() {
-		return this.password;
+	public String getQueryPassword() {
+		return this.queryPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setQueryPassword(String queryPassword) {
+		this.queryPassword = queryPassword;
 	}
 
-	public long getBalance() {
+	public String getTransactionPassword() {
+		return this.transactionPassword;
+	}
+
+	public void setTransactionPassword(String transactionPassword) {
+		this.transactionPassword = transactionPassword;
+	}
+
+	public Double getBalance() {
 		return this.balance;
 	}
 
-	public void setBalance(long balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
-	}
-
-	public String getCreateBank() {
-		return this.createBank;
-	}
-
-	public void setCreateBank(String createBank) {
-		this.createBank = createBank;
 	}
 
 	public Integer getStatementDate() {
@@ -181,12 +194,20 @@ public class CreditCard implements java.io.Serializable {
 		this.dueDate = dueDate;
 	}
 
-	public long getScore() {
+	public Double getScore() {
 		return this.score;
 	}
 
-	public void setScore(long score) {
+	public void setScore(Double score) {
 		this.score = score;
+	}
+
+	public String getIsSigned() {
+		return this.isSigned;
+	}
+
+	public void setIsSigned(String isSigned) {
+		this.isSigned = isSigned;
 	}
 
 	public Set getBillDetails() {
@@ -195,14 +216,6 @@ public class CreditCard implements java.io.Serializable {
 
 	public void setBillDetails(Set billDetails) {
 		this.billDetails = billDetails;
-	}
-
-	public Set getCreditCardBills() {
-		return this.creditCardBills;
-	}
-
-	public void setCreditCardBills(Set creditCardBills) {
-		this.creditCardBills = creditCardBills;
 	}
 
 }
