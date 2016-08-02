@@ -21,8 +21,7 @@
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
-				<prop key="hibernate.show_sql">true
-				</prop>
+				<prop key="hibernate.show_sql">false</prop>
 			</props>
 		</property>
 		<property name="mappingResources">
@@ -61,6 +60,9 @@
 		<property name="userDao" ref="UserDAO" />
 		<property name="accountDao" ref="AccountDAO" />
 		
+	</bean>
+	<bean id="accountManager" class="com.neusoft.bo.AccountManager">
+		<property name="accountDAO" ref="AccountDAO" />
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />

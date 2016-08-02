@@ -6,12 +6,20 @@
 	<!-- <constant name="struts.objectfactory" value="spring" /> -->
 
 	<package name="accountAction" namespace="/" extends="struts-default">
-	
+		<interceptors>
+			<interceptor name="auth"
+				class="com.neusoft.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="auth"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
 		<global-results>
-			<result name="error">/index.jsp</result>
+			<result name="login">sign_in.jsp</result>
 		</global-results>
 		<action name="account_*" class="com.neusoft.action.AccountAction"
 			method="{1}">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result name="info">/WEB-INF/jsp/account/account.jsp</result>
 			<result name="lockwin">WEB-INF/jsp/account/accountlock.jsp</result>
 			<result name="lock">/WEB-INF/jsp/account/account.jsp</result>

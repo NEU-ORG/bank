@@ -25,7 +25,9 @@ public class AccountAction extends ActionSupport {
 
 	private ApplicationContext ctx;
 	private AccountDAO accountDAO;
-	private AccountManager am;
+	private AccountManager accountManager;
+	
+	public String accountId;
 
 	public void init() {
 		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -44,12 +46,17 @@ public class AccountAction extends ActionSupport {
 	}
 	
 	public String lock() {
-		String accountId = ServletActionContext.getRequest().getParameter("accountId");
+		//String accountId = ServletActionContext.getRequest().getParameter("accountId");
+		//String accountId = Request.Params["accountId"];
+		System.out.println("acoutid:"+accountId);
 		if(accountId == null||accountId.isEmpty()) {
 			return "error";
 		} else {
 			Integer id = Integer.parseInt(accountId);
-			int temp = am.lock(id);
+			System.out.println("id:"+id);
+			//am = new AccountManager();
+			int temp = accountManager.lock(id);
+			System.out.println("t:"+temp);
 			if(temp == -1)
 				return "error";
 			else if(temp == 1)
@@ -159,4 +166,14 @@ public class AccountAction extends ActionSupport {
 	public void setTransactionPassword(String transactionPassword) {
 		this.transactionPassword = transactionPassword;
 	}
+
+	public AccountManager getAccountManager() {
+		return accountManager;
+	}
+
+	public void setAccountManager(AccountManager accountManager) {
+		this.accountManager = accountManager;
+	}
+	
+	
 }

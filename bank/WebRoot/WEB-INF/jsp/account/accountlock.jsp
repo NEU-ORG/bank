@@ -12,16 +12,15 @@
 <script type="text/javascript" charset="utf8" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
 var alist;
-var path;
 
 $(document).ready(function() {
-	$("#user-account").change(function() {
-		var val = document.getElementById("user-account").value;
-		//var text = document.getElementById("user-account").text;
-		//alert("val:"+val+"|"+text);
-		path = "";
-	});
 	//alert("loginInfo:"+loginInfo);
+	/*$("#lock-button").click(function() {
+		var aid = $("#user-account option:selected").val();
+		$.post("account_lock.action",{accountId:aid},function(data,status) {
+			alert("data:"+data+"status:"+status);
+		});
+	});*/
 });
 
 
@@ -37,7 +36,7 @@ function init() {
 			if(data.status==true) {
 				//alert("success1");
 				alist = data.result;
-				alert("alist"+alist.length);
+				//alert("alist"+alist.length);
 				var selObj = document.getElementById("user-account");
 				AddAccountSelect(selObj, alist);
 			} else
@@ -65,9 +64,11 @@ function AddAccountSelect(selObj, data) {
 			<div>
 				<h1>账户挂失</h1>
 				
-				<select id="user-account"></select>
-				<button ></button>
-			
+				<form action="account_lock.action">
+					<select id="user-account" name="accountId"></select>
+					<!-- <button id="lock-button" action="account_lock.action">lock</button> -->
+					<input type="submit" value="lock" />
+				</form>
 			</div>
 			<%@include file="/footer.jsp"%>
 		</main>

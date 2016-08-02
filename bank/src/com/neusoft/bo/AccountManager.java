@@ -11,15 +11,15 @@ public class AccountManager extends ActionSupport{
 	private AccountDAO accountDAO;
 	private ApplicationContext ctx;
 	
-	private void init() {
-		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		accountDAO = (AccountDAO) ctx.getBean("AccountDAO");
-	}
+//	private void init() {
+//		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		accountDAO = (AccountDAO) ctx.getBean("AccountDAO");
+//	}
 	
 	//0-成功
 	//-1-无账户
 	public int changeTransPwd(Integer aid, String password) {
-		init();
+//		init();
 		Account account = accountDAO.findById(aid);
 		if(account.equals(null)) {
 			System.out.println("null");
@@ -34,7 +34,7 @@ public class AccountManager extends ActionSupport{
 	//-1-无账户
 	//1-已锁定
 	public int lock(Integer aid) {
-		init();
+//		init();
 		Account account = accountDAO.findById(aid);
 		if(account.equals(null)) {
 			System.out.println("null");
@@ -44,8 +44,20 @@ public class AccountManager extends ActionSupport{
 			System.out.println("已是锁定状态");
 			return 1;
 		}
-		account.setStatus("lock");
+		//account.setStatus("lock");
+		account.setBalance(1234.56);
+		account.setAvailableBalance(456.12);
+		System.out.println("id:"+account.getId()+"|status:"+account.getStatus());
 		accountDAO.attachDirty(account);
+		System.out.println("11111111111111");
 		return 0;
+	}
+
+	public AccountDAO getAccountDAO() {
+		return accountDAO;
+	}
+
+	public void setAccountDAO(AccountDAO accountDAO) {
+		this.accountDAO = accountDAO;
 	}
 }
