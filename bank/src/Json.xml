@@ -5,6 +5,10 @@
 
 	<package name="JsonAction" extends="struts-default,json-default" namespace="/">
 	
+		<global-results>
+			<result name="error">/index.jsp</result>
+		</global-results>
+	
 		<action name="AccountJsonAction" class="com.neusoft.action.JsonAction" method="accountToJson">
 			<result type="json">
 				<param name="root">jsonResult</param>
@@ -24,6 +28,12 @@
 		</action>
 		
 		<action name="getTransactionDetail" class="com.neusoft.action.JsonAction" method="getTransactionDetail">
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		
+		<action name="QueryAddress" class="com.neusoft.action.JsonAction" method="QueryAddress">
 			<result type="json">
 				<param name="root">jsonResult</param>
 			</result>
