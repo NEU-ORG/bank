@@ -16,14 +16,14 @@ import com.neusoft.po.Admin;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 
-public class UserAdmin {
-	public String execute(){
+public class UserAdminAction {
+	public String signUp(){
 		Map request = (Map) ActionContext.getContext().get("request");
 		ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		AdminDAO adminDao = (AdminDAO) ctx.getBean("AdminDAO");
 		if(adminManager.checkOutLogin(name, password))
 		{
-			return "success1";
+			return "success_admin";
 		}
 		else
 		{
@@ -32,6 +32,8 @@ public class UserAdmin {
 			return "error2";
 		}
 	}
+	
+	//public String 
 	
 	private AdminManager adminManager;
 	private String name;
