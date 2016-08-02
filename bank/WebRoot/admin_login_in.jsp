@@ -39,7 +39,7 @@
 				<c:if test="${!empty loginError}">
 					<c:out value="${loginError}" />
 				</c:if>
-				<form action="loginAction.action" id＝"form" method="post">
+				<form action="admin_signUp" id＝"form" method="post">
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="sample3"
