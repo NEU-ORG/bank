@@ -16,9 +16,9 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class SignUpAction {
 	public String execute(){
-		System.out.println("1212"+realName);
+/*		System.out.println("1212"+realName);
 		System.out.println("444"+idNumber);
-		System.out.println("555"+cardNumber);
+		System.out.println("555"+cardNumber);*/
 /*		System.out.println(""+);
 		System.out.println(""+);*/
 		Map request = (Map) ActionContext.getContext().get("request");

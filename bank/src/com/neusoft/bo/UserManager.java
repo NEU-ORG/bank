@@ -47,9 +47,9 @@ public class UserManager {
 			Account account = (Account) accountDao.findByProperty(
 					"accountNumber", cardNumber).get(0);// 得到对应的ID
 			
-			  System.out.println("123"+account.getAccountNumber());
+			 /* System.out.println("123"+account.getAccountNumber());
 			  System.out.println("here"+account.getUser().getRealName());
-			  System.out.println("66666"+realName);
+			  System.out.println("66666"+realName);*/
 			 
 			if (account.getUser().getRealName().equals(realName))
 				if (account.getUser().getIdNumber().equals(idNumber)) {
@@ -79,13 +79,14 @@ public class UserManager {
 				"applicationContext.xml");
 		UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
 		AccountDAO accountDao = (AccountDAO) ctx.getBean("AccountDAO");
-		System.out.println("222" + userName);
-		System.out.println("111" + password);
+		/*System.out.println("222" + userName);
+		System.out.println("111" + password);*/
 		if (!userDao.findByProperty("userName", userName).isEmpty()) {
 			User user = (User) userDao.findByProperty("userName", userName)
 					.get(0);
-			System.out.println("333" + user.getUserName());
-			System.out.println("444" + user.getPassword());
+/*
+
+*/
 			if (user.getPassword().equals(password)) {
 				return true;
 			} else
