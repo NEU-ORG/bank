@@ -51,10 +51,10 @@
                     <h2 class="mdl-card__title-text">登录</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
-                	<c:if test="${!empty loginError}">
                 	<c:out value="${loginError}"/>
-                	</c:if>
-                    <form action="loginAction.action" id＝"form" method="post">
+                	<c:set var="loginError" value=""/>
+             
+                    <form action="user_signIn.action" id＝"form" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="sample3" name="userName">
                             <label class="mdl-textfield__label" for="sample3">用户名...</label>
@@ -65,8 +65,8 @@
 
                         </div>
                         <div class="mdl-card__actions">
-                            <a href="forget_username.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记用户名</a>
-                            <a href="forget_password.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记密码</a>
+                            <a href="sign_in.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记用户名</a>
+                            <a href="sign_in.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记密码</a>
                             <button onclick="document.getElementById('form').submit()" class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="float: right;">登录</button>
                         </div>
 

@@ -29,6 +29,7 @@ public class CreditCardAction extends ActionSupport {
 	}
 
 	public String apply() {// …Í«Î–≈”√ø®
+		creditCardManager.applyCreditCard((String) ActionContext.getContext().getSession().get("loginInfo"));
 		return "apply";
 	}
 

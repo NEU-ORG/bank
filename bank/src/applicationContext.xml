@@ -53,11 +53,12 @@
 		class="com.neusoft.bo.CreditCardManager">
 		<property name="userDao" ref="UserDAO" />
 		<property name="creditCardDao" ref="CreditCardDAO" />
+		<property name="applyDao" ref="ApplycreditcardDAO" />
 	</bean>
-		<bean id="userManager" class="com.neusoft.bo.UserManager">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+	<bean id="userManager" class="com.neusoft.bo.UserManager">
+		<property name="userDao" ref="UserDAO" />
+		<property name="accountDao" ref="AccountDAO" />
+		
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />

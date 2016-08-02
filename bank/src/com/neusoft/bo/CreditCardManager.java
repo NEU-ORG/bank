@@ -5,13 +5,18 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 
 
+import java.util.UUID;
+
+import com.neusoft.dao.ApplycreditcardDAO;
 import com.neusoft.dao.BillDetailDAO;
 import com.neusoft.dao.CreditCardDAO;
 import com.neusoft.dao.UserDAO;
+import com.neusoft.po.Applycreditcard;
 import com.neusoft.po.BillDetail;
 import com.neusoft.po.CreditCard;
 import com.neusoft.po.User;
@@ -19,26 +24,53 @@ import com.neusoft.po.User;
 public class CreditCardManager {
 	private UserDAO userDao;
 	private CreditCardDAO creditCardDao;
+	private ApplycreditcardDAO applyDao;
 	
 	public Set getCardInfo(String userName){
 		List users = userDao.findByProperty("userName", userName);
-		if(users.size()==0){
+		if(users.isEmpty()){
 			return null;
 		}
 		return ((User)users.get(0)).getCreditCards();
 	}
 	
-	public void applyCreditCard(){}
-	public void getApplicationProgress(){}
+	public void applyCreditCard(String userName){
+		int min=100000000;
+        int max=999999999;
+        Random random = new Random();
+        int s = random.nextInt(max)%(max-min+1) + min;
+        String cardNumber = "2913007"+s;
+        List users = userDao.findByProperty("userName", userName);
+        if(!users.isEmpty()){
+        	User user = (User) users.get(0);
+        	Applycreditcard item = new Applycreditcard(user,cardNumber);
+        	//user.getApplycreditcards().add(item);
+        	applyDao.save(item);
+        }   
+	}
+	public Set getApplicationProgress(String userName){
+		List users = userDao.findByProperty("userName", userName);
+		if(!users.isEmpty()){
+        	User user = (User) users.get(0);
+        	return user.getApplycreditcards();
+        }  
+		return null;
+	}
 	
 	public void reportLoss(Integer cardID){
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
-			creditCard.setStatus("lost");
+			creditCard.setStatus("lock");
 			creditCardDao.save(creditCard);
 		}
 	}
-	public void activeCard(){}
+	public void activeCard(Integer cardID){
+		CreditCard creditCard = creditCardDao.findById(cardID);
+		if(creditCard!=null){
+			creditCard.setStatus("normal");
+			creditCardDao.save(creditCard);
+		}
+	}
 	public void changeTPasssword(Integer cardID,String password){
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
@@ -85,5 +117,13 @@ public class CreditCardManager {
 	}
 	public void setCreditCardDao(CreditCardDAO creditCardDao) {
 		this.creditCardDao = creditCardDao;
+	}
+
+	public ApplycreditcardDAO getApplyDao() {
+		return applyDao;
+	}
+
+	public void setApplyDao(ApplycreditcardDAO applyDao) {
+		this.applyDao = applyDao;
 	}
 }

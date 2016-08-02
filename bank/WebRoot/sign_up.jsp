@@ -33,7 +33,7 @@
 				<c:if test="${!empty ErrorMessage}">
 					<c:out value="${ErrorMessage}" />
 				</c:if>
-				<form action="signUp.action"id＝"form">
+				<form action="user_signUp.action"id＝"form">
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text"
