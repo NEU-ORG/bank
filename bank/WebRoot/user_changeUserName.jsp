@@ -28,10 +28,11 @@
                     <h2 class="mdl-card__title-text">修改登录名</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
-             
-                    <form action="#" id＝"form" method="post">
+             		<c:out value="${passwordError}"/>
+                	<c:set var="passwordError" value=""/>
+                    <form action="user_changeUserName.action" id＝"form" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="sample3" name="newUserName">
+                            <input class="mdl-textfield__input" type="text" id="sample3" name="userName">
                             <label class="mdl-textfield__label" for="sample3">新用户名...</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
