@@ -17,9 +17,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.dao.AccountDAO;
+import com.neusoft.dao.AddressDAO;
 import com.neusoft.dao.TransactionDetailDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
+import com.neusoft.po.Address;
 import com.neusoft.po.TransactionDetail;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -31,6 +33,23 @@ public class JsonAction extends ActionSupport{
 	public Integer userId;
 	
 	public String execute() {
+		return "success";
+	}
+	
+	public String QueryAddress() {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		AddressDAO addressDAO = (AddressDAO) ctx.getBean("AddressDAO");
+		List<Address> l = addressDAO.findAll();
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("status", true);
+		map.put("result", l);
+		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
+		jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
+		jsonConfig.setExcludes(new String[]{"companies","banks","addresses","users"});
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		jsonResult = JSONObject.fromObject(map,jsonConfig);
+		
 		return "success";
 	}
 	
