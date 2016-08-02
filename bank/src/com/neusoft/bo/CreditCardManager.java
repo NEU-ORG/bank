@@ -26,6 +26,24 @@ public class CreditCardManager {
 	private CreditCardDAO creditCardDao;
 	private CreditcardApplyedDAO applyDao;
 	
+	public boolean checkQueryPassword(Integer cardID,String password){
+		CreditCard card = creditCardDao.findById(cardID);
+		if(card!=null){
+			if(card.getQueryPassword().equals(password)){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean checkTransactionPassword(Integer cardID,String password){
+		CreditCard card = creditCardDao.findById(cardID);
+		if(card!=null){
+			if(card.getTransactionPassword().equals(password)){
+				return true;
+			}
+		}
+		return false;
+	}
 	public Set getCardInfo(String userName){
 		List users = userDao.findByProperty("userName", userName);
 		if(users.isEmpty()){
@@ -61,28 +79,28 @@ public class CreditCardManager {
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
 			creditCard.setStatus("lock");
-			creditCardDao.save(creditCard);
+			creditCardDao.attachDirty(creditCard);
 		}
 	}
 	public void activeCard(Integer cardID){
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
 			creditCard.setStatus("normal");
-			creditCardDao.save(creditCard);
+			creditCardDao.attachDirty(creditCard);
 		}
 	}
 	public void changeTPasssword(Integer cardID,String password){
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
 			creditCard.setTransactionPassword(password);
-			creditCardDao.save(creditCard);
+			creditCardDao.attachDirty(creditCard);
 		}
 	}
 	public void changeSPassword(Integer cardID,String password){
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if(creditCard!=null){
-			creditCard.setTransactionPassword(password);
-			creditCardDao.save(creditCard);
+			creditCard.setQueryPassword(password);
+			creditCardDao.attachDirty(creditCard);
 		}
 	}
 	public void getCheckedBill(Integer cardID){

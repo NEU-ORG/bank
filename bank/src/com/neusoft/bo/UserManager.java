@@ -20,6 +20,24 @@ public class UserManager {
 	AccountDAO accountDao;
 	AddressDAO addressDao;
 	
+	public void changePassword(String userName, String newPassword) {
+		List users = userDao.findByProperty("userName", userName);
+		if(!users.isEmpty()){
+			User user = (User) users.get(0);
+			user.setPassword(newPassword);
+			userDao.attachDirty(user);
+		}
+		
+	}
+	
+	public void changeUserName(String oldName,String userName){
+		List users = userDao.findByProperty("userName", oldName);
+		if(!users.isEmpty()){
+			User user = (User) users.get(0);
+			user.setUserName(userName);
+			userDao.attachDirty(user);
+		}
+	}
 	public User getUserInfo(String userName){
 		List users = userDao.findByProperty("userName", userName);
 		if(!users.isEmpty()){
@@ -32,15 +50,15 @@ public class UserManager {
 		if(!users.isEmpty()){
 			User user = (User) users.get(0);
 			if(address!=null){
-				List addresses = addressDao.findByProperty("codeValue", address);
+				List addresses = addressDao.findByProperty("codeName", address);
 				if(!addresses.isEmpty()){
 					user.setAddress((Address) addresses.get(0));
 				}
 			}
-			if(email!=null){
+			if(email!=null&&!email.isEmpty()){
 				user.setEmail(email);
 			}
-			if(postCode!=null){
+			if(postCode!=null&&!postCode.isEmpty()){
 				user.setPostCode(postCode);
 			}
 			userDao.attachDirty(user);
@@ -114,4 +132,5 @@ public class UserManager {
 	public void setAddressDao(AddressDAO addressDao) {
 		this.addressDao = addressDao;
 	}
+	
 }

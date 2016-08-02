@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.bo.CreditCardManager;
 import com.neusoft.dao.UserDAO;
+import com.neusoft.po.CreditCard;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,7 +20,9 @@ import com.opensymphony.xwork2.ActionSupport;
 public class CreditCardAction extends ActionSupport {
 	private int creditCardID;
 	private CreditCardManager creditCardManager;// auto DI ???
-
+	private String password;
+	private String newPassword;
+	private String flag;
 	public String info() {
 		Set cards = creditCardManager.getCardInfo((String) ActionContext
 				.getContext().getSession().get("loginInfo"));
@@ -29,11 +32,15 @@ public class CreditCardAction extends ActionSupport {
 	}
 
 	public String apply() {// 申请信用卡
-		creditCardManager.applyCreditCard((String) ActionContext.getContext().getSession().get("loginInfo"));
+		System.out.println(flag);
+		if(flag!=null){
+			creditCardManager.applyCreditCard((String) ActionContext.getContext().getSession().get("loginInfo"));
+		}
 		return "apply";
 	}
 
 	public String application_progress() {
+		
 		return "application_progress";
 	}
 
@@ -62,12 +69,39 @@ public class CreditCardAction extends ActionSupport {
 	}
 
 	public String changeSPassword() {
-
+		
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
+		Set<CreditCard> cards = creditCardManager.getCardInfo((String) session.get("loginInfo"));
+		request.put("cards", cards);
+		
+		if(creditCardManager.checkQueryPassword(creditCardID, password)){
+			if(session.get("passwordError")!=null)
+			{
+				session.remove("passwordError");
+			}
+			creditCardManager.changeSPassword(creditCardID,newPassword);
+		}else{
+			session.put("passwordError","密码不正确！！");
+		}
 		return "changeSPassword";
 	}
 
 	public String changeTPassword() {
-
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
+		Set<CreditCard> cards = creditCardManager.getCardInfo((String) session.get("loginInfo"));
+		request.put("cards", cards);
+		
+		if(creditCardManager.checkTransactionPassword(creditCardID, password)){
+			if(session.get("passwordError")!=null)
+			{
+				session.remove("passwordError");
+			}
+			creditCardManager.changeTPasssword(creditCardID,newPassword);
+		}else{
+			session.put("passwordError","密码不正确！！");
+		}
 		return "changeTPassword";
 	}
 	public String returnMain(){
@@ -88,6 +122,30 @@ public class CreditCardAction extends ActionSupport {
 
 	public void setCreditCardID(int creditCardID) {
 		this.creditCardID = creditCardID;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 }
