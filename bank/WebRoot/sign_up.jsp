@@ -45,7 +45,6 @@
 						<input class="mdl-textfield__input" type="text" name="idNumber"
 							> <label class="mdl-textfield__label"
 							for="sample3">身份证号...</label>
-
 					</div>
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

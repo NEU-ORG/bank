@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.neusoft.action.UserAdmin;
+import com.neusoft.action.UserAdminAction;
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.AdminDAO;
 import com.neusoft.dao.UserDAO;

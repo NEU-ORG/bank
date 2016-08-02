@@ -55,9 +55,9 @@ public class UserAction extends ActionSupport {
 		
 	}
 	public String signUp(){
-		System.out.println("1212"+realName);
+/*		System.out.println("1212"+realName);
 		System.out.println("444"+idNumber);
-		System.out.println("555"+cardNumber);
+		System.out.println("555"+cardNumber);*/
 		Map request = (Map) ActionContext.getContext().get("request");
 		ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
