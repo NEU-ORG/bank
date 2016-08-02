@@ -15,7 +15,8 @@ public class Bank implements java.io.Serializable {
 	private Address address;
 	private String name;
 	private String type;
-	private Set companyaccounts = new HashSet(0);
+	private Set companyAccounts = new HashSet(0);
+	private Set companies = new HashSet(0);
 	private Set accounts = new HashSet(0);
 	private Set creditCards = new HashSet(0);
 	private Set users = new HashSet(0);
@@ -34,12 +35,13 @@ public class Bank implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Bank(Address address, String name, String type, Set companyaccounts,
-			Set accounts, Set creditCards, Set users) {
+	public Bank(Address address, String name, String type, Set companyAccounts,
+			Set companies, Set accounts, Set creditCards, Set users) {
 		this.address = address;
 		this.name = name;
 		this.type = type;
-		this.companyaccounts = companyaccounts;
+		this.companyAccounts = companyAccounts;
+		this.companies = companies;
 		this.accounts = accounts;
 		this.creditCards = creditCards;
 		this.users = users;
@@ -79,12 +81,20 @@ public class Bank implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public Set getCompanyaccounts() {
-		return this.companyaccounts;
+	public Set getCompanyAccounts() {
+		return this.companyAccounts;
 	}
 
-	public void setCompanyaccounts(Set companyaccounts) {
-		this.companyaccounts = companyaccounts;
+	public void setCompanyAccounts(Set companyAccounts) {
+		this.companyAccounts = companyAccounts;
+	}
+
+	public Set getCompanies() {
+		return this.companies;
+	}
+
+	public void setCompanies(Set companies) {
+		this.companies = companies;
 	}
 
 	public Set getAccounts() {

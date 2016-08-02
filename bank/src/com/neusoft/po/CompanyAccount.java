@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Companyaccount entity. @author MyEclipse Persistence Tools
+ * CompanyAccount entity. @author MyEclipse Persistence Tools
  */
 
-public class Companyaccount implements java.io.Serializable {
+public class CompanyAccount implements java.io.Serializable {
 
 	// Fields
 
@@ -25,17 +25,17 @@ public class Companyaccount implements java.io.Serializable {
 	private String type;
 	private Double balance;
 	private Double availableBalance;
-	private Set companytransactiondetailsForTargetAccount = new HashSet(0);
-	private Set companytransactiondetailsForAccountId = new HashSet(0);
+	private Set companyTransactionDetailsForAccountId = new HashSet(0);
+	private Set companyTransactionDetailsForTargetAccount = new HashSet(0);
 
 	// Constructors
 
 	/** default constructor */
-	public Companyaccount() {
+	public CompanyAccount() {
 	}
 
 	/** minimal constructor */
-	public Companyaccount(Company company, Bank bank, String accountNumber,
+	public CompanyAccount(Company company, Bank bank, String accountNumber,
 			String transactionPassword, String currency, Timestamp createDate,
 			String isSigned, String status, String type, Double balance,
 			Double availableBalance) {
@@ -53,12 +53,12 @@ public class Companyaccount implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Companyaccount(Company company, Bank bank, String name,
+	public CompanyAccount(Company company, Bank bank, String name,
 			String accountNumber, String transactionPassword, String currency,
 			Timestamp createDate, String isSigned, String status, String type,
 			Double balance, Double availableBalance,
-			Set companytransactiondetailsForTargetAccount,
-			Set companytransactiondetailsForAccountId) {
+			Set companyTransactionDetailsForAccountId,
+			Set companyTransactionDetailsForTargetAccount) {
 		this.company = company;
 		this.bank = bank;
 		this.name = name;
@@ -71,8 +71,8 @@ public class Companyaccount implements java.io.Serializable {
 		this.type = type;
 		this.balance = balance;
 		this.availableBalance = availableBalance;
-		this.companytransactiondetailsForTargetAccount = companytransactiondetailsForTargetAccount;
-		this.companytransactiondetailsForAccountId = companytransactiondetailsForAccountId;
+		this.companyTransactionDetailsForAccountId = companyTransactionDetailsForAccountId;
+		this.companyTransactionDetailsForTargetAccount = companyTransactionDetailsForTargetAccount;
 	}
 
 	// Property accessors
@@ -181,22 +181,22 @@ public class Companyaccount implements java.io.Serializable {
 		this.availableBalance = availableBalance;
 	}
 
-	public Set getCompanytransactiondetailsForTargetAccount() {
-		return this.companytransactiondetailsForTargetAccount;
+	public Set getCompanyTransactionDetailsForAccountId() {
+		return this.companyTransactionDetailsForAccountId;
 	}
 
-	public void setCompanytransactiondetailsForTargetAccount(
-			Set companytransactiondetailsForTargetAccount) {
-		this.companytransactiondetailsForTargetAccount = companytransactiondetailsForTargetAccount;
+	public void setCompanyTransactionDetailsForAccountId(
+			Set companyTransactionDetailsForAccountId) {
+		this.companyTransactionDetailsForAccountId = companyTransactionDetailsForAccountId;
 	}
 
-	public Set getCompanytransactiondetailsForAccountId() {
-		return this.companytransactiondetailsForAccountId;
+	public Set getCompanyTransactionDetailsForTargetAccount() {
+		return this.companyTransactionDetailsForTargetAccount;
 	}
 
-	public void setCompanytransactiondetailsForAccountId(
-			Set companytransactiondetailsForAccountId) {
-		this.companytransactiondetailsForAccountId = companytransactiondetailsForAccountId;
+	public void setCompanyTransactionDetailsForTargetAccount(
+			Set companyTransactionDetailsForTargetAccount) {
+		this.companyTransactionDetailsForTargetAccount = companyTransactionDetailsForTargetAccount;
 	}
 
 }

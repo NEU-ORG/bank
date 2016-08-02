@@ -3,10 +3,10 @@ package com.neusoft.po;
 import java.sql.Timestamp;
 
 /**
- * Applycreditcard entity. @author MyEclipse Persistence Tools
+ * CreditcardApplyed entity. @author MyEclipse Persistence Tools
  */
 
-public class Applycreditcard implements java.io.Serializable {
+public class CreditcardApplyed implements java.io.Serializable {
 
 	// Fields
 
@@ -18,17 +18,17 @@ public class Applycreditcard implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Applycreditcard() {
+	public CreditcardApplyed() {
 	}
 
 	/** minimal constructor */
-	public Applycreditcard(User user, String creditCardNumber) {
+	public CreditcardApplyed(User user, String creditCardNumber) {
 		this.user = user;
 		this.creditCardNumber = creditCardNumber;
 	}
 
 	/** full constructor */
-	public Applycreditcard(User user, String creditCardNumber,
+	public CreditcardApplyed(User user, String creditCardNumber,
 			Timestamp applyDate) {
 		this.user = user;
 		this.creditCardNumber = creditCardNumber;

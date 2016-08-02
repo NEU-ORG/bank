@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Companyoperator entity. @author MyEclipse Persistence Tools
+ * CompanyOperator entity. @author MyEclipse Persistence Tools
  */
 
-public class Companyoperator implements java.io.Serializable {
+public class CompanyOperator implements java.io.Serializable {
 
 	// Fields
 
@@ -16,16 +16,16 @@ public class Companyoperator implements java.io.Serializable {
 	private String managerName;
 	private String password;
 	private String idNumber;
-	private Set companytransactiondetails = new HashSet(0);
+	private Set companyTransactionDetails = new HashSet(0);
 
 	// Constructors
 
 	/** default constructor */
-	public Companyoperator() {
+	public CompanyOperator() {
 	}
 
 	/** minimal constructor */
-	public Companyoperator(Company company, String managerName,
+	public CompanyOperator(Company company, String managerName,
 			String password, String idNumber) {
 		this.company = company;
 		this.managerName = managerName;
@@ -34,13 +34,13 @@ public class Companyoperator implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Companyoperator(Company company, String managerName,
-			String password, String idNumber, Set companytransactiondetails) {
+	public CompanyOperator(Company company, String managerName,
+			String password, String idNumber, Set companyTransactionDetails) {
 		this.company = company;
 		this.managerName = managerName;
 		this.password = password;
 		this.idNumber = idNumber;
-		this.companytransactiondetails = companytransactiondetails;
+		this.companyTransactionDetails = companyTransactionDetails;
 	}
 
 	// Property accessors
@@ -85,12 +85,12 @@ public class Companyoperator implements java.io.Serializable {
 		this.idNumber = idNumber;
 	}
 
-	public Set getCompanytransactiondetails() {
-		return this.companytransactiondetails;
+	public Set getCompanyTransactionDetails() {
+		return this.companyTransactionDetails;
 	}
 
-	public void setCompanytransactiondetails(Set companytransactiondetails) {
-		this.companytransactiondetails = companytransactiondetails;
+	public void setCompanyTransactionDetails(Set companyTransactionDetails) {
+		this.companyTransactionDetails = companyTransactionDetails;
 	}
 
 }

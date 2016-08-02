@@ -12,23 +12,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neusoft.po.Applycreditcard;
+import com.neusoft.po.CompanyOperator;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Applycreditcard entities. Transaction control of the save(), update() and
+ * CompanyOperator entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see com.neusoft.po.Applycreditcard
+ * @see com.neusoft.po.CompanyOperator
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-public class ApplycreditcardDAO {
+public class CompanyOperatorDAO {
 	private static final Logger log = LoggerFactory
-			.getLogger(ApplycreditcardDAO.class);
+			.getLogger(CompanyOperatorDAO.class);
 
 	private SessionFactory sessionFactory;
 
@@ -44,8 +44,8 @@ public class ApplycreditcardDAO {
 		// do nothing
 	}
 
-	public void save(Applycreditcard transientInstance) {
-		log.debug("saving Applycreditcard instance");
+	public void save(CompanyOperator transientInstance) {
+		log.debug("saving CompanyOperator instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -55,8 +55,8 @@ public class ApplycreditcardDAO {
 		}
 	}
 
-	public void delete(Applycreditcard persistentInstance) {
-		log.debug("deleting Applycreditcard instance");
+	public void delete(CompanyOperator persistentInstance) {
+		log.debug("deleting CompanyOperator instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -66,11 +66,11 @@ public class ApplycreditcardDAO {
 		}
 	}
 
-	public Applycreditcard findById(java.lang.Integer id) {
-		log.debug("getting Applycreditcard instance with id: " + id);
+	public CompanyOperator findById(java.lang.Integer id) {
+		log.debug("getting CompanyOperator instance with id: " + id);
 		try {
-			Applycreditcard instance = (Applycreditcard) getCurrentSession()
-					.get("com.neusoft.po.Applycreditcard", id);
+			CompanyOperator instance = (CompanyOperator) getCurrentSession()
+					.get("com.neusoft.po.CompanyOperator", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -78,11 +78,11 @@ public class ApplycreditcardDAO {
 		}
 	}
 
-	public List findByExample(Applycreditcard instance) {
-		log.debug("finding Applycreditcard instance by example");
+	public List findByExample(CompanyOperator instance) {
+		log.debug("finding CompanyOperator instance by example");
 		try {
 			List results = getCurrentSession()
-					.createCriteria("com.neusoft.po.Applycreditcard")
+					.createCriteria("com.neusoft.po.CompanyOperator")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -94,10 +94,10 @@ public class ApplycreditcardDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Applycreditcard instance with property: "
+		log.debug("finding CompanyOperator instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from Applycreditcard as model where model."
+			String queryString = "from CompanyOperator as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -109,9 +109,9 @@ public class ApplycreditcardDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all Applycreditcard instances");
+		log.debug("finding all CompanyOperator instances");
 		try {
-			String queryString = "from Applycreditcard";
+			String queryString = "from CompanyOperator";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -120,10 +120,10 @@ public class ApplycreditcardDAO {
 		}
 	}
 
-	public Applycreditcard merge(Applycreditcard detachedInstance) {
-		log.debug("merging Applycreditcard instance");
+	public CompanyOperator merge(CompanyOperator detachedInstance) {
+		log.debug("merging CompanyOperator instance");
 		try {
-			Applycreditcard result = (Applycreditcard) getCurrentSession()
+			CompanyOperator result = (CompanyOperator) getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -133,8 +133,8 @@ public class ApplycreditcardDAO {
 		}
 	}
 
-	public void attachDirty(Applycreditcard instance) {
-		log.debug("attaching dirty Applycreditcard instance");
+	public void attachDirty(CompanyOperator instance) {
+		log.debug("attaching dirty CompanyOperator instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -144,8 +144,8 @@ public class ApplycreditcardDAO {
 		}
 	}
 
-	public void attachClean(Applycreditcard instance) {
-		log.debug("attaching clean Applycreditcard instance");
+	public void attachClean(CompanyOperator instance) {
+		log.debug("attaching clean CompanyOperator instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -156,8 +156,8 @@ public class ApplycreditcardDAO {
 		}
 	}
 
-	public static ApplycreditcardDAO getFromApplicationContext(
+	public static CompanyOperatorDAO getFromApplicationContext(
 			ApplicationContext ctx) {
-		return (ApplycreditcardDAO) ctx.getBean("ApplycreditcardDAO");
+		return (CompanyOperatorDAO) ctx.getBean("CompanyOperatorDAO");
 	}
 }

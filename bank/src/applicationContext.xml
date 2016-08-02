@@ -27,23 +27,23 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/neusoft/po/Company.hbm.xml</value>
-				<value>com/neusoft/po/Admin.hbm.xml</value>
-				<value>com/neusoft/po/User.hbm.xml</value>
-				<value>com/neusoft/po/Applycreditcard.hbm.xml</value>
-				<value>com/neusoft/po/CreditCard.hbm.xml</value>
-				<value>com/neusoft/po/BillDetail.hbm.xml</value>
-				<value>com/neusoft/po/TransactionDetail.hbm.xml</value>
-				<value>com/neusoft/po/Account.hbm.xml</value>
-				<value>com/neusoft/po/Bank.hbm.xml</value>
-				<value>
-					com/neusoft/po/Companytransactiondetail.hbm.xml
-				</value>
-				<value>com/neusoft/po/Companyoperator.hbm.xml</value>
-				<value>com/neusoft/po/Address.hbm.xml</value>
-				<value>com/neusoft/po/PayeeList.hbm.xml</value>
-				<value>com/neusoft/po/Constant.hbm.xml</value>
-				<value>com/neusoft/po/Companyaccount.hbm.xml</value></list>
+			<value>com/neusoft/po/Company.hbm.xml</value>
+			<value>com/neusoft/po/Admin.hbm.xml</value>
+			<value>com/neusoft/po/CompanyAccount.hbm.xml</value>
+			<value>com/neusoft/po/CompanyOperator.hbm.xml</value>
+			<value>com/neusoft/po/User.hbm.xml</value>
+			<value>com/neusoft/po/CreditcardApplyed.hbm.xml</value>
+			<value>com/neusoft/po/CreditCard.hbm.xml</value>
+			<value>com/neusoft/po/BillDetail.hbm.xml</value>
+			<value>com/neusoft/po/TransactionDetail.hbm.xml</value>
+			<value>com/neusoft/po/Account.hbm.xml</value>
+			<value>
+				com/neusoft/po/CompanyTransactionDetail.hbm.xml
+			</value>
+			<value>com/neusoft/po/Bank.hbm.xml</value>
+			<value>com/neusoft/po/Address.hbm.xml</value>
+			<value>com/neusoft/po/PayeeList.hbm.xml</value>
+			<value>com/neusoft/po/Constant.hbm.xml</value></list>
 		</property>
 	</bean>
 	<bean id="transactionManager"
@@ -55,7 +55,7 @@
 		class="com.neusoft.bo.CreditCardManager">
 		<property name="userDao" ref="UserDAO" />
 		<property name="creditCardDao" ref="CreditCardDAO" />
-		<property name="applyDao" ref="ApplycreditcardDAO" />
+		<property name="applyDao" ref="CreditcardApplyedDAO" />
 	</bean>
 	<bean id="userManager" class="com.neusoft.bo.UserManager">
 		<property name="userDao" ref="UserDAO" />
@@ -74,13 +74,25 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="CompanyAccountDAO"
+		class="com.neusoft.dao.CompanyAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CompanyOperatorDAO"
+		class="com.neusoft.dao.CompanyOperatorDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	<bean id="UserDAO" class="com.neusoft.dao.UserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="ApplycreditcardDAO"
-		class="com.neusoft.dao.ApplycreditcardDAO">
+	<bean id="CreditcardApplyedDAO"
+		class="com.neusoft.dao.CreditcardApplyedDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
@@ -92,7 +104,7 @@
 	</bean>
 	<bean id="BillDetailDAO" class="com.neusoft.dao.BillDetailDAO">
 		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
+			<ref bean="sessionFactory"></ref>
 		</property>
 	</bean>
 	<bean id="TransactionDetailDAO"
@@ -106,19 +118,13 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="CompanyTransactionDetailDAO"
+		class="com.neusoft.dao.CompanyTransactionDetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	<bean id="BankDAO" class="com.neusoft.dao.BankDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="CompanytransactiondetailDAO"
-		class="com.neusoft.dao.CompanytransactiondetailDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="CompanyoperatorDAO"
-		class="com.neusoft.dao.CompanyoperatorDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
@@ -130,16 +136,10 @@
 	</bean>
 	<bean id="PayeeListDAO" class="com.neusoft.dao.PayeeListDAO">
 		<property name="sessionFactory">
-			<ref bean="sessionFactory"></ref>
-		</property>
-	</bean>
-	<bean id="ConstantDAO" class="com.neusoft.dao.ConstantDAO">
-		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="CompanyaccountDAO"
-		class="com.neusoft.dao.CompanyaccountDAO">
+	<bean id="ConstantDAO" class="com.neusoft.dao.ConstantDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

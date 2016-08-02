@@ -12,23 +12,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neusoft.po.Companyaccount;
+import com.neusoft.po.CreditcardApplyed;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Companyaccount entities. Transaction control of the save(), update() and
+ * CreditcardApplyed entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see com.neusoft.po.Companyaccount
+ * @see com.neusoft.po.CreditcardApplyed
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-public class CompanyaccountDAO {
+public class CreditcardApplyedDAO {
 	private static final Logger log = LoggerFactory
-			.getLogger(CompanyaccountDAO.class);
+			.getLogger(CreditcardApplyedDAO.class);
 
 	private SessionFactory sessionFactory;
 
@@ -44,8 +44,8 @@ public class CompanyaccountDAO {
 		// do nothing
 	}
 
-	public void save(Companyaccount transientInstance) {
-		log.debug("saving Companyaccount instance");
+	public void save(CreditcardApplyed transientInstance) {
+		log.debug("saving CreditcardApplyed instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -55,8 +55,8 @@ public class CompanyaccountDAO {
 		}
 	}
 
-	public void delete(Companyaccount persistentInstance) {
-		log.debug("deleting Companyaccount instance");
+	public void delete(CreditcardApplyed persistentInstance) {
+		log.debug("deleting CreditcardApplyed instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -66,11 +66,11 @@ public class CompanyaccountDAO {
 		}
 	}
 
-	public Companyaccount findById(java.lang.Integer id) {
-		log.debug("getting Companyaccount instance with id: " + id);
+	public CreditcardApplyed findById(java.lang.Integer id) {
+		log.debug("getting CreditcardApplyed instance with id: " + id);
 		try {
-			Companyaccount instance = (Companyaccount) getCurrentSession().get(
-					"com.neusoft.po.Companyaccount", id);
+			CreditcardApplyed instance = (CreditcardApplyed) getCurrentSession()
+					.get("com.neusoft.po.CreditcardApplyed", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -78,11 +78,11 @@ public class CompanyaccountDAO {
 		}
 	}
 
-	public List findByExample(Companyaccount instance) {
-		log.debug("finding Companyaccount instance by example");
+	public List findByExample(CreditcardApplyed instance) {
+		log.debug("finding CreditcardApplyed instance by example");
 		try {
 			List results = getCurrentSession()
-					.createCriteria("com.neusoft.po.Companyaccount")
+					.createCriteria("com.neusoft.po.CreditcardApplyed")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -94,10 +94,10 @@ public class CompanyaccountDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Companyaccount instance with property: "
+		log.debug("finding CreditcardApplyed instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from Companyaccount as model where model."
+			String queryString = "from CreditcardApplyed as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -109,9 +109,9 @@ public class CompanyaccountDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all Companyaccount instances");
+		log.debug("finding all CreditcardApplyed instances");
 		try {
-			String queryString = "from Companyaccount";
+			String queryString = "from CreditcardApplyed";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -120,11 +120,11 @@ public class CompanyaccountDAO {
 		}
 	}
 
-	public Companyaccount merge(Companyaccount detachedInstance) {
-		log.debug("merging Companyaccount instance");
+	public CreditcardApplyed merge(CreditcardApplyed detachedInstance) {
+		log.debug("merging CreditcardApplyed instance");
 		try {
-			Companyaccount result = (Companyaccount) getCurrentSession().merge(
-					detachedInstance);
+			CreditcardApplyed result = (CreditcardApplyed) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -133,8 +133,8 @@ public class CompanyaccountDAO {
 		}
 	}
 
-	public void attachDirty(Companyaccount instance) {
-		log.debug("attaching dirty Companyaccount instance");
+	public void attachDirty(CreditcardApplyed instance) {
+		log.debug("attaching dirty CreditcardApplyed instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -144,8 +144,8 @@ public class CompanyaccountDAO {
 		}
 	}
 
-	public void attachClean(Companyaccount instance) {
-		log.debug("attaching clean Companyaccount instance");
+	public void attachClean(CreditcardApplyed instance) {
+		log.debug("attaching clean CreditcardApplyed instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -156,8 +156,8 @@ public class CompanyaccountDAO {
 		}
 	}
 
-	public static CompanyaccountDAO getFromApplicationContext(
+	public static CreditcardApplyedDAO getFromApplicationContext(
 			ApplicationContext ctx) {
-		return (CompanyaccountDAO) ctx.getBean("CompanyaccountDAO");
+		return (CreditcardApplyedDAO) ctx.getBean("CreditcardApplyedDAO");
 	}
 }

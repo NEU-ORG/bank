@@ -6,36 +6,45 @@
 -->
 <hibernate-mapping default-lazy="false">
  <class catalog="bank" name="com.neusoft.po.Address" table="address">
-  <id name="codeValue" type="java.lang.String">
-   <column length="10" name="codeValue"/>
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
    <generator class="increment"/>
   </id>
+  <many-to-one class="com.neusoft.po.Address" fetch="select" name="address">
+   <column name="parentNode"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="codeValue" type="java.lang.String">
+   <column length="10" name="codeValue" not-null="true" unique="true"/>
+  </property>
   <property generated="never" lazy="false" name="codeName" type="java.lang.String">
    <column length="30" name="codeName" not-null="true"/>
   </property>
   <property generated="never" lazy="false" name="type" type="java.lang.String">
    <column length="8" name="type" not-null="true"/>
   </property>
-  <property generated="never" lazy="false" name="parentNode" type="java.lang.String">
-   <column length="10" name="parentNode" not-null="true"/>
-  </property>
-  <set inverse="true" name="users" sort="unsorted">
+  <set inverse="true" lazy="false" name="addresses" sort="unsorted">
    <key>
-    <column length="10" name="address"/>
+    <column name="parentNode"/>
    </key>
-   <one-to-many class="com.neusoft.po.User"/>
+   <one-to-many class="com.neusoft.po.Address"/>
   </set>
   <set inverse="true" lazy="false" name="companies" sort="unsorted">
    <key>
-    <column length="10" name="address" not-null="true"/>
+    <column name="address" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.Company"/>
   </set>
   <set inverse="true" lazy="false" name="banks" sort="unsorted">
    <key>
-    <column length="10" name="address" not-null="true"/>
+    <column name="address" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.Bank"/>
+  </set>
+  <set inverse="true" lazy="false" name="users" sort="unsorted">
+   <key>
+    <column name="address"/>
+   </key>
+   <one-to-many class="com.neusoft.po.User"/>
   </set>
  </class>
 </hibernate-mapping>

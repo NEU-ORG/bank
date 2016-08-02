@@ -12,19 +12,19 @@ import java.util.Set;
 
 import java.util.UUID;
 
-import com.neusoft.dao.ApplycreditcardDAO;
 import com.neusoft.dao.BillDetailDAO;
 import com.neusoft.dao.CreditCardDAO;
+import com.neusoft.dao.CreditcardApplyedDAO;
 import com.neusoft.dao.UserDAO;
-import com.neusoft.po.Applycreditcard;
 import com.neusoft.po.BillDetail;
 import com.neusoft.po.CreditCard;
+import com.neusoft.po.CreditcardApplyed;
 import com.neusoft.po.User;
 
 public class CreditCardManager {
 	private UserDAO userDao;
 	private CreditCardDAO creditCardDao;
-	private ApplycreditcardDAO applyDao;
+	private CreditcardApplyedDAO applyDao;
 	
 	public Set getCardInfo(String userName){
 		List users = userDao.findByProperty("userName", userName);
@@ -43,7 +43,7 @@ public class CreditCardManager {
         List users = userDao.findByProperty("userName", userName);
         if(!users.isEmpty()){
         	User user = (User) users.get(0);
-        	Applycreditcard item = new Applycreditcard(user,cardNumber);
+        	CreditcardApplyed item = new CreditcardApplyed(user,cardNumber);
         	//user.getApplycreditcards().add(item);
         	applyDao.save(item);
         }   
@@ -52,7 +52,7 @@ public class CreditCardManager {
 		List users = userDao.findByProperty("userName", userName);
 		if(!users.isEmpty()){
         	User user = (User) users.get(0);
-        	return user.getApplycreditcards();
+        	return user.getCreditcardApplyeds();
         }  
 		return null;
 	}
@@ -119,11 +119,11 @@ public class CreditCardManager {
 		this.creditCardDao = creditCardDao;
 	}
 
-	public ApplycreditcardDAO getApplyDao() {
+	public CreditcardApplyedDAO getApplyDao() {
 		return applyDao;
 	}
 
-	public void setApplyDao(ApplycreditcardDAO applyDao) {
+	public void setApplyDao(CreditcardApplyedDAO applyDao) {
 		this.applyDao = applyDao;
 	}
 }

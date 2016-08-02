@@ -11,7 +11,7 @@
    <generator class="increment"/>
   </id>
   <many-to-one class="com.neusoft.po.Address" fetch="select" name="address">
-   <column length="10" name="address" not-null="true"/>
+   <column name="address" not-null="true"/>
   </many-to-one>
   <property generated="never" lazy="false" name="name" type="java.lang.String">
    <column length="40" name="name" not-null="true"/>
@@ -19,11 +19,17 @@
   <property generated="never" lazy="false" name="type" type="java.lang.String">
    <column length="7" name="type" not-null="true"/>
   </property>
-  <set inverse="true" lazy="false" name="companyaccounts" sort="unsorted">
+  <set inverse="true" lazy="false" name="companyAccounts" sort="unsorted">
    <key>
     <column name="createBank" not-null="true"/>
    </key>
-   <one-to-many class="com.neusoft.po.Companyaccount"/>
+   <one-to-many class="com.neusoft.po.CompanyAccount"/>
+  </set>
+  <set inverse="true" lazy="false" name="companies" sort="unsorted">
+   <key>
+    <column name="bankId"/>
+   </key>
+   <one-to-many class="com.neusoft.po.Company"/>
   </set>
   <set inverse="true" lazy="false" name="accounts" sort="unsorted">
    <key>

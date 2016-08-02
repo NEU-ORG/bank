@@ -12,23 +12,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neusoft.po.Companyoperator;
+import com.neusoft.po.CompanyAccount;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Companyoperator entities. Transaction control of the save(), update() and
+ * CompanyAccount entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see com.neusoft.po.Companyoperator
+ * @see com.neusoft.po.CompanyAccount
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-public class CompanyoperatorDAO {
+public class CompanyAccountDAO {
 	private static final Logger log = LoggerFactory
-			.getLogger(CompanyoperatorDAO.class);
+			.getLogger(CompanyAccountDAO.class);
 
 	private SessionFactory sessionFactory;
 
@@ -44,8 +44,8 @@ public class CompanyoperatorDAO {
 		// do nothing
 	}
 
-	public void save(Companyoperator transientInstance) {
-		log.debug("saving Companyoperator instance");
+	public void save(CompanyAccount transientInstance) {
+		log.debug("saving CompanyAccount instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -55,8 +55,8 @@ public class CompanyoperatorDAO {
 		}
 	}
 
-	public void delete(Companyoperator persistentInstance) {
-		log.debug("deleting Companyoperator instance");
+	public void delete(CompanyAccount persistentInstance) {
+		log.debug("deleting CompanyAccount instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -66,11 +66,11 @@ public class CompanyoperatorDAO {
 		}
 	}
 
-	public Companyoperator findById(java.lang.Integer id) {
-		log.debug("getting Companyoperator instance with id: " + id);
+	public CompanyAccount findById(java.lang.Integer id) {
+		log.debug("getting CompanyAccount instance with id: " + id);
 		try {
-			Companyoperator instance = (Companyoperator) getCurrentSession()
-					.get("com.neusoft.po.Companyoperator", id);
+			CompanyAccount instance = (CompanyAccount) getCurrentSession().get(
+					"com.neusoft.po.CompanyAccount", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -78,11 +78,11 @@ public class CompanyoperatorDAO {
 		}
 	}
 
-	public List findByExample(Companyoperator instance) {
-		log.debug("finding Companyoperator instance by example");
+	public List findByExample(CompanyAccount instance) {
+		log.debug("finding CompanyAccount instance by example");
 		try {
 			List results = getCurrentSession()
-					.createCriteria("com.neusoft.po.Companyoperator")
+					.createCriteria("com.neusoft.po.CompanyAccount")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -94,10 +94,10 @@ public class CompanyoperatorDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Companyoperator instance with property: "
+		log.debug("finding CompanyAccount instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from Companyoperator as model where model."
+			String queryString = "from CompanyAccount as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -109,9 +109,9 @@ public class CompanyoperatorDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all Companyoperator instances");
+		log.debug("finding all CompanyAccount instances");
 		try {
-			String queryString = "from Companyoperator";
+			String queryString = "from CompanyAccount";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -120,11 +120,11 @@ public class CompanyoperatorDAO {
 		}
 	}
 
-	public Companyoperator merge(Companyoperator detachedInstance) {
-		log.debug("merging Companyoperator instance");
+	public CompanyAccount merge(CompanyAccount detachedInstance) {
+		log.debug("merging CompanyAccount instance");
 		try {
-			Companyoperator result = (Companyoperator) getCurrentSession()
-					.merge(detachedInstance);
+			CompanyAccount result = (CompanyAccount) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -133,8 +133,8 @@ public class CompanyoperatorDAO {
 		}
 	}
 
-	public void attachDirty(Companyoperator instance) {
-		log.debug("attaching dirty Companyoperator instance");
+	public void attachDirty(CompanyAccount instance) {
+		log.debug("attaching dirty CompanyAccount instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -144,8 +144,8 @@ public class CompanyoperatorDAO {
 		}
 	}
 
-	public void attachClean(Companyoperator instance) {
-		log.debug("attaching clean Companyoperator instance");
+	public void attachClean(CompanyAccount instance) {
+		log.debug("attaching clean CompanyAccount instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -156,8 +156,8 @@ public class CompanyoperatorDAO {
 		}
 	}
 
-	public static CompanyoperatorDAO getFromApplicationContext(
+	public static CompanyAccountDAO getFromApplicationContext(
 			ApplicationContext ctx) {
-		return (CompanyoperatorDAO) ctx.getBean("CompanyoperatorDAO");
+		return (CompanyAccountDAO) ctx.getBean("CompanyAccountDAO");
 	}
 }

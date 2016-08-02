@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.neusoft.po.Constant;
-import com.neusoft.po.ConstantId;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -67,7 +66,7 @@ public class ConstantDAO {
 		}
 	}
 
-	public Constant findById(com.neusoft.po.ConstantId id) {
+	public Constant findById(java.lang.Integer id) {
 		log.debug("getting Constant instance with id: " + id);
 		try {
 			Constant instance = (Constant) getCurrentSession().get(

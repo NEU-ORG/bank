@@ -3,17 +3,17 @@ package com.neusoft.po;
 import java.sql.Timestamp;
 
 /**
- * Companytransactiondetail entity. @author MyEclipse Persistence Tools
+ * CompanyTransactionDetail entity. @author MyEclipse Persistence Tools
  */
 
-public class Companytransactiondetail implements java.io.Serializable {
+public class CompanyTransactionDetail implements java.io.Serializable {
 
 	// Fields
 
 	private Integer id;
-	private Companyaccount companyaccountByTargetAccount;
-	private Companyaccount companyaccountByAccountId;
-	private Companyoperator companyoperator;
+	private CompanyAccount companyAccountByTargetAccount;
+	private CompanyOperator companyOperator;
+	private CompanyAccount companyAccountByAccountId;
 	private Timestamp transactionTime;
 	private Double amountPaid;
 	private Double amountReceived;
@@ -25,14 +25,15 @@ public class Companytransactiondetail implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Companytransactiondetail() {
+	public CompanyTransactionDetail() {
 	}
 
 	/** minimal constructor */
-	public Companytransactiondetail(Companyaccount companyaccountByAccountId,
-			Double amountPaid, Double amountReceived, Double balance,
-			String currency) {
-		this.companyaccountByAccountId = companyaccountByAccountId;
+	public CompanyTransactionDetail(CompanyOperator companyOperator,
+			CompanyAccount companyAccountByAccountId, Double amountPaid,
+			Double amountReceived, Double balance, String currency) {
+		this.companyOperator = companyOperator;
+		this.companyAccountByAccountId = companyAccountByAccountId;
 		this.amountPaid = amountPaid;
 		this.amountReceived = amountReceived;
 		this.balance = balance;
@@ -40,15 +41,16 @@ public class Companytransactiondetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Companytransactiondetail(
-			Companyaccount companyaccountByTargetAccount,
-			Companyaccount companyaccountByAccountId,
-			Companyoperator companyoperator, Timestamp transactionTime,
-			Double amountPaid, Double amountReceived, Double balance,
-			String currency, String type, String message) {
-		this.companyaccountByTargetAccount = companyaccountByTargetAccount;
-		this.companyaccountByAccountId = companyaccountByAccountId;
-		this.companyoperator = companyoperator;
+	public CompanyTransactionDetail(
+			CompanyAccount companyAccountByTargetAccount,
+			CompanyOperator companyOperator,
+			CompanyAccount companyAccountByAccountId,
+			Timestamp transactionTime, Double amountPaid,
+			Double amountReceived, Double balance, String currency,
+			String type, String message) {
+		this.companyAccountByTargetAccount = companyAccountByTargetAccount;
+		this.companyOperator = companyOperator;
+		this.companyAccountByAccountId = companyAccountByAccountId;
 		this.transactionTime = transactionTime;
 		this.amountPaid = amountPaid;
 		this.amountReceived = amountReceived;
@@ -68,30 +70,30 @@ public class Companytransactiondetail implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Companyaccount getCompanyaccountByTargetAccount() {
-		return this.companyaccountByTargetAccount;
+	public CompanyAccount getCompanyAccountByTargetAccount() {
+		return this.companyAccountByTargetAccount;
 	}
 
-	public void setCompanyaccountByTargetAccount(
-			Companyaccount companyaccountByTargetAccount) {
-		this.companyaccountByTargetAccount = companyaccountByTargetAccount;
+	public void setCompanyAccountByTargetAccount(
+			CompanyAccount companyAccountByTargetAccount) {
+		this.companyAccountByTargetAccount = companyAccountByTargetAccount;
 	}
 
-	public Companyaccount getCompanyaccountByAccountId() {
-		return this.companyaccountByAccountId;
+	public CompanyOperator getCompanyOperator() {
+		return this.companyOperator;
 	}
 
-	public void setCompanyaccountByAccountId(
-			Companyaccount companyaccountByAccountId) {
-		this.companyaccountByAccountId = companyaccountByAccountId;
+	public void setCompanyOperator(CompanyOperator companyOperator) {
+		this.companyOperator = companyOperator;
 	}
 
-	public Companyoperator getCompanyoperator() {
-		return this.companyoperator;
+	public CompanyAccount getCompanyAccountByAccountId() {
+		return this.companyAccountByAccountId;
 	}
 
-	public void setCompanyoperator(Companyoperator companyoperator) {
-		this.companyoperator = companyoperator;
+	public void setCompanyAccountByAccountId(
+			CompanyAccount companyAccountByAccountId) {
+		this.companyAccountByAccountId = companyAccountByAccountId;
 	}
 
 	public Timestamp getTransactionTime() {

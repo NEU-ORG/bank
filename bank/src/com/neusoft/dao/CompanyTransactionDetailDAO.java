@@ -12,24 +12,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neusoft.po.Companytransactiondetail;
+import com.neusoft.po.CompanyTransactionDetail;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Companytransactiondetail entities. Transaction control of the save(),
+ * CompanyTransactionDetail entities. Transaction control of the save(),
  * update() and delete() operations can directly support Spring
  * container-managed transactions or they can be augmented to handle
  * user-managed Spring transactions. Each of these methods provides additional
  * information for how to configure it for the desired type of transaction
  * control.
  * 
- * @see com.neusoft.po.Companytransactiondetail
+ * @see com.neusoft.po.CompanyTransactionDetail
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-public class CompanytransactiondetailDAO {
+public class CompanyTransactionDetailDAO {
 	private static final Logger log = LoggerFactory
-			.getLogger(CompanytransactiondetailDAO.class);
+			.getLogger(CompanyTransactionDetailDAO.class);
 
 	private SessionFactory sessionFactory;
 
@@ -45,8 +45,8 @@ public class CompanytransactiondetailDAO {
 		// do nothing
 	}
 
-	public void save(Companytransactiondetail transientInstance) {
-		log.debug("saving Companytransactiondetail instance");
+	public void save(CompanyTransactionDetail transientInstance) {
+		log.debug("saving CompanyTransactionDetail instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -56,8 +56,8 @@ public class CompanytransactiondetailDAO {
 		}
 	}
 
-	public void delete(Companytransactiondetail persistentInstance) {
-		log.debug("deleting Companytransactiondetail instance");
+	public void delete(CompanyTransactionDetail persistentInstance) {
+		log.debug("deleting CompanyTransactionDetail instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -67,11 +67,11 @@ public class CompanytransactiondetailDAO {
 		}
 	}
 
-	public Companytransactiondetail findById(java.lang.Integer id) {
-		log.debug("getting Companytransactiondetail instance with id: " + id);
+	public CompanyTransactionDetail findById(java.lang.Integer id) {
+		log.debug("getting CompanyTransactionDetail instance with id: " + id);
 		try {
-			Companytransactiondetail instance = (Companytransactiondetail) getCurrentSession()
-					.get("com.neusoft.po.Companytransactiondetail", id);
+			CompanyTransactionDetail instance = (CompanyTransactionDetail) getCurrentSession()
+					.get("com.neusoft.po.CompanyTransactionDetail", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -79,11 +79,11 @@ public class CompanytransactiondetailDAO {
 		}
 	}
 
-	public List findByExample(Companytransactiondetail instance) {
-		log.debug("finding Companytransactiondetail instance by example");
+	public List findByExample(CompanyTransactionDetail instance) {
+		log.debug("finding CompanyTransactionDetail instance by example");
 		try {
 			List results = getCurrentSession()
-					.createCriteria("com.neusoft.po.Companytransactiondetail")
+					.createCriteria("com.neusoft.po.CompanyTransactionDetail")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -95,10 +95,10 @@ public class CompanytransactiondetailDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Companytransactiondetail instance with property: "
+		log.debug("finding CompanyTransactionDetail instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from Companytransactiondetail as model where model."
+			String queryString = "from CompanyTransactionDetail as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -110,9 +110,9 @@ public class CompanytransactiondetailDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all Companytransactiondetail instances");
+		log.debug("finding all CompanyTransactionDetail instances");
 		try {
-			String queryString = "from Companytransactiondetail";
+			String queryString = "from CompanyTransactionDetail";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -121,11 +121,11 @@ public class CompanytransactiondetailDAO {
 		}
 	}
 
-	public Companytransactiondetail merge(
-			Companytransactiondetail detachedInstance) {
-		log.debug("merging Companytransactiondetail instance");
+	public CompanyTransactionDetail merge(
+			CompanyTransactionDetail detachedInstance) {
+		log.debug("merging CompanyTransactionDetail instance");
 		try {
-			Companytransactiondetail result = (Companytransactiondetail) getCurrentSession()
+			CompanyTransactionDetail result = (CompanyTransactionDetail) getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -135,8 +135,8 @@ public class CompanytransactiondetailDAO {
 		}
 	}
 
-	public void attachDirty(Companytransactiondetail instance) {
-		log.debug("attaching dirty Companytransactiondetail instance");
+	public void attachDirty(CompanyTransactionDetail instance) {
+		log.debug("attaching dirty CompanyTransactionDetail instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -146,8 +146,8 @@ public class CompanytransactiondetailDAO {
 		}
 	}
 
-	public void attachClean(Companytransactiondetail instance) {
-		log.debug("attaching clean Companytransactiondetail instance");
+	public void attachClean(CompanyTransactionDetail instance) {
+		log.debug("attaching clean CompanyTransactionDetail instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -158,9 +158,9 @@ public class CompanytransactiondetailDAO {
 		}
 	}
 
-	public static CompanytransactiondetailDAO getFromApplicationContext(
+	public static CompanyTransactionDetailDAO getFromApplicationContext(
 			ApplicationContext ctx) {
-		return (CompanytransactiondetailDAO) ctx
-				.getBean("CompanytransactiondetailDAO");
+		return (CompanyTransactionDetailDAO) ctx
+				.getBean("CompanyTransactionDetailDAO");
 	}
 }

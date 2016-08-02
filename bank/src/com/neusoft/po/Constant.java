@@ -8,7 +8,10 @@ public class Constant implements java.io.Serializable {
 
 	// Fields
 
-	private ConstantId id;
+	private Integer id;
+	private String text;
+	private Double value;
+	private String type;
 
 	// Constructors
 
@@ -17,18 +20,44 @@ public class Constant implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Constant(ConstantId id) {
-		this.id = id;
+	public Constant(String text, Double value, String type) {
+		this.text = text;
+		this.value = value;
+		this.type = type;
 	}
 
 	// Property accessors
 
-	public ConstantId getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(ConstantId id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getText() {
+		return this.text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Double getValue() {
+		return this.value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

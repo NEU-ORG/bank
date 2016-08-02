@@ -65,7 +65,7 @@ public class AddressDAO {
 		}
 	}
 
-	public Address findById(java.lang.String id) {
+	public Address findById(java.lang.Integer id) {
 		log.debug("getting Address instance with id: " + id);
 		try {
 			Address instance = (Address) getCurrentSession().get(

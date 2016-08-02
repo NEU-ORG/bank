@@ -24,9 +24,9 @@ public class User implements java.io.Serializable {
 	private String isSigned;
 	private String email;
 	private String postCode;
+	private Set creditcardApplyeds = new HashSet(0);
 	private Set payeeLists = new HashSet(0);
 	private Set creditCards = new HashSet(0);
-	private Set applycreditcards = new HashSet(0);
 	private Set accounts = new HashSet(0);
 
 	// Constructors
@@ -49,8 +49,8 @@ public class User implements java.io.Serializable {
 	public User(Address address, Bank bank, String userName, String password,
 			String phoneNumber, String realName, String idNumber,
 			Timestamp createDate, String isSigned, String email,
-			String postCode, Set payeeLists, Set creditCards,
-			Set applycreditcards, Set accounts) {
+			String postCode, Set creditcardApplyeds, Set payeeLists,
+			Set creditCards, Set accounts) {
 		this.address = address;
 		this.bank = bank;
 		this.userName = userName;
@@ -62,9 +62,9 @@ public class User implements java.io.Serializable {
 		this.isSigned = isSigned;
 		this.email = email;
 		this.postCode = postCode;
+		this.creditcardApplyeds = creditcardApplyeds;
 		this.payeeLists = payeeLists;
 		this.creditCards = creditCards;
-		this.applycreditcards = applycreditcards;
 		this.accounts = accounts;
 	}
 
@@ -166,6 +166,14 @@ public class User implements java.io.Serializable {
 		this.postCode = postCode;
 	}
 
+	public Set getCreditcardApplyeds() {
+		return this.creditcardApplyeds;
+	}
+
+	public void setCreditcardApplyeds(Set creditcardApplyeds) {
+		this.creditcardApplyeds = creditcardApplyeds;
+	}
+
 	public Set getPayeeLists() {
 		return this.payeeLists;
 	}
@@ -180,14 +188,6 @@ public class User implements java.io.Serializable {
 
 	public void setCreditCards(Set creditCards) {
 		this.creditCards = creditCards;
-	}
-
-	public Set getApplycreditcards() {
-		return this.applycreditcards;
-	}
-
-	public void setApplycreditcards(Set applycreditcards) {
-		this.applycreditcards = applycreditcards;
 	}
 
 	public Set getAccounts() {

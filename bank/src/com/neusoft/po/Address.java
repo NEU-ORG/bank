@@ -11,13 +11,15 @@ public class Address implements java.io.Serializable {
 
 	// Fields
 
+	private Integer id;
+	private Address address;
 	private String codeValue;
 	private String codeName;
 	private String type;
-	private String parentNode;
-	private Set users = new HashSet(0);
+	private Set addresses = new HashSet(0);
 	private Set companies = new HashSet(0);
 	private Set banks = new HashSet(0);
+	private Set users = new HashSet(0);
 
 	// Constructors
 
@@ -26,24 +28,42 @@ public class Address implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Address(String codeName, String type, String parentNode) {
+	public Address(String codeValue, String codeName, String type) {
+		this.codeValue = codeValue;
 		this.codeName = codeName;
 		this.type = type;
-		this.parentNode = parentNode;
 	}
 
 	/** full constructor */
-	public Address(String codeName, String type, String parentNode, Set users,
-			Set companies, Set banks) {
+	public Address(Address address, String codeValue, String codeName,
+			String type, Set addresses, Set companies, Set banks, Set users) {
+		this.address = address;
+		this.codeValue = codeValue;
 		this.codeName = codeName;
 		this.type = type;
-		this.parentNode = parentNode;
-		this.users = users;
+		this.addresses = addresses;
 		this.companies = companies;
 		this.banks = banks;
+		this.users = users;
 	}
 
 	// Property accessors
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Address getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public String getCodeValue() {
 		return this.codeValue;
@@ -69,20 +89,12 @@ public class Address implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public String getParentNode() {
-		return this.parentNode;
+	public Set getAddresses() {
+		return this.addresses;
 	}
 
-	public void setParentNode(String parentNode) {
-		this.parentNode = parentNode;
-	}
-
-	public Set getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(Set users) {
-		this.users = users;
+	public void setAddresses(Set addresses) {
+		this.addresses = addresses;
 	}
 
 	public Set getCompanies() {
@@ -99,6 +111,14 @@ public class Address implements java.io.Serializable {
 
 	public void setBanks(Set banks) {
 		this.banks = banks;
+	}
+
+	public Set getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Set users) {
+		this.users = users;
 	}
 
 }

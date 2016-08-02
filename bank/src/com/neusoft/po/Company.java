@@ -13,10 +13,11 @@ public class Company implements java.io.Serializable {
 
 	private Integer id;
 	private Address address;
+	private Bank bank;
 	private String companyName;
 	private String phoneNumber;
-	private Set companyoperators = new HashSet(0);
-	private Set companyaccounts = new HashSet(0);
+	private Set companyAccounts = new HashSet(0);
+	private Set companyOperators = new HashSet(0);
 
 	// Constructors
 
@@ -32,13 +33,14 @@ public class Company implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Company(Address address, String companyName, String phoneNumber,
-			Set companyoperators, Set companyaccounts) {
+	public Company(Address address, Bank bank, String companyName,
+			String phoneNumber, Set companyAccounts, Set companyOperators) {
 		this.address = address;
+		this.bank = bank;
 		this.companyName = companyName;
 		this.phoneNumber = phoneNumber;
-		this.companyoperators = companyoperators;
-		this.companyaccounts = companyaccounts;
+		this.companyAccounts = companyAccounts;
+		this.companyOperators = companyOperators;
 	}
 
 	// Property accessors
@@ -59,6 +61,14 @@ public class Company implements java.io.Serializable {
 		this.address = address;
 	}
 
+	public Bank getBank() {
+		return this.bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
+
 	public String getCompanyName() {
 		return this.companyName;
 	}
@@ -75,20 +85,20 @@ public class Company implements java.io.Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Set getCompanyoperators() {
-		return this.companyoperators;
+	public Set getCompanyAccounts() {
+		return this.companyAccounts;
 	}
 
-	public void setCompanyoperators(Set companyoperators) {
-		this.companyoperators = companyoperators;
+	public void setCompanyAccounts(Set companyAccounts) {
+		this.companyAccounts = companyAccounts;
 	}
 
-	public Set getCompanyaccounts() {
-		return this.companyaccounts;
+	public Set getCompanyOperators() {
+		return this.companyOperators;
 	}
 
-	public void setCompanyaccounts(Set companyaccounts) {
-		this.companyaccounts = companyaccounts;
+	public void setCompanyOperators(Set companyOperators) {
+		this.companyOperators = companyOperators;
 	}
 
 }

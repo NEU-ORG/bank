@@ -11,7 +11,7 @@
    <generator class="increment"/>
   </id>
   <many-to-one class="com.neusoft.po.Address" fetch="select" name="address">
-   <column length="10" name="address"/>
+   <column name="address"/>
   </many-to-one>
   <many-to-one class="com.neusoft.po.Bank" fetch="select" name="bank">
    <column name="createBank" not-null="true"/>
@@ -45,6 +45,12 @@
   <property generated="never" lazy="false" name="postCode" type="java.lang.String">
    <column length="10" name="postCode"/>
   </property>
+  <set inverse="true" lazy="false" name="creditcardApplyeds" sort="unsorted">
+   <key>
+    <column name="userId" not-null="true"/>
+   </key>
+   <one-to-many class="com.neusoft.po.CreditcardApplyed"/>
+  </set>
   <set inverse="true" lazy="false" name="payeeLists" sort="unsorted">
    <key>
     <column name="userId" not-null="true"/>
@@ -56,12 +62,6 @@
     <column name="userId" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.CreditCard"/>
-  </set>
-  <set inverse="true" lazy="false" name="applycreditcards" sort="unsorted">
-   <key>
-    <column name="userId" not-null="true"/>
-   </key>
-   <one-to-many class="com.neusoft.po.Applycreditcard"/>
   </set>
   <set inverse="true" lazy="false" name="accounts" sort="unsorted">
    <key>
