@@ -12,13 +12,15 @@
 		</global-results>
 		<action name="account_*" class="com.neusoft.action.AccountAction"
 			method="{1}">
-			<result name="info">/WEB-INF/jsp/account.jsp</result>
-			<result name="list">/WEB-INF/jsp/account.jsp</result>
-			<result name="create_win">/WEB-INF/jsp/account_create.jsp</result>
-			<result name="create">/WEB-INF/jsp/account.jsp</result>
-			<result name="payment_win">/WEB-INF/jsp/payment.jsp</result>
-			<result name="return">/WEB-INF/jsp/account.jsp</result>
-			<result name="input">/WEB-INF/jsp/account_create.jsp</result>
+			<result name="info">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="lockwin">WEB-INF/jsp/account/accountlock.jsp</result>
+			<result name="lock">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="list">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="create_win">/WEB-INF/jsp/account/account_create.jsp</result>
+			<result name="create">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="payment_win">/WEB-INF/jsp/account/payment.jsp</result>
+			<result name="return">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="input">/WEB-INF/jsp/account/account_create.jsp</result>
 		</action>
 
 	</package>
