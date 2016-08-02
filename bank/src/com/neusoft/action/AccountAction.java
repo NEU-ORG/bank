@@ -5,9 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.neusoft.bo.AccountManager;
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
@@ -23,6 +25,7 @@ public class AccountAction extends ActionSupport {
 
 	private ApplicationContext ctx;
 	private AccountDAO accountDAO;
+	private AccountManager am;
 
 	public void init() {
 		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -34,6 +37,25 @@ public class AccountAction extends ActionSupport {
 
 	public String info() {
 		return "info";
+	}
+	
+	public String lockwin() {
+		return "lockwin";
+	}
+	
+	public String lock() {
+		String accountId = ServletActionContext.getRequest().getParameter("accountId");
+		if(accountId == null||accountId.isEmpty()) {
+			return "error";
+		} else {
+			Integer id = Integer.parseInt(accountId);
+			int temp = am.lock(id);
+			if(temp == -1)
+				return "error";
+			else if(temp == 1)
+				return "error";
+		}
+		return "lock";
 	}
 
 	public String list() {

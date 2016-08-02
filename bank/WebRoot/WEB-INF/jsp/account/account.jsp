@@ -9,7 +9,14 @@
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
-<script type="text/javascript" charset="utf8" src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<style type="text/css">
+td {
+      text-align:center; /*设置水平居中*/
+      vertical-align:middle;/*设置垂直居中*/
+}
+</style>
+
+<script type="text/javascript" charset="utf8" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -45,7 +52,7 @@ function AddAccountsTable(tabObj, data) {
 				"</td><td>"+data[i].currency+
 				"</td><td>"+data[i].balance+
 				"</td><td>"+data[i].availableBalance+
-				"</td><td>"+data[i].createBank+
+				"</td><td>"+data[i].bank.name+
 				"</td><td>"+new Date(data[i].createDate.time).toISOString()+
 				"</td></tr>";
 		tabObj.append(newRow);
@@ -61,9 +68,27 @@ function AddAccountsTable(tabObj, data) {
 		<main class="mdl-layout__content">
 			
 			<h1>我的账户:<c:out value="${loginInfo}" /></h1><br />
-		
-			<div>
-				<table id="alist-show" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+			
+			<div class="mdl-grid portfolio-max-width">
+        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src=" images/example-blog02.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title ">
+                        <h2 class="mdl-card__title-text">Loren</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+                          View Updates
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+				<table id="alist-show" 	class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 					<thead>
 				    	<tr>
 				      		<th>账号</th>
@@ -78,6 +103,10 @@ function AddAccountsTable(tabObj, data) {
 				  	<tbody></tbody>
 				</table>
 			</div>
+                
+            </div>
+		
+			
 			
 			<%@include file="/footer.jsp"%>
 		</main>

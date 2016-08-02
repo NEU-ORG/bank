@@ -36,7 +36,7 @@ public class JsonAction extends ActionSupport{
 	
 	public String getTransactionDetail() {
 		String accountId = ServletActionContext.getRequest().getParameter("accountId");
-		System.out.println("accountId:"+accountId);
+		//System.out.println("accountId:"+accountId);
 		if(accountId == null||accountId.isEmpty()) {
 			return "error";
 		} else {

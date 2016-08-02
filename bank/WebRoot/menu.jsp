@@ -3,7 +3,7 @@
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="my-account">
     <li class="mdl-menu__item" onclick="location='account_info.action'">帐户查询</li>
-    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">账户挂失</li>
+    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_lockwin.action'">账户挂失</li>
     <li class="mdl-menu__item">添加新账户</li>
     <li class="mdl-menu__item">删除帐户</li>
 </ul>
