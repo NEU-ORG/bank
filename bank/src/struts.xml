@@ -20,8 +20,8 @@
 		</action>
 		<action name="user_*" class="com.neusoft.action.UserAction" method="{1}">
 			<result name="success">/WEB-INF/jsp/main.jsp</result>
-			<result name="signIn">/sign_in.jsp</result>
-			<result name="signUp">/sign_up.jsp</result>
+			<result name="sign_in">/sign_in.jsp</result>
+			<result name="sign_up">/sign_up.jsp</result>
 			<result name="{1}">/user_{1}.jsp</result>
 		</action>
 			<action name="admin_*" class="com.neusoft.action.UserAdminAction" method="{1}">

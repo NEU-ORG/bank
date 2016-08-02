@@ -137,7 +137,7 @@ public class AccountDAO {
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("attach failed", re);
 			throw re;
 		}

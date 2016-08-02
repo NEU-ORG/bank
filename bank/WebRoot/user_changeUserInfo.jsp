@@ -32,21 +32,22 @@
              		<c:out value="手机号：${user.phoneNumber}"></c:out><br/>
              		<c:out value="所属分行：${user.bank.name}"></c:out><br/>
              		<c:out value="创建时间：${user.createDate}"></c:out><br/>
-             		<form action="user_signIn.action" id＝"form" method="post">
+             		<form action="user_changeUserInfo.action" id＝"form" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="sample3" name="userName">
+                            <input class="mdl-textfield__input" type="text" id="sample3" name="email">
                             <label class="mdl-textfield__label" for="sample3">邮箱...</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                           <select>
-                           	<option value="沈阳">沈阳</option>
-                           	<option value="大连">大连</option>
-                           	<option value="北京">北京</option>
+                           	地址：
+                           <select name="address">
+                           		<c:forEach var="address" items="${addresses}">
+                           			<option value="${address.codeName}">${address.codeName}</option>
+                           		</c:forEach>
                            </select>
 
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="password" id="sample3" name="password">
+                            <input class="mdl-textfield__input" type="text" id="sample3" name="postCode">
                             <label class="mdl-textfield__label" for="sample3">邮编...</label>
 
                         </div>

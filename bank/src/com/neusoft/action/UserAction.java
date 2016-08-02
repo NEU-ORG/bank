@@ -1,5 +1,6 @@
 package com.neusoft.action;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
@@ -7,7 +8,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.bo.UserManager;
 import com.neusoft.dao.AccountDAO;
+import com.neusoft.dao.AddressDAO;
 import com.neusoft.dao.UserDAO;
+import com.neusoft.po.Address;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,11 +21,39 @@ public class UserAction extends ActionSupport {
 	private String cardNumber;
 	private String userName;
 	private String password;
+	private String newPassword;
 	private UserManager userManager;
 	private String email;
 	private String address;
 	private String postCode;
 	
+	public String changeUserName(){
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		if(userManager.checkOutLogin((String)session.get("loginInfo"), password)){
+			if(session.get("passwordError")!=null)
+			{
+				session.remove("passwordError");
+			}
+			userManager.changeUserName((String)session.get("loginInfo"),userName);
+			session.put("loginInfo", userName);
+		}else{
+			session.put("passwordError","密码不正确！！");
+		}
+		return "changeUserName";
+	}
+	public String changePassword(){
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		if(userManager.checkOutLogin((String)session.get("loginInfo"), password)){
+			if(session.get("passwordError")!=null)
+			{
+				session.remove("passwordError");
+			}
+			userManager.changePassword((String)session.get("loginInfo"),newPassword);
+		}else{
+			session.put("passwordError","密码不正确！！");
+		}
+		return "changePassword";
+	}
 	public String info(){
 		Map request = (Map) ActionContext.getContext().get("request");
 		Map<String,Object> session = ActionContext.getContext().getSession();
@@ -33,6 +64,12 @@ public class UserAction extends ActionSupport {
 		Map request = (Map) ActionContext.getContext().get("request");
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		User user = userManager.changeUserInfo((String) session.get("loginInfo"), email, address, postCode);
+		
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		AddressDAO addressDAO = (AddressDAO) ctx.getBean("AddressDAO");
+		List<Address> l = addressDAO.findAll();
+		request.put("addresses",l);
+		
 		request.put("user",userManager.getUserInfo((String) session.get("loginInfo")));
 		return "changeUserInfo";
 	}
@@ -49,7 +86,7 @@ public class UserAction extends ActionSupport {
 				result = "success";
 		}else{
 			session.put("loginError","用户名或密码不正确！！");
-			result = "signIn";
+			result = "sign_in";
 		}
 		return result;
 		
@@ -71,7 +108,7 @@ public class UserAction extends ActionSupport {
 		{
 			Map<String,Object> session = ActionContext.getContext().getSession();
 			session.put("ErrorMessage", "注册信息错误");
-			return "signUp";
+			return "sign_up";
 		}
 	}
 	public String getRealName() {
@@ -127,5 +164,11 @@ public class UserAction extends ActionSupport {
 	}
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
+	}
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 }

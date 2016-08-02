@@ -28,10 +28,11 @@
                     <h2 class="mdl-card__title-text">修改密码</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
-             
-                    <form action="#" id＝"form" method="post">
+             		<c:out value="${passwordError}"/>
+                	<c:set var="passwordError" value=""/>
+                    <form action="user_changePassword.action" id＝"form" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="sample3" name="oldPassword">
+                            <input class="mdl-textfield__input" type="text" id="sample3" name="password">
                             <label class="mdl-textfield__label" for="sample3">原密码...</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
