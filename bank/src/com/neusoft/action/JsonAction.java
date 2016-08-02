@@ -18,10 +18,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.AddressDAO;
+import com.neusoft.dao.ConstantDAO;
 import com.neusoft.dao.TransactionDetailDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
 import com.neusoft.po.Address;
+import com.neusoft.po.Constant;
 import com.neusoft.po.TransactionDetail;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -33,6 +35,22 @@ public class JsonAction extends ActionSupport{
 	public Integer userId;
 	
 	public String execute() {
+		return "success";
+	}
+	
+	public String QueryConstant() {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ConstantDAO constantDAO = (ConstantDAO) ctx.getBean("ConstantDAO");
+		List<Constant> l = constantDAO.findAll();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("status", true);
+		map.put("result", l);
+		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
+		jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
+		jsonConfig.setExcludes(new String[]{""});
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		jsonResult = JSONObject.fromObject(map,jsonConfig);
+		
 		return "success";
 	}
 	
@@ -79,7 +97,8 @@ public class JsonAction extends ActionSupport{
 				map.put("status", true);
 				map.put("result", l);
 				jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
-				jsonConfig.setExcludes(new String[]{"accountByAccountId"});
+				jsonConfig.setExcludes(new String[]{"bank","users","address","creditCards","accounts","applycreditcards","payeeLists","companyaccounts","user","accounts","transactionDetailsForAccountId","transactionDetailsForTargetAccount"});
+				
 				jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 			}
 			jsonResult = JSONObject.fromObject(map,jsonConfig);
