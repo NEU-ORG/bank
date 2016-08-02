@@ -32,7 +32,6 @@ public class CreditCardAction extends ActionSupport {
 	}
 
 	public String apply() {// …Í«Î–≈”√ø®
-		System.out.println(flag);
 		if(flag!=null){
 			creditCardManager.applyCreditCard((String) ActionContext.getContext().getSession().get("loginInfo"));
 		}
@@ -40,31 +39,56 @@ public class CreditCardAction extends ActionSupport {
 	}
 
 	public String application_progress() {
-		
+		Set cardsApplyed = creditCardManager.getApplicationProgress((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("cardsApplyed", cardsApplyed);
 		return "application_progress";
 	}
 
 	public String report_loss() {// ø®∆¨π“ ß
+		Set cards = creditCardManager.getCardInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("creditCards", cards);
+		if(flag!=null){
+			creditCardManager.reportLoss(creditCardID);
+		}
 		return "report_loss";
 	}
 
 	public String active() {// ø®∆¨º§ªÓ
+		Set cards = creditCardManager.getCardInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("creditCards", cards);
+		if(flag!=null){
+			creditCardManager.activeCard(creditCardID);
+		}
 		return "active";
 	}
 
 	public String checkedBill() {// “—≥ˆ’Àµ•≤È—Ø
-		System.out.println(creditCardID);
-		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
+		Set cards = creditCardManager.getCardInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("creditCards", cards);
+		
+	
 		//CreditCardBill checkedBill = creditCardManager.getCheckedBill(creditCardID);
 		//request.put("checkedBill",checkedBill);
 		return "checkedBill";
 	}
 
 	public String uncheckedBill() {//need to check user<->card relationship;
-		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
-		
-		Set uncheckedBill = creditCardManager.getUncheckedBill(creditCardID);
-		request.put("uncheckedBill", uncheckedBill);
+		Set cards = creditCardManager.getCardInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("creditCards", cards);
+		if(flag!=null){
+			Set uncheckedBill = creditCardManager.getUncheckedBill(creditCardID);
+			request.put("uncheckedBill", uncheckedBill);
+		}
 		return "uncheckedBill";
 	}
 
