@@ -56,7 +56,7 @@
 		<property name="creditCardDao" ref="CreditCardDAO" />
 		<property name="applyDao" ref="CreditcardApplyedDAO" />
 	</bean>
-	<bean id="userManager" class="com.neusoft.bo.UserManager">
+		<bean id="userManager" class="com.neusoft.bo.UserManager">
 		<property name="userDao" ref="UserDAO" />
 		<property name="accountDao" ref="AccountDAO" />
 		<property name="addressDao" ref="AddressDAO" />

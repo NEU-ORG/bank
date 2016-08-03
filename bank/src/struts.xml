@@ -29,11 +29,6 @@
 			<result name="signUp">/sign_up.jsp</result>
 			<result name="{1}">/user_{1}.jsp</result>
 		</action>
-			<action name="admin_*" class="com.neusoft.action.UserAdminAction" method="{1}">
-			<result name="success_admin">/admin_main.jsp</result>
-			<result name="signUp">/sign_up.jsp</result>
-			<result name="{1}">/user_{1}.jsp</result>
-		</action>
 		
 	</package>
 	<include file="creditCardStruts.xml"></include>

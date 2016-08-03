@@ -38,7 +38,7 @@
                             <label class="mdl-textfield__label" for="sample3">邮箱...</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                           
+                           	地址：
                            <select name="address">
                            		<c:forEach var="address" items="${addresses}">
                            			<option value="${address.codeName}">${address.codeName}</option>
