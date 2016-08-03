@@ -24,6 +24,7 @@ http://localhost:8080/bank/getUserList
 http://localhost:8080/bank/AccountJsonAction
 
 http://localhost:8080/bank/getTransactionDetail?accountId=1
+http://localhost:8080/bank/QueryTransactionDetail?accountId=1&btime=1469949255000&etime=1470366920000
 
 http://localhost:8080/bank/QueryAddress
 //ËÑË÷ËùÓÐµØÖ·
