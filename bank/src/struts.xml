@@ -24,10 +24,14 @@
 			<result name="sign_up">/sign_up.jsp</result>
 			<result name="{1}">/user_{1}.jsp</result>
 		</action>
-			<action name="admin_*" class="com.neusoft.action.UserAdminAction" method="{1}">
+		<action name="admin_*" class="com.neusoft.action.UserAdminAction" method="{1}">
 			<result name="success_admin">/admin_main.jsp</result>
-			<result name="signUp">/sign_up.jsp</result>
-			<result name="{1}">/user_{1}.jsp</result>
+			<result name="benefitShow">/benefitShow.jsp</result>
+			<result name="error2">/admin_login_in.jsp</result>
+			<result name="admin_change_benefit">/admin_change_benefit.jsp</result>
+<!-- 			<result name=""> -->
+			<!-- <result name="signUp">/sign_up.jsp</result>
+			<result name="{1}">/user_{1}.jsp</result> -->
 		</action>
 		
 	</package>

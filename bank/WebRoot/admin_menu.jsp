@@ -9,8 +9,8 @@
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="transfer">
-    <li class="mdl-menu__item">查询利率</li>
-    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">更改利率</li>
+    <li onclick="location='admin_benefitShow'"class="mdl-menu__item">查询利率</li>
+    <li onclick="location='admin_changeBenefit'"class="mdl-menu__item mdl-menu__item--full-bleed-divider">更改利率</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="credit-card">

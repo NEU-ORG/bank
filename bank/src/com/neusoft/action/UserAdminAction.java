@@ -13,33 +13,67 @@ import com.neusoft.dao.AdminDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
 import com.neusoft.po.Admin;
+import com.neusoft.po.Constant;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 
 public class UserAdminAction {
+	private AdminManager adminManager;
+	private String name;
+	private String password;
+	private double value;
+	private String text;
+	private int id;
 	public String signUp(){
-		Map request = (Map) ActionContext.getContext().get("request");
-		ApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		AdminDAO adminDao = (AdminDAO) ctx.getBean("AdminDAO");
+		/*Map request = (Map) ActionContext.getContext().get("request");*/
+		Map<String, Object> session = ActionContext.getContext().getSession();
 		if(adminManager.checkOutLogin(name, password))
 		{
+			session.put("loginInfo", name);
 			return "success_admin";
 		}
 		else
 		{
-			Map<String, Object> session = ActionContext.getContext().getSession();
+			//Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put("FailLogin", "µÇÂ½Ê§°Ü");
 			return "error2";
 		}
 	}
-	
+	public String benefitShow()
+	{
+		return "benefitShow";
+	}
 	//public String 
+	public String setCurrent()
+	{
+		adminManager.currentBenefitSet(value);
+		return "";
+	}
+	public String changeBenefit()
+	{
+		return "admin_change_benefit";
+	}
 	
-	private AdminManager adminManager;
-	private String name;
-	private String password;
 	public AdminManager getAdminManager() {
 		return adminManager;
+	}
+	public double getValue() {
+		return value;
+	}
+	public void setValue(double value) {
+		this.value = value;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public void setAdminManager(AdminManager adminManager) {
 		this.adminManager = adminManager;
