@@ -9,18 +9,44 @@
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
+<style type="text/css">
+.mdl-card {
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+	min-width: 200px;
+	width: 400px;
+}
+</style>
+
 <script type="text/javascript" charset="utf8" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://code.ciphertrick.com/demo/jquerysession/js/jquerysession.js"></script>
 <script type="text/javascript">
 var alist;
 
 $(document).ready(function() {
 	//alert("loginInfo:"+loginInfo);
-	/*$("#lock-button").click(function() {
+	
+	$("#lock-button").click(function() {
 		var aid = $("#user-account option:selected").val();
-		$.post("account_lock.action",{accountId:aid},function(data,status) {
-			alert("data:"+data+"status:"+status);
+		var pwd = $("#pwd").val();
+		$.post("account_lock.action",{accountId:aid,pwd:pwd},function() {
+			alert("aa");
 		});
-	});*/
+		/* $.ajax({
+		  type: 'POST',
+		  url: "account_lock.action",
+		  data: {accountId:aid,pwd:pwd},
+		  success: function(msgResult){
+		  	alert("c")
+		  },
+		  dataType: "JSON",
+		  error:function(msgResult,b){
+		  	alert(JSON.stringify(msgResult));
+		  	alert(b);
+		  }
+		}); */
+	});
 });
 
 
@@ -63,12 +89,36 @@ function AddAccountSelect(selObj, data) {
 		<main class="mdl-layout__content">
 			<div>
 				<h1>账户挂失</h1>
+				                    
+				<div class="mdl-grid portfolio-max-width" id="a-card">
+        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src=" images/example-blog02.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title ">
+                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">账户挂失</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+						 账号：<select id="user-account" name="accountId"></select>
+                    	<br /><br />
+        				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" id="pwd"
+							name="password"> <label class="mdl-textfield__label"
+							for="pwd">密码...</label>
+						</div>
+						<br />
+						<c:out value="${passwordError}"/>
+                		<c:set var="passwordError" value=""/>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button id="lock-button" 
+                        	class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                        	style="float:right;">挂失</button>
+                    </div>
+                </div>
+               
+            </div>	
 				
-				<form action="account_lock.action">
-					<select id="user-account" name="accountId"></select>
-					<!-- <button id="lock-button" action="account_lock.action">lock</button> -->
-					<input type="submit" value="lock" />
-				</form>
 			</div>
 			<%@include file="/footer.jsp"%>
 		</main>

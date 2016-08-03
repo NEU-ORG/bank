@@ -1,5 +1,6 @@
 package com.neusoft.action;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,8 +27,6 @@ public class AccountAction extends ActionSupport {
 	private ApplicationContext ctx;
 	private AccountDAO accountDAO;
 	private AccountManager accountManager;
-	
-	public String accountId;
 
 	public void init() {
 		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -41,26 +40,78 @@ public class AccountAction extends ActionSupport {
 		return "info";
 	}
 	
+	public String transdetail_win() {
+		String aid = ServletActionContext.getRequest().getParameter("accountId");
+		String display = ServletActionContext.getRequest().getParameter("display");
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		session.put("aid", aid);
+		session.put("display", display);
+		return "transdetail_win";
+	}
+	
+	public String changepwd_win() {
+		return "changepwd_win";
+	}
+	
+	public String changepwd() throws IOException {
+		String tspwd = ServletActionContext.getRequest().getParameter("pwd");
+		String oldpwd = ServletActionContext.getRequest().getParameter("oldpwd");
+		String accountId = ServletActionContext.getRequest().getParameter("accountId");
+		if(accountId == null||accountId.isEmpty()) {
+			return "error";
+		} else {
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			Integer id = Integer.parseInt(accountId);
+			int temp = accountManager.judgeTransPwd(id, oldpwd);
+			System.out.println("t1:"+temp);
+			ServletActionContext.getResponse().getWriter().write("temp");
+			if(temp != 0)
+				session.put("passwordError","·账户或密码不正确！");
+			else {
+				if(session.get("passwordError")!=null)
+				{
+					session.remove("passwordError");
+				}
+				temp = accountManager.changeTransPwd(id, tspwd);
+				System.out.println("t2:"+temp);
+				if(temp == 0) {
+					session.put("passwordError","修改成功！");
+				}
+			}
+		}
+		return "changepwd";
+	}
+	
 	public String lockwin() {
 		return "lockwin";
 	}
 	
 	public String lock() {
-		//String accountId = ServletActionContext.getRequest().getParameter("accountId");
-		//String accountId = Request.Params["accountId"];
-		System.out.println("acoutid:"+accountId);
+		String tspwd = ServletActionContext.getRequest().getParameter("pwd");
+		String accountId = ServletActionContext.getRequest().getParameter("accountId");
 		if(accountId == null||accountId.isEmpty()) {
 			return "error";
 		} else {
+			Map<String,Object> session = ActionContext.getContext().getSession();
 			Integer id = Integer.parseInt(accountId);
-			System.out.println("id:"+id);
-			//am = new AccountManager();
-			int temp = accountManager.lock(id);
-			System.out.println("t:"+temp);
-			if(temp == -1)
-				return "error";
-			else if(temp == 1)
-				return "error";
+			int temp1 = accountManager.judgeTransPwd(id, tspwd);
+			if(temp1 != 0)
+				session.put("passwordError","·密码不正确！");
+			else {
+				if(session.get("passwordError")!=null)
+				{
+					session.remove("passwordError");
+				}
+				int temp2 = accountManager.lock(id);
+				//System.out.println("t:"+temp2);
+				if(temp2 == -1)
+					return "error";
+				else if(temp2 == 1)
+					session.put("passwordError","账户已经锁定！");
+				if(temp2 == 0) {
+					session.put("passwordError","修改成功！");
+				}
+			}
 		}
 		return "lock";
 	}

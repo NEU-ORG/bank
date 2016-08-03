@@ -71,8 +71,10 @@ public class JsonAction extends ActionSupport{
 		return "success";
 	}
 	
-	public String getTransactionDetail() {
+	public String QueryTransactionDetail() {
 		String accountId = ServletActionContext.getRequest().getParameter("accountId");
+		String btime = ServletActionContext.getRequest().getParameter("btime");
+		String etime = ServletActionContext.getRequest().getParameter("etime");
 		//System.out.println("accountId:"+accountId);
 		if(accountId == null||accountId.isEmpty()) {
 			return "error";
@@ -88,6 +90,24 @@ public class JsonAction extends ActionSupport{
 			}
 			TransactionDetailDAO tdDAO = (TransactionDetailDAO) ctx.getBean("TransactionDetailDAO");
 			List<TransactionDetail> l = tdDAO.findByProperty("accountByAccountId", a);
+			Long bt,et,time;
+			if(btime == null || btime.isEmpty())
+				bt = 0L;
+			else
+				bt = Long.parseLong(btime);
+			if(etime == null || etime.isEmpty())
+				et = Long.MAX_VALUE;
+			else
+				et = Long.parseLong(etime);
+			if(bt > et) {
+				System.out.println("bt>et");
+				return "error";
+			}
+			for(int i=0;i<l.size();i++) {
+				time = l.get(i).getTransactionTime().getTime();
+				if(bt>time || time>et)
+					l.remove(i);
+			}
 			Map<String,Object> map = new HashMap<String,Object>();
 			JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
 			if(l.size() == 0) {

@@ -27,7 +27,7 @@
 			</result>
 		</action>
 		
-		<action name="getTransactionDetail" class="com.neusoft.action.JsonAction" method="getTransactionDetail">
+		<action name="QueryTransactionDetail" class="com.neusoft.action.JsonAction" method="QueryTransactionDetail">
 			<result type="json">
 				<param name="root">jsonResult</param>
 			</result>
@@ -44,7 +44,7 @@
 				<param name="root">jsonResult</param>
 			</result>
 		</action>
-		
+	
 	</package>
 
 </struts>
