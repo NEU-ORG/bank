@@ -53,8 +53,8 @@
 						<br />
 						<c:out value="账单日：每月${card.statementDate}号"></c:out>
 						<br />
-						<a href="creditCard_uncheckedBill.action?creditCardID=${card.id}">未出账单查询</a>
-						<a href="creditCard_checkedBill.action?creditCardID=${card.id}">已出账单查询</a>
+						<a href="creditCard_uncheckedBill.action?flag='notNull'&creditCardID=${card.id}">未出账单查询</a>
+						<a href="creditCard_checkedBill.action?flag='notNull'&creditCardID=${card.id}">已出账单查询</a>
 	
 					</div>
 				</c:forEach>
