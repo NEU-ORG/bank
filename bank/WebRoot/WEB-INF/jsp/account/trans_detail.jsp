@@ -72,7 +72,12 @@ function AddAccountSelect(selObj, data) {
 function getTransDetail() {
 	$("#t-detail tbody").empty();
 	var aid = document.getElementById("user-account").value;
-	info="accountId="+aid;
+	var bti = new Date(document.getElementById("btime").value).getTime();
+	var eti = new Date(document.getElementById("etime").value).getTime();
+	
+	//alert("bt:"+bti);
+	//alert("et:"+eti); 
+	info="accountId="+aid+"&btime="+bti+"&etime="+eti;
 	$.ajax({
 		type:"GET",
 		url:"QueryTransactionDetail",
@@ -130,6 +135,10 @@ function AddTable(data) {
                     </div>
                     <div class="mdl-card__supporting-text">
 						 账号：<select id="user-account" name="accountId"></select>
+                    	<br /><br />
+                    	查询开始时间：<input type="datetime-local" id="btime" />
+                    	<br /><br />
+                    	查询结束时间：<input type="datetime-local" id="etime" />
                     	<br /><br />
                     	<button id="trans-button"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"

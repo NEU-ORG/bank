@@ -49,7 +49,7 @@
    <column name="availableBalance" not-null="true" precision="10"/>
   </property>
   <set inverse="true" lazy="false"
-   name="companyTransactionDetailsForAccountId" sort="unsorted">
+   name="companyTransactionDetailsForAccountId" sort="unsorted" cascade="save-update">
    <key>
     <column name="accountId" not-null="true"/>
    </key>

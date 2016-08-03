@@ -33,7 +33,11 @@
 			<!-- <result name="signUp">/sign_up.jsp</result>
 			<result name="{1}">/user_{1}.jsp</result> -->
 		</action>
-		
+		<action name="company_*" class="com.neusoft.action.CompanyAction" method="{1}">	
+			<result name="loginSuccess">/company_main.jsp</result>	
+			<result name="sign_in">/company_sign_in.jsp</result>
+			<result name="{1}">/company_{1}.jsp</result>
+		</action>
 	</package>
 	<include file="creditCardStruts.xml"></include>
 	<include file="accountStruts.xml"></include>
