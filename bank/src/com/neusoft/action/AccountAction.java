@@ -24,6 +24,33 @@ public class AccountAction extends ActionSupport {
 		return "info";
 	}
 	
+	public String transfer_win() {
+		return "transfer_win";
+	}
+	
+	public String transfer() {
+		String aid = ServletActionContext.getRequest().getParameter("accountId");
+		String tanum = ServletActionContext.getRequest().getParameter("targetAccountNumber");
+		String pay = ServletActionContext.getRequest().getParameter("pay");
+		String pwd = ServletActionContext.getRequest().getParameter("pwd");
+		boolean b = (aid == null || aid.isEmpty() || 
+					 tanum == null || tanum.isEmpty() || 
+					 pay == null || pay.isEmpty() || 
+					 pwd == null || pwd.isEmpty());
+		if(b) return "transfer_win";
+		Integer id = Integer.parseInt(aid);
+		int t1 = accountManager.judgeTransPwd(id, pwd);
+		System.out.println("t1:"+t1);
+		if(t1 != 0)
+			return "transfer_win";
+		Double p = Double.parseDouble(pay);
+		int t2 = accountManager.transfer(id, tanum, p);
+		System.out.println("t2:"+t2);
+		if(t2 != 0)
+			return "transfer_win";
+		return "transfer";
+	}
+	
 	public String transdetail_win() {
 		String aid = ServletActionContext.getRequest().getParameter("accountId");
 		String display = ServletActionContext.getRequest().getParameter("display");

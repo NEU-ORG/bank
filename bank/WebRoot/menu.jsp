@@ -4,6 +4,7 @@
     for="my-account">
     <li class="mdl-menu__item" onclick="location='account_info.action'">帐户查询</li>
     <li class="mdl-menu__item" onclick="location='account_changepwd_win.action'">交易密码修改</li>
+    <li class="mdl-menu__item" onclick="location='account_transfer_win.action'">转账业务</li>
     <li class="mdl-menu__item" onclick="location='account_transdetail_win.action'">交易明细查询</li>
     <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_lockwin.action'">账户挂失</li>
     <li class="mdl-menu__item" onclick="location='account_create_win.action'">添加银行卡</li>

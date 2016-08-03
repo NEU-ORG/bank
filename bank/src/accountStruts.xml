@@ -21,6 +21,8 @@
 			method="{1}">
 			<interceptor-ref name="mystack"></interceptor-ref>
 			<result name="info">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="transfer_win">/WEB-INF/jsp/account/transfer.jsp</result>
+			<result name="transfer">/WEB-INF/jsp/account/transfer.jsp</result>
 			<result name="transdetail_win">/WEB-INF/jsp/account/trans_detail.jsp</result>
 			<result name="changepwd_win">/WEB-INF/jsp/account/accountchangepwd.jsp</result>
 			<result name="changepwd">/WEB-INF/jsp/account/accountchangepwd.jsp</result>
