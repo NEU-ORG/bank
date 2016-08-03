@@ -19,10 +19,10 @@
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="transfer">
     <li class="mdl-menu__item" onclick="location='company_internalTransfer.action'">企业内部转账</li>
-    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_lockwin.action'">行内转账</li>
+    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='company_transfer.action'">行内转账</li>
     <li class="mdl-menu__item">跨行转账</li>
     <li class="mdl-menu__item">收款人名册</li>
-    <li class="mdl-menu__item">转账查询</li>
+    <li class="mdl-menu__item" onclick="location='company_transferDetail'">转账查询</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="pay">

@@ -23,12 +23,12 @@
 		<main class="mdl-layout__content">
 		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">企业内部转账</h2>
+				<h2 class="mdl-card__title-text">行内转账</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				<c:out value="${passwordError}" />
 				<c:set var="passwordError" value="" />
-				<form action="company_internalTransfer.action?flag='notNull'"
+				<form action="company_transfer.action?flag='notNull'"
 					id＝"form" method="post">
 					选择账号： 
 					<select name="accountID">
@@ -36,12 +36,12 @@
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
 						</c:forEach>
 					</select><br /> 
-					选择目标账号： 
-					<select name="targetAccountID">
-						<c:forEach var="account" items="${companyAccounts}">
-							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
-						</c:forEach>
-					</select><br />
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" id="sample3"
+							name="targetAccountNumber"> <label class="mdl-textfield__label"
+							for="sample3">对方账号...</label>
+					</div>
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="sample3"

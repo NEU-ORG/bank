@@ -14,11 +14,32 @@ public class CompanyAction {
 	private String newPassword;
 	private CompanyManager companyManager;
 	private int accountID;
+	private int targetAccountID;
 	private Date beginTime;
 	private Date endTime;
 	private String flag;
+	private Double amount;
+	private String targetAccountNumber;
+	
+	public String transfer(){
+		Set companyAccounts = companyManager.getAccountInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("companyAccounts", companyAccounts);
+		if(flag!=null){
+			companyManager.transfer(accountID, targetAccountNumber, amount);
+		}
+		return "transfer";
+	}
 	
 	public String internalTransfer(){
+		Set companyAccounts = companyManager.getAccountInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("companyAccounts", companyAccounts);
+		if(flag!=null){
+			companyManager.internalTransfer(accountID, targetAccountID, amount);
+		}
 		return "internalTransfer";
 	}
 	
@@ -50,6 +71,19 @@ public class CompanyAction {
 			session.put("passwordError","ÃÜÂë²»ÕýÈ·£¡£¡");
 		}
 		return "changeTPassword";
+	}
+	
+	public String transferDetail(){//get account,set date.
+		Set companyAccounts = companyManager.getAccountInfo((String) ActionContext
+				.getContext().getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("companyAccounts", companyAccounts);
+		
+		if(flag!=null){
+			Set transactionDetails = companyManager.getTransferDetail(accountID,beginTime,endTime);
+			request.put("transactionDetails", transactionDetails);
+		}
+		return "transferDetail";
 	}
 	
 	public String transactionDetail(){//get account,set date.
@@ -150,5 +184,29 @@ public class CompanyAction {
 
 	public void setAccountID(int accountID) {
 		this.accountID = accountID;
+	}
+
+	public int getTargetAccountID() {
+		return targetAccountID;
+	}
+
+	public void setTargetAccountID(int targetAccountID) {
+		this.targetAccountID = targetAccountID;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public String getTargetAccountNumber() {
+		return targetAccountNumber;
+	}
+
+	public void setTargetAccountNumber(String targetAccountNumber) {
+		this.targetAccountNumber = targetAccountNumber;
 	}
 }
