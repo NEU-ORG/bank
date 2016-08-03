@@ -62,6 +62,7 @@
 		<property name="addressDao" ref="AddressDAO" />
 	</bean>
 	<bean id="accountManager" class="com.neusoft.bo.AccountManager">
+		<property name="userDAO" ref="UserDAO" />
 		<property name="accountDAO" ref="AccountDAO" />
 	</bean>
 	

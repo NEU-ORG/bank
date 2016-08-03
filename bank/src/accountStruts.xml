@@ -23,14 +23,13 @@
 			<result name="info">/WEB-INF/jsp/account/account.jsp</result>
 			<result name="transdetail_win">/WEB-INF/jsp/account/trans_detail.jsp</result>
 			<result name="changepwd_win">/WEB-INF/jsp/account/accountchangepwd.jsp</result>
-			<!-- <result name="changepwd">/WEB-INF/jsp/account/accountchangepwd.jsp</result> -->
+			<result name="changepwd">/WEB-INF/jsp/account/accountchangepwd.jsp</result>
 			<result name="lockwin">WEB-INF/jsp/account/accountlock.jsp</result>
-			<!-- <result name="lock">/WEB-INF/jsp/account/SUCC.jsp</result> -->
-			<result name="list">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="lock">/WEB-INF/jsp/account/SUCC.jsp</result>
+			<!-- <result name="list">/WEB-INF/jsp/account/account.jsp</result> -->
 			<result name="create_win">/WEB-INF/jsp/account/account_create.jsp</result>
-			<result name="create">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="addaccount">/WEB-INF/jsp/account/account_create.jsp</result>
 			<result name="payment_win">/WEB-INF/jsp/account/payment.jsp</result>
-			<result name="return">/WEB-INF/jsp/account/account.jsp</result>
 			<result name="input">/WEB-INF/jsp/account/account_create.jsp</result>
 		</action>
 
