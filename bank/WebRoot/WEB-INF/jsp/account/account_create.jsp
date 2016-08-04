@@ -24,12 +24,12 @@ $(document).ready(function() {
 	$("#create-button").click(function() {
 		var accountnum = $("#account").val();
 		var pwd = $("#pwd").val();
-		alert("1:"+accountnum+"|2:"+pwd);
-		$.post("account_addaccount",
+		//alert("1:"+accountnum+"|2:"+pwd);
+		$.post("addaccountAction",
 				{	accountNumber:accountnum,
 					pwd:pwd
-				},function(data,status) {
-					alert("data:"+data+"|status:"+status);
+				},function(a,b) {
+					$("#msg-label").html(a.jsonResult);
 				});
 	});
 });
@@ -74,9 +74,7 @@ function init() {
 						<h2 class="mdl-card__title-text">添加银行卡</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
-						<c:out value="${passwordError}"/>
-		                <c:set var="passwordError" value=""/>
-						<form>
+						<label id="msg-label"></label>
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 								<input class="mdl-textfield__input" type="text" id="account"
 									name="account"> <label class="mdl-textfield__label"
@@ -103,8 +101,6 @@ function init() {
 									class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 									style="float: right;">修改</button>
 							</div>
-		
-						</form>
 					</div>
 				</div>
 

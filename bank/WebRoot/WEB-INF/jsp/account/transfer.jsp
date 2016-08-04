@@ -32,13 +32,13 @@ $(document).ready(function() {
 		alert("\n2:"+tanum);
 		alert("\n3:"+paynum);
 		alert("\n4:"+pwd); */
-		$.post("account_transfer.action",
+		$.post("transferAction",
 			{accountId:aid,
 			 targetAccountNumber:tanum,
 			 pay:paynum,
 			 pwd:pwd},
-			function() {
-				alert("aa");
+			function(a,b) {
+				$("#msg-label").html(a.jsonResult);
 		});
 	});
 });
@@ -111,8 +111,7 @@ function AddAccountSelect(selObj, data) {
 									for="pwd">请输入交易密码...</label>
 							</div>
 							<br />
-							<c:out value="${passwordError}"/>
-	                		<c:set var="passwordError" value=""/>
+							<label id="msg-label"></label>
 	                    </div>
 	                    <div class="mdl-card__actions mdl-card--border">
 	                        <a href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">取消</a>

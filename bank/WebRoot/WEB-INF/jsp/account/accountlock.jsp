@@ -28,8 +28,8 @@ $(document).ready(function() {
 	$("#lock-button").click(function() {
 		var aid = $("#user-account option:selected").val();
 		var pwd = $("#pwd").val();
-		$.post("account_lock.action",{accountId:aid,pwd:pwd},function() {
-			alert("aa");
+		$.post("lockAction",{accountId:aid,pwd:pwd},function(a,b) {
+			$("#msg-label").html(a.jsonResult);
 		});
 		/* $.ajax({
 		  type: 'POST',
@@ -99,13 +99,12 @@ function AddAccountSelect(selObj, data) {
 							 账号：<select id="user-account" name="accountId"></select>
 	                    	<br /><br />
 	        				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-							<input class="mdl-textfield__input" type="text" id="pwd"
+							<input class="mdl-textfield__input" type="password" id="pwd"
 								name="password"> <label class="mdl-textfield__label"
 								for="pwd">密码...</label>
 							</div>
 							<br />
-							<c:out value="${passwordError}"/>
-	                		<c:set var="passwordError" value=""/>
+							<label id="msg-label"></label>
 	                    </div>
 	                    <div class="mdl-card__actions mdl-card--border">
 	                        <button id="lock-button" 
