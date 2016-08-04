@@ -21,6 +21,7 @@
 				<br />
 				</c:if>
 				<c:forEach var="account" items="${companyAccounts}">
+					<c:if test="${account.isSigned!='none'}">
 					<div
 						class="mdl-cell mdl-cell--3-col demo-card-event mdl-card mdl-shadow--4dp">
 						<c:out value="账号：${account.accountNumber}"></c:out>
@@ -33,6 +34,8 @@
 						<br />
 						<c:out value="状态：${account.status}"></c:out>
 						<br />
+						<c:out value="签约状态：${account.isSigned}"></c:out>
+						<br />
 						<c:out value="所属分行：${account.bank.name}"></c:out>
 						<br />
 						<c:out value="ID：${account.id}"></c:out>
@@ -41,6 +44,7 @@
 				
 	
 					</div>
+					</c:if>
 				</c:forEach>
 			</div>
 			<%@include file="/footer.jsp"%>

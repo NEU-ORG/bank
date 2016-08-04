@@ -7,7 +7,8 @@
     <li class="mdl-menu__item">网银交易查询</li>
     <li class="mdl-menu__item">对账单查询</li>
     <li class="mdl-menu__item" onclick="location='company_changeTPassword.action'">修改查询密码</li>
-    <li class="mdl-menu__item">增加删除上挂帐户</li>
+    <li class="mdl-menu__item" onclick="location='company_addAccount.action'">增加帐户</li>
+    <li class="mdl-menu__item" onclick="location='company_deleteAccount.action'">删除帐户</li>
     <li class="mdl-menu__item" onclick="location='company_reportLoss.action'">账户挂失</li>
     <li class="mdl-menu__item">票据挂失</li>
 </ul>

@@ -23,33 +23,22 @@
 		<main class="mdl-layout__content">
 		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">行内转账</h2>
+				<h2 class="mdl-card__title-text">删除账户</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				<c:out value="${passwordError}" />
 				<c:set var="passwordError" value="" />
-				<form action="company_transfer.action?flag='notNull'"
+				<form action="company_deleteAccount.action?flag='notNull'"
 					id＝"form" method="post">
 					选择账号： 
 					<select name="accountID">
 						<c:forEach var="account" items="${companyAccounts}">
-						<c:if test="${account.isSigned!='none'}">
+							<c:if test="${account.isSigned!='none'}">
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
 							</c:if>
 						</c:forEach>
 					</select><br /> 
-					<div
-						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="sample3"
-							name="targetAccountNumber"> <label class="mdl-textfield__label"
-							for="sample3">对方账号...</label>
-					</div>
-					<div
-						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="sample3"
-							name="amount"> <label class="mdl-textfield__label"
-							for="sample3">转账金额...</label>
-					</div>
+					
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="sample3"
@@ -57,11 +46,10 @@
 							for="sample3">交易密码...</label>
 					</div>
 
-
 					<div class="mdl-card__actions">
 						<button onclick="document.getElementById('form').submit()"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-							style="float: right;">转账</button>
+							style="float: right;">删除</button>
 					</div>
 
 				</form>

@@ -27,7 +27,7 @@
     <script src="material.min.js"></script>
     <style>
     .mdl-card {
-        margin-top: 100px;
+        margin-top: 80px;
         margin-right: auto;
         margin-left: auto;
 
@@ -46,7 +46,16 @@
 
         <main class="mdl-layout__content">
 
-            <div class="demo-card-wide mdl-card mdl-shadow--8dp">
+            
+            
+  <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#starks-panel" class="mdl-tabs__tab is-active">个人银行</a>
+      <a href="#lannisters-panel" class="mdl-tabs__tab">企业银行</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="starks-panel">
+  		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">登录</h2>
                 </div>
@@ -54,7 +63,7 @@
                 	<c:out value="${loginError}"/>
                 	<c:set var="loginError" value=""/>
              
-                    <form action="user_signIn.action" id＝"form" method="post">
+                    <form action="userSignIn.action" id＝"form" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="sample3" name="userName">
                             <label class="mdl-textfield__label" for="sample3">用户名...</label>
@@ -65,8 +74,8 @@
 
                         </div>
                         <div class="mdl-card__actions">
-                            <a href="sign_in.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记用户名</a>
-                            <a href="sign_in.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记密码</a>
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记用户名</a>
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记密码</a>
                             <button onclick="document.getElementById('form').submit()" class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="float: right;">登录</button>
                         </div>
 
@@ -78,6 +87,36 @@
                     </button>
                 </div>
             </div>
+  </div>
+  <div class="mdl-tabs__panel" id="lannisters-panel">
+    	<div class="demo-card-wide mdl-card mdl-shadow--8dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">登录</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                	<c:out value="${loginError}"/>
+                	<c:set var="loginError" value=""/>
+             
+                    <form action="companySignIn.action" id＝"form" method="post">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="sample3" name="operatorName">
+                            <label class="mdl-textfield__label" for="sample3">用户名...</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="password" id="sample3" name="password">
+                            <label class="mdl-textfield__label" for="sample3">密码...</label>
+
+                        </div>
+                        <div class="mdl-card__actions">
+                            <a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记用户名</a>
+                            <a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记密码</a>
+                            <button onclick="document.getElementById('form').submit()" class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="float: right;">登录</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+  </div>
         </main>
         <footer class="mdl-mini-footer">
             <div class="mdl-mini-footer__left-section">
