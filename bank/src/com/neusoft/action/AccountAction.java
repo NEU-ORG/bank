@@ -40,6 +40,83 @@ public class AccountAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String delete_win() {
+		return "delete_win";
+	}
+	
+	public String delete() {
+		String tspwd = ServletActionContext.getRequest().getParameter("pwd");
+		String accountId = ServletActionContext.getRequest().getParameter("accountId");
+		if(accountId == null||accountId.isEmpty()) {
+			System.out.println("account empty");
+			return "error";
+		} else {
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			Integer id = Integer.parseInt(accountId);
+			int temp1 = accountManager.judgeTransPwd(id, tspwd);
+			System.out.println("t1:"+temp1);
+			if(temp1 != 0)
+				jsonResult = "密码不正确！";
+			else {
+				int temp2 = accountManager.delete(id);
+				System.out.println("t2:"+temp2);
+				if(temp2 == -1) {
+					System.out.println("account error");
+					return "error";
+				} else if(temp2 == 1)
+					jsonResult = "银行卡已经删除！";
+				if(temp2 == 0) {
+					jsonResult = "银行卡删除成功！";
+				}
+			}
+		}
+		return SUCCESS;
+	}
+	
+	public String transferdetail_win() {
+		return "transferdetail_win";
+	}
+	
+	public String db_transfer_win() {
+		return "db_transfer_win";
+	}
+	
+	public String db_transfer() {
+		String aid = ServletActionContext.getRequest().getParameter("accountId");
+		String tanum = ServletActionContext.getRequest().getParameter("targetAccountNumber");
+		String pay = ServletActionContext.getRequest().getParameter("pay");
+		String pwd = ServletActionContext.getRequest().getParameter("pwd");
+		boolean b = (aid == null || aid.isEmpty() || 
+					 tanum == null || tanum.isEmpty() || 
+					 pay == null || pay.isEmpty() || 
+					 pwd == null || pwd.isEmpty());
+		if(b) {
+			jsonResult = "请输入数据！";
+			return SUCCESS;
+		}
+		Integer id = Integer.parseInt(aid);
+		int t1 = accountManager.judgeTransPwd(id, pwd);
+		System.out.println("t1:"+t1);
+		if(t1 != 0)
+			jsonResult = "密码不正确！";
+		else {
+			Double p = Double.parseDouble(pay);
+			int t2 = accountManager.db_transfer(id, tanum, p);
+			System.out.println("t2:"+t2);
+			if(t2 == -1) {
+				System.out.println("account error");
+				return "error";
+			}
+			if(t2 == -2)
+				jsonResult = "目标账户不存在！";
+			else if(t2 == 1)
+				jsonResult = "账户余额不足！";
+			else
+				jsonResult = "转账成功！";
+		}
+		return SUCCESS;
+	}
+	
 	public String transfer_win() {
 		return "transfer_win";
 	}

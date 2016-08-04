@@ -65,6 +65,8 @@ function init() {
 
 function AddAccountSelect(selObj, data) {
 	for(var i=0;i<data.length;i++) {
+		if(data[i].isSigned == "none")
+			continue;
 		selObj.options.add(new Option(data[i].accountNumber,data[i].id))
 	}
 }

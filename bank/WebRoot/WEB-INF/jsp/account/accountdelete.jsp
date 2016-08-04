@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>Account Delete</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -25,10 +25,10 @@ var alist;
 $(document).ready(function() {
 	//alert("loginInfo:"+loginInfo);
 	
-	$("#lock-button").click(function() {
+	$("#del-button").click(function() {
 		var aid = $("#user-account option:selected").val();
 		var pwd = $("#pwd").val();
-		$.post("lockAction",{accountId:aid,pwd:pwd},function(a,b) {
+		$.post("deleteAction",{accountId:aid,pwd:pwd},function(a,b) {
 			$("#msg-label").html(a.jsonResult);
 		});
 		/* $.ajax({
@@ -87,15 +87,15 @@ function AddAccountSelect(selObj, data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-				<h1>账户挂失</h1>
-				                    
-				<div class="mdl-grid portfolio-max-width" id="a-card">
+			<h1>银行卡删除</h1>
+			
+			<div class="mdl-grid portfolio-max-width" id="a-card">
 	        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
 	                    <div class="mdl-card__media">
 	                        <img class="article-image" src=" images/example-blog02.jpg" border="0" alt="">
 	                    </div>
 	                    <div class="mdl-card__title ">
-	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">账户挂失</h2>
+	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">银行卡删除</h2>
 	                    </div>
 	                    <div class="mdl-card__supporting-text">
 							 账号：<select id="user-account" name="accountId"></select>
@@ -109,14 +109,14 @@ function AddAccountSelect(selObj, data) {
 							<label id="msg-label"></label>
 	                    </div>
 	                    <div class="mdl-card__actions mdl-card--border">
-	                        <button id="lock-button" 
+	                        <button id="del-button" 
 	                        	class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-	                        	style="float:right;">挂失</button>
+	                        	style="float:right;">删除</button>
 	                    </div>
 	                </div>
 	               
 	            </div>	
-				
+			
 			</div>
 			<%@include file="/footer.jsp"%>
 		</main>

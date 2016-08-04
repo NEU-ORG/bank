@@ -66,3 +66,5 @@ http://localhost:8080/bank/QueryConstant
 {"id":8,"text":"大额转账时间","type":"时间","value":10.0},
 {"id":9,"text":"贷款二年","type":"贷款利率","value":0.0535}],
 "status":true}
+
+http://localhost:8080/bank/QueryCompanyMsg?companyId=1

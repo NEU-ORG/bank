@@ -70,6 +70,7 @@
 	<bean id="accountManager" class="com.neusoft.bo.AccountManager">
 		<property name="userDAO" ref="UserDAO" />
 		<property name="accountDAO" ref="AccountDAO" />
+		<property name="constantDAO" ref="ConstantDAO" />
 		<property name="transDAO" ref="TransactionDetailDAO"></property>
 	</bean>
 	

@@ -44,6 +44,18 @@
 				<param name="root">jsonResult</param>
 			</result>
 		</action>
+		
+		<action name="QueryCompanyMsg" class="com.neusoft.action.JsonAction" method="QueryCompanyMsg">
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		
+		<action name="QueryComTransDetails" class="com.neusoft.action.JsonAction" method="QueryComTransDetails">
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
 	
 	</package>
 
