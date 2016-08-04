@@ -33,13 +33,17 @@
 					选择账号： 
 					<select name="accountID">
 						<c:forEach var="account" items="${companyAccounts}">
+							<c:if test="${account.isSigned!='none'}">
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
+							</c:if>
 						</c:forEach>
 					</select><br /> 
 					选择目标账号： 
 					<select name="targetAccountID">
 						<c:forEach var="account" items="${companyAccounts}">
+							<c:if test="${account.isSigned!='none'}">
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
+							</c:if>
 						</c:forEach>
 					</select><br />
 					<div

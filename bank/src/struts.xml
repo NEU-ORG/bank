@@ -18,10 +18,14 @@
 		<action name="defaultAction">
 			<result>/sign_in.jsp</result>
 		</action>
-		<action name="user_*" class="com.neusoft.action.UserAction" method="{1}">
+		<action name="userSignIn" class="com.neusoft.action.UserAction" method="signIn">		
 			<result name="success">/WEB-INF/jsp/main.jsp</result>
-			<result name="sign_in">/sign_in.jsp</result>
+			<result name="signIn">/sign_in.jsp</result>
+		</action>
+		<action name="user_*" class="com.neusoft.action.UserAction" method="{1}">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result name="sign_up">/sign_up.jsp</result>
+			<result name="login">sign_in.jsp</result>
 			<result name="{1}">/user_{1}.jsp</result>
 		</action>
 		<action name="admin_*" class="com.neusoft.action.UserAdminAction" method="{1}">
@@ -29,9 +33,16 @@
 			<result name="signUp">/sign_up.jsp</result>
 			<result name="{1}">/user_{1}.jsp</result>
 		</action>
-		<action name="company_*" class="com.neusoft.action.CompanyAction" method="{1}">	
+		<!-- login action,no interceptor !!! -->
+		<action name="companySignIn" class="com.neusoft.action.CompanyAction" method="signIn">		
 			<result name="loginSuccess">/company_main.jsp</result>	
-			<result name="sign_in">/company_sign_in.jsp</result>
+			<result name="sign_in">/sign_in.jsp</result>
+		</action>
+		<action name="company_*" class="com.neusoft.action.CompanyAction" method="{1}">	
+			<interceptor-ref name="mystack"></interceptor-ref>
+			<result name="loginSuccess">/company_main.jsp</result>	
+			<result name="sign_in">/sign_in.jsp</result>
+			<result name="login">sign_in.jsp</result>
 			<result name="{1}">/company_{1}.jsp</result>
 		</action>
 	</package>

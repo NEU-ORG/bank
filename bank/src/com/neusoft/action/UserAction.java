@@ -86,7 +86,7 @@ public class UserAction extends ActionSupport {
 				result = "success";
 		}else{
 			session.put("loginError","用户名或密码不正确！！");
-			result = "sign_in";
+			result = "signIn";
 		}
 		return result;
 		

@@ -14,6 +14,7 @@ import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.CompanyAccountDAO;
 import com.neusoft.dao.CompanyOperatorDAO;
 import com.neusoft.dao.UserDAO;
+import com.neusoft.po.Account;
 import com.neusoft.po.CompanyAccount;
 import com.neusoft.po.CompanyOperator;
 import com.neusoft.po.CompanyTransactionDetail;
@@ -24,6 +25,49 @@ import com.opensymphony.xwork2.ActionContext;
 public class CompanyManager {
 	private CompanyOperatorDAO operatorDao;
 	private CompanyAccountDAO accountDao;
+	
+	//0：成功；-1：operator不存在；-2：银行卡不存在
+	//-3：非本人的卡；1：已删除
+	public int deleteAccount(String operatorName, Integer accountID){
+		List operatorsList = operatorDao.findByProperty("managerName",
+				operatorName);	
+		if(operatorsList.isEmpty())
+			return -1;
+		CompanyAccount account = accountDao.findById(accountID);
+		if(account==null)
+			return -2;
+		CompanyOperator operator = (CompanyOperator) operatorsList.get(0);
+		if(!operator.getCompany().getId().equals(account.getCompany().getId()))
+			return -3;
+		if(account.getIsSigned().equals("none"))
+			return 1;
+	
+		account.setIsSigned("none");
+		accountDao.attachDirty(account);
+		return 0;
+	}
+	
+	//0：成功；-1：operator不存在；-2：银行卡不存在
+	//-3：非本人的卡；1：已添加
+	public int addAccount(String operatorName, String accountNumber) {
+		List operatorsList = operatorDao.findByProperty("managerName",
+				operatorName);
+		List accounts = accountDao.findByProperty("accountNumber", accountNumber);
+		if(operatorsList.isEmpty())
+			return -1;
+		if(accounts.isEmpty())
+			return -2;
+		CompanyOperator operator = (CompanyOperator) operatorsList.get(0);
+		CompanyAccount account = (CompanyAccount) accounts.get(0);
+		if(!operator.getCompany().getId().equals(account.getCompany().getId()))
+			return -3;
+		if(!account.getIsSigned().equals("none"))
+			return 1;
+	
+		account.setIsSigned("unsigned");
+		accountDao.attachDirty(account);
+		return 0;
+	}
 
 	public void transfer(Integer accountID, String targetAccountNumber,
 			Double amount) {
@@ -168,6 +212,17 @@ public class CompanyManager {
 
 	public boolean checkOutTPassword(Integer accountID, String password) {
 		CompanyAccount account = accountDao.findById(accountID);
+		if (account != null
+				&& account.getTransactionPassword().equals(password)) {
+			return true;
+		}
+		return false;
+	}
+	public boolean checkOutTPassword(String accountNumber, String password) {
+		List accounts = accountDao.findByProperty("accountNumber", accountNumber);
+		if(accounts.isEmpty())
+			return false;
+		CompanyAccount account = (CompanyAccount) accounts.get(0);
 		if (account != null
 				&& account.getTransactionPassword().equals(password)) {
 			return true;
