@@ -28,7 +28,8 @@
 			<result name="success_admin">/admin_main.jsp</result>
 			<result name="benefitShow">/benefitShow.jsp</result>
 			<result name="error2">/admin_login_in.jsp</result>
-			<result name="admin_change_benefit">/admin_change_benefit.jsp</result>
+			<result name="admin_changeBenefit">/admin_change_benefit.jsp</result>
+			<result name="success">/admin_success.jsp</result>
 <!-- 			<result name=""> -->
 			<!-- <result name="signUp">/sign_up.jsp</result>
 			<result name="{1}">/user_{1}.jsp</result> -->

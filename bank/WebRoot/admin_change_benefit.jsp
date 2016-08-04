@@ -35,18 +35,19 @@
 				<br />
 				<c:out value="创建时间：${user.createDate}"></c:out>
 				<br /> --%>
+				<form action="admin_benefitSet" id＝"form" method="post">
 				<div
 					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-					地址： <select name="type">
-						<c:forEach var="type" items="${types}">
-							<option value="${constant.type}">${constant.type}</option>
+					费率： <select name="benefitID">
+						<c:forEach var="benefit" items="${benefits}">
+							<option value="${benefit.id}">${benefit.type}${benefit.text}(${benefit.value})</option>
 						</c:forEach>
 					</select>
 
 				</div>
 <%-- 				<c:out value="更改前的费率：${constant.type}"></c:out>
 				<br /> --%>
-				<form action="user_changeUserInfo.action" id＝"form" method="post">
+				
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="sample3"

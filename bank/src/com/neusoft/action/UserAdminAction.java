@@ -44,14 +44,23 @@ public class UserAdminAction {
 		return "benefitShow";
 	}
 	//public String 
-	public String setCurrent()
+/*	public String setCurrent()
 	{
 		adminManager.currentBenefitSet(value);
 		return "";
-	}
+	}*/
 	public String changeBenefit()
 	{
-		return "admin_change_benefit";
+		Map<String, Object> request = (Map)ActionContext.getContext().get("request");
+		request.put("benefits", adminManager.getBenefitList());
+		return "admin_changeBenefit";
+	}
+	public String benefitSet()
+	{
+		System.out.println("text"+text);
+		//adminManager.scheduledBenefitSet(value, text);
+		return "admin_changeBenefit";
+		
 	}
 	
 	public AdminManager getAdminManager() {
