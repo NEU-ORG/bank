@@ -17,7 +17,7 @@ public class BenefitAction extends ActionSupport {
 		if(!constantDao.findByProperty("存款利率",type).isEmpty())
 		{
 			Constant constant = (Constant) constantDao.findByProperty("存款利率", type);
-			
+			//if(constant.)
 			
 			
 		}
@@ -34,4 +34,21 @@ public class BenefitAction extends ActionSupport {
 
 	private ConstantDAO constantDao;
 	private String type;
+	private String text;
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 }

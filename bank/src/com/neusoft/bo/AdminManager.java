@@ -1,5 +1,6 @@
 package com.neusoft.bo;
 
+import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
@@ -10,43 +11,46 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.neusoft.action.UserAdminAction;
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.AdminDAO;
+import com.neusoft.dao.ConstantDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
 import com.neusoft.po.Admin;
+import com.neusoft.po.Constant;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 
 public class AdminManager {
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
-	}
-
-	protected void initDao() {
-		// do nothing
-	}
+	private AdminDAO adminDao;
+	private String name;
+	private String password;
+	private ConstantDAO constantDao;
+	private String type;
+	//private double value;
+	private String text;
 	
 	
 	
+
+	public List getBenefitList()
+	{
+		return constantDao.findAll();
+	}
+
 	public boolean checkOutLogin(String name, String password) {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"applicationContext.xml");
-		AdminDAO adminDao = (AdminDAO)ctx.getBean("AdminDAO");
 		/*UserDAO userDao = (UserDAO) ctx.getBean("UserDAO");
 		AccountDAO accountDao = (AccountDAO) ctx.getBean("AccountDAO");
 		System.out.println("222" + userName);
 		System.out.println("111" + password);*/
+		System.out.println("1234"+name);
+		System.out.println("1234"+password);
 		if (!adminDao.findByProperty("name", name).isEmpty()) {
 			Admin admin = (Admin) adminDao.findByProperty("name", name)
 					.get(0);
 			
-			/*System.out.println("333" + admin.getName());
-			System.out.println("444" + admin.getPassword());*/
+			System.out.println("333" + admin.getName());
+			System.out.println("444" + admin.getPassword());
 			if (admin.getPassword().equals(password)) {
 				return true;
 			} else
@@ -54,6 +58,30 @@ public class AdminManager {
 		} else
 			return false;
 	}
+/*	public String currentBenefitSet(double value, double text)
+	{
+		Constant constant = (Constant)constantDao.findByProperty("text", "»îÆÚ").get(0);
+		constant.setValue(value);
+		constantDao.attachDirty(constant);
+		return "success";
+	}*/
+	public String scheduledBenefitSet(double value, String text)
+	{
+		Constant constant = (Constant)constantDao.findByProperty("text", text).get(0);
+		constant.setValue(value);
+		constantDao.attachDirty(constant);
+		return "success";
+	}
+/*	public String otherBenefitSet(double value, double text, String type)
+	{
+		Constant constant = (Constant)constantDao.findByProperty("type", type).get(0);
+		if(constant.getType().contentEquals(type))
+		{
+			constant.setValue(value);
+			constantDao.attachDirty(constant);
+		}
+		return "success";
+	}*/
 /*	public boolean checkOutRegister(String realName, String idNumber,
 			String cardNumber, String userName, String password) {
 		
@@ -95,4 +123,91 @@ public class AdminManager {
 			return false;
 		}
 	}*/
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
+	protected void initDao() {
+		// do nothing
+	}
+	
+	
+	
+/*	public double getValue() {
+		return value;
+	}
+
+
+
+	public void setValue(double value) {
+		this.value = value;
+	}*/
+
+
+
+	public String getText() {
+		return text;
+	}
+
+
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+
+
+	public ConstantDAO getConstantDao() {
+		return constantDao;
+	}
+
+
+
+	public void setConstantDao(ConstantDAO constantDao) {
+		this.constantDao = constantDao;
+	}
+
+
+
+	public AdminDAO getAdminDao() {
+		return adminDao;
+	}
+
+
+
+	public void setAdminDao(AdminDAO adminDao) {
+		this.adminDao = adminDao;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

@@ -24,6 +24,7 @@
 </style>
 </head>
 <body>
+
 	<%@include file="/admin_menu.jsp"%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header
@@ -51,7 +52,7 @@
 			<button id="setting" class="mdl-button mdl-js-button">设置</button>
 		</div>
 		<main class="mdl-layout__content">
-
+		<h1>修改成功</h1>
 		<%@include file="/footer.jsp"%> </main>
 	</div>
 	<script src="material.min.js"></script>
