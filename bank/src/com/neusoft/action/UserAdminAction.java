@@ -2,6 +2,7 @@ package com.neusoft.action;
 
 import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
@@ -16,19 +17,26 @@ import com.neusoft.po.Admin;
 import com.neusoft.po.Constant;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class UserAdminAction {
+public class UserAdminAction  extends ActionSupport{
 	private AdminManager adminManager;
 	private String name;
 	private String password;
 	private double value;
 	private String text;
+	private int benefitID;
 	private int id;
+	
 	public String signUp(){
 		/*Map request = (Map) ActionContext.getContext().get("request");*/
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		if(adminManager.checkOutLogin(name, password))
 		{
+			if(session.get("FailLogin")!=null)
+			{
+				session.remove("FailLogin");
+			}
 			session.put("loginInfo", name);
 			return "success_admin";
 		}
@@ -57,9 +65,10 @@ public class UserAdminAction {
 	}
 	public String benefitSet()
 	{
-		System.out.println("text"+text);
+		adminManager.scheduledBenefitSet(benefitID, value, text);
+		//System.out.println("text"+text);
 		//adminManager.scheduledBenefitSet(value, text);
-		return "admin_changeBenefit";
+		return "success";
 		
 	}
 	
@@ -98,6 +107,12 @@ public class UserAdminAction {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getBenefitID() {
+		return benefitID;
+	}
+	public void setBenefitID(int benefitID) {
+		this.benefitID = benefitID;
 	}
 	
 	

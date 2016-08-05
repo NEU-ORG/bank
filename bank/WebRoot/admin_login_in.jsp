@@ -36,8 +36,8 @@
 				<h2 class="mdl-card__title-text">登录</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<c:if test="${!empty loginError}">
-					<c:out value="${loginError}" />
+				<c:if test="${!empty FailLogin}">
+					<c:out value="${FailLogin}" />
 				</c:if>
 				<form action="admin_signUp" id＝"form" method="post">
 					<div

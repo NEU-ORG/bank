@@ -43,14 +43,14 @@ public class AdminManager {
 		AccountDAO accountDao = (AccountDAO) ctx.getBean("AccountDAO");
 		System.out.println("222" + userName);
 		System.out.println("111" + password);*/
-		System.out.println("1234"+name);
-		System.out.println("1234"+password);
+/*		System.out.println("1234"+name);
+		System.out.println("1234"+password);*/
 		if (!adminDao.findByProperty("name", name).isEmpty()) {
 			Admin admin = (Admin) adminDao.findByProperty("name", name)
 					.get(0);
 			
-			System.out.println("333" + admin.getName());
-			System.out.println("444" + admin.getPassword());
+/*			System.out.println("333" + admin.getName());
+			System.out.println("444" + admin.getPassword());*/
 			if (admin.getPassword().equals(password)) {
 				return true;
 			} else
@@ -65,9 +65,9 @@ public class AdminManager {
 		constantDao.attachDirty(constant);
 		return "success";
 	}*/
-	public String scheduledBenefitSet(double value, String text)
+	public String scheduledBenefitSet(int benefitID, double value, String text)
 	{
-		Constant constant = (Constant)constantDao.findByProperty("text", text).get(0);
+		Constant constant = (Constant)constantDao.findByProperty("id", benefitID).get(0);
 		constant.setValue(value);
 		constantDao.attachDirty(constant);
 		return "success";
