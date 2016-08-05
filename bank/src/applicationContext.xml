@@ -71,6 +71,7 @@
 		<property name="userDAO" ref="UserDAO" />
 		<property name="accountDAO" ref="AccountDAO" />
 		<property name="constantDAO" ref="ConstantDAO" />
+		<property name="plDAO" ref="PayeeListDAO" />
 		<property name="transDAO" ref="TransactionDetailDAO"></property>
 	</bean>
 	

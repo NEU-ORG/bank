@@ -103,7 +103,7 @@ function AddTable(data) {
 	//alert("a:"+data.length);
 	var newRow;
 	for(var i=0;i<data.length;i++) {
-		if(data[i].type != "转账")
+		if(data[i].type != "转账"&&data[i].type != "跨行转账")
 			continue;
 		var ta = "";
 		if("accountNumber" in data[i].accountByTargetAccount)

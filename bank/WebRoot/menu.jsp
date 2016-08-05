@@ -14,7 +14,7 @@
     <li class="mdl-menu__item" onclick="location='account_transfer_win.action'">转账业务</li>
     <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_db_transfer_win.action'">跨行汇款</li>
     <li class="mdl-menu__item " onclick="location='account_transferdetail_win.action'">转账查询</li>
-    <li class="mdl-menu__item">收款人名册</li>
+    <li class="mdl-menu__item" onclick="location='account_paylist_win.action'">收款人名册</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="credit-card">

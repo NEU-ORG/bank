@@ -56,6 +56,12 @@
 				<param name="root">jsonResult</param>
 			</result>
 		</action>
+		
+		<action name="QueryPayeeList" class="com.neusoft.action.JsonAction" method="QueryPayeeList">
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
 	
 	</package>
 

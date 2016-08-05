@@ -23,6 +23,7 @@ import com.neusoft.dao.CompanyDAO;
 import com.neusoft.dao.CompanyOperatorDAO;
 import com.neusoft.dao.CompanyTransactionDetailDAO;
 import com.neusoft.dao.ConstantDAO;
+import com.neusoft.dao.PayeeListDAO;
 import com.neusoft.dao.TransactionDetailDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
@@ -44,6 +45,42 @@ public class JsonAction extends ActionSupport{
 	
 	public String execute() {
 		return "success";
+	}
+	
+	public String QueryPayeeList() {
+		String userName = ServletActionContext.getRequest().getParameter("userName");
+		if(userName == null||userName.isEmpty()) {
+			return "error";
+		} else {
+			ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+			UserDAO userDAO = (UserDAO) ctx.getBean("UserDAO");
+			List<User> l = userDAO.findByProperty("userName", userName);
+			if(l.size() != 1) {
+				return "error";
+			} else {
+				User user = l.get(0);
+				PayeeListDAO payeeListDAO = (PayeeListDAO) ctx.getBean("PayeeListDAO");
+				List<Account> pl = payeeListDAO.findByProperty("user", user);
+				Map<String,Object> map = new HashMap<String,Object>();
+				JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
+				if(pl.size() == 0) {
+					map.put("status", false);
+					map.put("result", null);
+				} else {
+					map.put("status", true);
+					map.put("result", pl);
+					jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
+					jsonConfig.setExcludes(new String[]{"users","address","creditCards","accounts",
+														"applycreditcards","payeeLists","companyaccounts",
+														"user","accounts","transactionDetailsForAccountId",
+														"transactionDetailsForTargetAccount",
+														"companyAccounts","companies","companyOperators"});
+					jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+				}
+				jsonResult = JSONObject.fromObject(map,jsonConfig);
+			}
+		}
+		return SUCCESS;
 	}
 	
 	public String QueryCompanyMsg() {

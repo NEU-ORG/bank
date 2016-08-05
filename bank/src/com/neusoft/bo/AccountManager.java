@@ -7,10 +7,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.ConstantDAO;
+import com.neusoft.dao.PayeeListDAO;
 import com.neusoft.dao.TransactionDetailDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
 import com.neusoft.po.Constant;
+import com.neusoft.po.PayeeList;
 import com.neusoft.po.TransactionDetail;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,7 +22,18 @@ public class AccountManager extends ActionSupport{
 	private UserDAO userDAO;
 	private TransactionDetailDAO transDAO;
 	private ConstantDAO constantDAO;
+	private PayeeListDAO plDAO;
 	private ApplicationContext ctx;
+
+	public int addpayee(int userId, int accountId) {
+		PayeeList pl = new PayeeList();
+		pl.setUser(userDAO.findById(userId));
+		Account a = accountDAO.findById(accountId);
+		pl.setAccount(a);
+		pl.setPayeeName(a.getName());
+		plDAO.save(pl);
+		return 0;
+	}
 	
 	public int db_transfer(int aid, String tanum, double pay) {
 		Account a = accountDAO.findById(aid);
@@ -40,7 +53,7 @@ public class AccountManager extends ActionSupport{
 		double taab = ta.getAvailableBalance();
 		Constant c = (Constant) constantDAO.findByProperty("text", "跨行转账").get(0);
 		double cpay = c.getValue();
-		if(ta.getBank().getType() == a.getBank().getType())
+		if(ta.getBank().getType().equals(a.getBank().getType()))
 			cpay = 0.00;
 		double pay2 = pay + pay * cpay;
 		if(aab < pay2) {
@@ -65,20 +78,23 @@ public class AccountManager extends ActionSupport{
 		td2.setAmountReceived(pay);
 		td1.setBalance(a.getBalance());
 		td2.setBalance(ta.getBalance());
-		td1.setType("转账");
+		if(cpay == 0.0)
+			td1.setType("转账");
+		else td1.setType("跨行转账");
 		td2.setType("收款");
 		td1.setCurrency("CNY");
 		td2.setCurrency("CNY");
-//		System.out.println("a1");
+		System.out.println("cpay:"+cpay);
 //		TransactionDetail tdtest = transDAO.findById(1);
 //		tdtest.setMessage("cunkuan");
 //		transDAO.save(tdtest);
 		transDAO.save(td1);
 		transDAO.save(td2);
+		this.addpayee(a.getUser().getId(), ta.getId());
 		return 0;
 	}
 	
-	//0：成功；-1：无账户；-2：无目标账户
+	//0：成功；-1：无账户；-2：无目标账户；-3：跨行
 	//1：金额不足
 	public int transfer(int aid, String tanum, double pay) {
 		Account a = accountDAO.findById(aid);
@@ -92,6 +108,9 @@ public class AccountManager extends ActionSupport{
 			return -2;
 		}
 		Account ta = talist.get(0);
+		if(!ta.getBank().getType().equals(a.getBank().getType())) {
+			return -3;
+		}
 		double ab = a.getBalance();
 		double aab = a.getAvailableBalance();
 		double tab = ta.getBalance();
@@ -128,6 +147,7 @@ public class AccountManager extends ActionSupport{
 //		transDAO.save(tdtest);
 		transDAO.save(td1);
 		transDAO.save(td2);
+		this.addpayee(a.getUser().getId(), ta.getId());
 		return 0;
 	}
 	
@@ -238,5 +258,13 @@ public class AccountManager extends ActionSupport{
 
 	public void setConstantDAO(ConstantDAO constantDAO) {
 		this.constantDAO = constantDAO;
+	}
+
+	public PayeeListDAO getPlDAO() {
+		return plDAO;
+	}
+
+	public void setPlDAO(PayeeListDAO plDAO) {
+		this.plDAO = plDAO;
 	}
 }
