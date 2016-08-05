@@ -53,34 +53,42 @@
 		</global-results>
 		<action name="testAction" class="com.neusoft.action.AccountAction"
 			method="test">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 		<action name="changepwdAction" class="com.neusoft.action.AccountAction"
 			method="changepwd">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 		<action name="lockAction" class="com.neusoft.action.AccountAction"
 			method="lock">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 		<action name="transferAction" class="com.neusoft.action.AccountAction"
 			method="transfer">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 		<action name="dbTransferAction" class="com.neusoft.action.AccountAction"
 			method="db_transfer">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 		<action name="addaccountAction" class="com.neusoft.action.AccountAction"
 			method="addaccount">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 		<action name="deleteAction" class="com.neusoft.action.AccountAction"
 			method="delete">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 		<action name="paymentAction" class="com.neusoft.action.AccountAction"
 			method="payment">
+			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
 

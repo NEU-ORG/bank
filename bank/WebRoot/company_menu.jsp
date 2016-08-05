@@ -33,12 +33,12 @@
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="jituan">
+    <li class="mdl-menu__item" onclick="location='group_query_win.action'">账户查询</li>
     <li class="mdl-menu__item" >集团账户管理</li>
-    <li class="mdl-menu__item" onclick="location='company_internalTransfer.action'">账户查询</li>
     <li class="mdl-menu__item">资金归集</li>
     <li class="mdl-menu__item">结算中心支付</li>
     <li class="mdl-menu__item">账户利息计算</li>
-    <li class="mdl-menu__item">资金调拨</li>
+    <li class="mdl-menu__item" onclick="location='group_transfer_win.action'">资金调拨</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="huipiao">

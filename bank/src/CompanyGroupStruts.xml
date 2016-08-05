@@ -3,7 +3,7 @@
 
 <struts>
 
-	<package name="accountAction" namespace="/" extends="struts-default">
+	<package name="groupAction" namespace="/" extends="struts-default">
 		<interceptors>
 			<interceptor name="auth"
 				class="com.neusoft.interceptor.AuthInterceptor"></interceptor>
@@ -15,19 +15,33 @@
 		<global-results>
 			<result name="login">sign_in.jsp</result>
 		</global-results>
-		<action name="account_*" class="com.neusoft.action.AccountAction"
+		<action name="group_*" class="com.neusoft.action.GroupAction"
 			method="{1}">
 			<interceptor-ref name="mystack"></interceptor-ref>
-			<result name="info">/WEB-INF/jsp/account/account.jsp</result>
-			<result name="transfer_win">/WEB-INF/jsp/account/transfer.jsp</result>
-			<result name="transdetail_win">/WEB-INF/jsp/account/trans_detail.jsp</result>
-			<result name="changepwd_win">/WEB-INF/jsp/account/accountchangepwd.jsp</result>
-			<result name="lockwin">WEB-INF/jsp/account/accountlock.jsp</result>
-			<!-- <result name="list">/WEB-INF/jsp/account/account.jsp</result> -->
-			<result name="create_win">/WEB-INF/jsp/account/account_create.jsp</result>
-			<result name="addaccount">/WEB-INF/jsp/account/account_create.jsp</result>
-			<result name="payment_win">/WEB-INF/jsp/account/payment.jsp</result>
-			<result name="input">/WEB-INF/jsp/account/account_create.jsp</result>
+			<result name="query_win">/WEB-INF/jsp/group/ComAccountQuery.jsp</result>
+			<result name="transfer_win">/WEB-INF/jsp/group/grouptransfer.jsp</result>
+
+		</action>
+
+	</package>
+	
+	<package name="groupAction2" namespace="/" extends="struts-default,json-default">
+		<interceptors>
+			<interceptor name="auth"
+				class="com.neusoft.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="auth"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="login">sign_in.jsp</result>
+		</global-results>
+		
+		<action name="GroupTransferAction" class="com.neusoft.action.GroupAction"
+			method="transfer">
+			<interceptor-ref name="mystack"></interceptor-ref>
+			<result type="json">jsonResult</result>	
 		</action>
 
 	</package>
