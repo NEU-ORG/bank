@@ -155,6 +155,8 @@ public class AccountAction extends ActionSupport {
 			}
 			if(t2 == -2)
 				jsonResult = "目标账户不存在！";
+			else if(t2 == -4)
+				jsonResult = "账户不能相同";
 			else if(t2 == 1)
 				jsonResult = "账户余额不足！";
 			else
@@ -197,6 +199,8 @@ public class AccountAction extends ActionSupport {
 				jsonResult = "目标账户不存在！";
 			else if(t2 == -3)
 				jsonResult = "银行不同，请跨行转账！";
+			else if(t2 == -4)
+				jsonResult = "账户不能相同";
 			else if(t2 == 1)
 				jsonResult = "账户余额不足！";
 			else

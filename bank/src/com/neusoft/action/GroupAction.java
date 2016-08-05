@@ -17,6 +17,10 @@ public class GroupAction extends ActionSupport {
 		return "transfer_win";
 	}
 	
+	public String transdetail_win() {
+		return "transdetail_win";
+	}
+	
 	public String transfer() {
 		String aid = ServletActionContext.getRequest().getParameter("accountId");
 		String taid = ServletActionContext.getRequest().getParameter("targetAccountId");
@@ -46,6 +50,8 @@ public class GroupAction extends ActionSupport {
 			}
 			if(t2 == 1)
 				jsonResult = "账户余额不足！";
+			else if(t2 == -4)
+				jsonResult = "账户不能相同";
 			else
 				jsonResult = "转账成功！";
 		}

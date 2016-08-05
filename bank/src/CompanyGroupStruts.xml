@@ -20,6 +20,7 @@
 			<interceptor-ref name="mystack"></interceptor-ref>
 			<result name="query_win">/WEB-INF/jsp/group/ComAccountQuery.jsp</result>
 			<result name="transfer_win">/WEB-INF/jsp/group/grouptransfer.jsp</result>
+			<result name="transdetail_win">/WEB-INF/jsp/group/grouptransdetail.jsp</result>
 
 		</action>
 

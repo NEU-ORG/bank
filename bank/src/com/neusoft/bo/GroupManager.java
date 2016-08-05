@@ -37,7 +37,7 @@ public class GroupManager  extends ActionSupport {
 		return 0;
 	}
 	
-	//0：成功；-1：无账户；-2：无目标账户；-3：跨行
+	//0：成功；-1：无账户；-2：无目标账户；-3：跨行;-4:相同账户
 	//1：金额不足
 	public int transfer(int aid, int taid, double pay) {
 		Map<String,Object> session = ActionContext.getContext().getSession();
@@ -54,6 +54,8 @@ public class GroupManager  extends ActionSupport {
 			System.out.println("a null");
 			return -1;
 		}
+		if(ca.getId().equals(tca.getId()))
+			return -4;
 //		if(!tca.getBank().getType().equals(ca.getBank().getType())) {
 //			return -3;
 //		}

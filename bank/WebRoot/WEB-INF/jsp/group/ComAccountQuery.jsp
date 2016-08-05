@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>集团账户管理</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -110,12 +110,12 @@ function AddTable(data, index) {
 		<%@include file="/company_header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>集团账户查询:<c:out value="${loginInfo}" /></h1>
+			<h1>集团账户管理:<c:out value="${loginInfo}" /></h1>
 
 				<div class="mdl-grid portfolio-max-width" id="a-card">
 	        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
 	                    <div class="mdl-card__title ">
-	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">交易明细查询</h2>
+	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">集团账户管理</h2>
 	                    </div>
 	                    <div class="mdl-card__supporting-text">
 							 公司：<select id="company-list"></select>
