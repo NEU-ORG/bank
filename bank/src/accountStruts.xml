@@ -21,18 +21,61 @@
 			method="{1}">
 			<interceptor-ref name="mystack"></interceptor-ref>
 			<result name="info">/WEB-INF/jsp/account/account.jsp</result>
+			<result name="db_transfer_win">/WEB-INF/jsp/account/db_transfer.jsp</result>
+			<result name="transferdetail_win">/WEB-INF/jsp/account/transferdetail.jsp</result>
 			<result name="transfer_win">/WEB-INF/jsp/account/transfer.jsp</result>
-			<result name="transfer">/WEB-INF/jsp/account/transfer.jsp</result>
 			<result name="transdetail_win">/WEB-INF/jsp/account/trans_detail.jsp</result>
 			<result name="changepwd_win">/WEB-INF/jsp/account/accountchangepwd.jsp</result>
-			<result name="changepwd">/WEB-INF/jsp/account/accountchangepwd.jsp</result>
 			<result name="lockwin">WEB-INF/jsp/account/accountlock.jsp</result>
-			<result name="lock">/WEB-INF/jsp/account/SUCC.jsp</result>
+			<result name="delete_win">WEB-INF/jsp/account/accountdelete.jsp</result>
 			<!-- <result name="list">/WEB-INF/jsp/account/account.jsp</result> -->
 			<result name="create_win">/WEB-INF/jsp/account/account_create.jsp</result>
 			<result name="addaccount">/WEB-INF/jsp/account/account_create.jsp</result>
 			<result name="payment_win">/WEB-INF/jsp/account/payment.jsp</result>
 			<result name="input">/WEB-INF/jsp/account/account_create.jsp</result>
+		</action>
+
+	</package>
+	
+	<package name="accountAction2" namespace="/" extends="struts-default,json-default">
+		<interceptors>
+			<interceptor name="auth"
+				class="com.neusoft.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="auth"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="login">sign_in.jsp</result>
+		</global-results>
+		<action name="testAction" class="com.neusoft.action.AccountAction"
+			method="test">
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="changepwdAction" class="com.neusoft.action.AccountAction"
+			method="changepwd">
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="lockAction" class="com.neusoft.action.AccountAction"
+			method="lock">
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="transferAction" class="com.neusoft.action.AccountAction"
+			method="transfer">
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="dbTransferAction" class="com.neusoft.action.AccountAction"
+			method="db_transfer">
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="addaccountAction" class="com.neusoft.action.AccountAction"
+			method="addaccount">
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="deleteAction" class="com.neusoft.action.AccountAction"
+			method="delete">
+			<result type="json">jsonResult</result>	
 		</action>
 
 	</package>

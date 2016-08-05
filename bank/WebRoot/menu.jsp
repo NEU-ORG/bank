@@ -4,18 +4,17 @@
     for="my-account">
     <li class="mdl-menu__item" onclick="location='account_info.action'">帐户查询</li>
     <li class="mdl-menu__item" onclick="location='account_changepwd_win.action'">交易密码修改</li>
-    <li class="mdl-menu__item" onclick="location='account_transfer_win.action'">转账业务</li>
     <li class="mdl-menu__item" onclick="location='account_transdetail_win.action'">交易明细查询</li>
     <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_lockwin.action'">账户挂失</li>
     <li class="mdl-menu__item" onclick="location='account_create_win.action'">添加银行卡</li>
-    <li class="mdl-menu__item">删除银行卡</li>
+    <li class="mdl-menu__item" onclick="location='account_delete_win.action'">删除银行卡</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="transfer">
-    <li class="mdl-menu__item">Some Action</li>
-    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
-    <li disabled class="mdl-menu__item">Disabled Action</li>
-    <li class="mdl-menu__item">Yet Another Action</li>
+    <li class="mdl-menu__item" onclick="location='account_transfer_win.action'">转账业务</li>
+    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_db_transfer_win.action'">跨行汇款</li>
+    <li class="mdl-menu__item " onclick="location='account_transferdetail_win.action'">转账查询</li>
+    <li class="mdl-menu__item">收款人名册</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="credit-card">

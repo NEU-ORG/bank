@@ -24,14 +24,16 @@
 		<main class="mdl-layout__content">
 			<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">信用卡挂失</h2>
+				<h2 class="mdl-card__title-text">账户挂失</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				<form action="company_reportLoss.action?flag='notNull'"
 					id＝"form" method="post">
 					选择账号： <select name="accountID">
 						<c:forEach var="account" items="${companyAccounts}">
+						<c:if test="${account.isSigned!='none'}">
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
+						</c:if>
 						</c:forEach>
 					</select>
 					<div class="mdl-card__actions">

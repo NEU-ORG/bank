@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>Account Delete</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -20,29 +20,32 @@
 <script type="text/javascript" charset="utf8" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" charset="utf8" src="http://code.ciphertrick.com/demo/jquerysession/js/jquerysession.js"></script>
 <script type="text/javascript">
+var alist;
 
 $(document).ready(function() {
+	//alert("loginInfo:"+loginInfo);
 	
-	$("#transfer-button").click(function() {
+	$("#del-button").click(function() {
 		var aid = $("#user-account option:selected").val();
-		var tanum = $("#account").val();
-		var paynum = $("#paynum").val();
 		var pwd = $("#pwd").val();
-		/* alert("1:"+aid);
-		alert("\n2:"+tanum);
-		alert("\n3:"+paynum);
-		alert("\n4:"+pwd); */
-		$.post("transferAction",
-			{accountId:aid,
-			 targetAccountNumber:tanum,
-			 pay:paynum,
-			 pwd:pwd},
-			function(a,b) {
-				$("#msg-label").html(a.jsonResult);
+		$.post("deleteAction",{accountId:aid,pwd:pwd},function(a,b) {
+			$("#msg-label").html(a.jsonResult);
 		});
+		/* $.ajax({
+		  type: 'POST',
+		  url: "account_lock.action",
+		  data: {accountId:aid,pwd:pwd},
+		  success: function(msgResult){
+		  	alert("c")
+		  },
+		  dataType: "JSON",
+		  error:function(msgResult,b){
+		  	alert(JSON.stringify(msgResult));
+		  	alert(b);
+		  }
+		}); */
 	});
 });
-
 
 function init() {
 	var loginInfo = "userName="+"<c:out value="${loginInfo}" />";
@@ -54,7 +57,7 @@ function init() {
 		dataType:"json",
 		success:function(data) {
 			if(data.status==true) {
-				//alert("success");
+				//alert("success1");
 				alist = data.result;
 				//alert("alist"+alist.length);
 				var selObj = document.getElementById("user-account");
@@ -70,6 +73,8 @@ function init() {
 
 function AddAccountSelect(selObj, data) {
 	for(var i=0;i<data.length;i++) {
+		if(data[i].isSigned == "none")
+			continue;
 		selObj.options.add(new Option(data[i].accountNumber,data[i].id))
 	}
 }
@@ -82,42 +87,31 @@ function AddAccountSelect(selObj, data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-				<h1>转账</h1>
+			<h1>银行卡删除</h1>
 			
-				<div class="mdl-grid portfolio-max-width" id="a-card">
+			<div class="mdl-grid portfolio-max-width" id="a-card">
 	        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
 	                    <div class="mdl-card__media">
 	                        <img class="article-image" src=" images/example-blog02.jpg" border="0" alt="">
 	                    </div>
 	                    <div class="mdl-card__title ">
-	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">转账业务</h2>
+	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">银行卡删除</h2>
 	                    </div>
 	                    <div class="mdl-card__supporting-text">
-							 个人账号：<select id="user-account" name="accountId"></select>
+							 账号：<select id="user-account" name="accountId"></select>
 	                    	<br /><br />
-	                    	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-								<input class="mdl-textfield__input" type="text" id="account"
-									name="account"> <label class="mdl-textfield__label"
-									for="account">请输入目标账户...</label>
-							</div>
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-								<input class="mdl-textfield__input" type="text" id="paynum"
-									name="paynum"> <label class="mdl-textfield__label"
-									for="paynum">请输入转账金额...</label>
-							</div>
 	        				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-								<input class="mdl-textfield__input" type="password" id="pwd"
-									name="password"> <label class="mdl-textfield__label"
-									for="pwd">请输入交易密码...</label>
+							<input class="mdl-textfield__input" type="password" id="pwd"
+								name="password"> <label class="mdl-textfield__label"
+								for="pwd">密码...</label>
 							</div>
 							<br />
 							<label id="msg-label"></label>
 	                    </div>
 	                    <div class="mdl-card__actions mdl-card--border">
-	                        <a href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">取消</a>
-							<button id="transfer-button"
-								class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-								style="float: right;">转账</button>
+	                        <button id="del-button" 
+	                        	class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+	                        	style="float:right;">删除</button>
 	                    </div>
 	                </div>
 	               

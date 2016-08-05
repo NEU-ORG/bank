@@ -27,12 +27,14 @@ $(document).ready(function() {
 		var oldpwd = $("#oldpwd").val();
 		var pwd = $("#newpwd").val();
 		//alert("1:"+accountId+"|2:"+oldpwd+"|3:"+pwd);
-		$.post("account_changepwd.action",
+		$.post("changepwdAction",
 				{	accountId:accountId,
 					oldpwd:oldpwd,
 					pwd:pwd
-				},function(data) {
-					alert("data:"+data);
+				},function(a,b) {
+					//alert(a.jsonResult);
+					//alert(b);
+					$("#msg-label").html(a.jsonResult);
 				});
 	});
 });
@@ -63,6 +65,8 @@ function init() {
 
 function AddAccountSelect(selObj, data) {
 	for(var i=0;i<data.length;i++) {
+		if(data[i].isSigned == "none")
+			continue;
 		selObj.options.add(new Option(data[i].accountNumber,data[i].id))
 	}
 }
@@ -82,10 +86,11 @@ function AddAccountSelect(selObj, data) {
 				<h2 class="mdl-card__title-text">交易密码修改</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<c:out value="${passwordError}"/>
-                <c:set var="passwordError" value=""/>
+				<%-- <c:out value="${passwordError}"/>
+                <c:set var="passwordError" value=""/> --%>
+                <label id="msg-label"></label>
                 <br /><br />
-				<form>
+
 					账号：<select id="user-account" name="accountId"></select>
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="oldpwd"
@@ -114,7 +119,7 @@ function AddAccountSelect(selObj, data) {
 							style="float: right;">修改</button>
 					</div>
 
-				</form>
+
 			</div>
 		</div>
 		<br />

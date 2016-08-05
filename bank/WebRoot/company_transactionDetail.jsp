@@ -30,7 +30,9 @@
 				<form action="company_transactionDetail?flag='notNull'" id＝"form" method="post">
 					选择账号： <select name="accountID">
 						<c:forEach var="account" items="${companyAccounts}">
+							<c:if test="${account.isSigned!='none'}">
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
+							</c:if>
 						</c:forEach>
 					</select><br/>
 					开始日期：<input type="date" name="beginTime"/><br />

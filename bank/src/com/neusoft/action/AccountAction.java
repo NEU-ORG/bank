@@ -19,9 +19,102 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AccountAction extends ActionSupport {
 	private AccountManager accountManager;
+	private String jsonResult;
+
+	public String getJsonResult() {
+		return jsonResult;
+	}
+
+	public void setJsonResult(String jsonResult) {
+		this.jsonResult = jsonResult;
+	}
 
 	public String info() {
 		return "info";
+	}
+	
+	public String test() {
+		String val = ServletActionContext.getRequest().getParameter("val");
+		System.out.println("val:"+val);
+		jsonResult = "4567";
+		return SUCCESS;
+	}
+	
+	public String delete_win() {
+		return "delete_win";
+	}
+	
+	public String delete() {
+		String tspwd = ServletActionContext.getRequest().getParameter("pwd");
+		String accountId = ServletActionContext.getRequest().getParameter("accountId");
+		if(accountId == null||accountId.isEmpty()) {
+			System.out.println("account empty");
+			return "error";
+		} else {
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			Integer id = Integer.parseInt(accountId);
+			int temp1 = accountManager.judgeTransPwd(id, tspwd);
+			System.out.println("t1:"+temp1);
+			if(temp1 != 0)
+				jsonResult = "密码不正确！";
+			else {
+				int temp2 = accountManager.delete(id);
+				System.out.println("t2:"+temp2);
+				if(temp2 == -1) {
+					System.out.println("account error");
+					return "error";
+				} else if(temp2 == 1)
+					jsonResult = "银行卡已经删除！";
+				if(temp2 == 0) {
+					jsonResult = "银行卡删除成功！";
+				}
+			}
+		}
+		return SUCCESS;
+	}
+	
+	public String transferdetail_win() {
+		return "transferdetail_win";
+	}
+	
+	public String db_transfer_win() {
+		return "db_transfer_win";
+	}
+	
+	public String db_transfer() {
+		String aid = ServletActionContext.getRequest().getParameter("accountId");
+		String tanum = ServletActionContext.getRequest().getParameter("targetAccountNumber");
+		String pay = ServletActionContext.getRequest().getParameter("pay");
+		String pwd = ServletActionContext.getRequest().getParameter("pwd");
+		boolean b = (aid == null || aid.isEmpty() || 
+					 tanum == null || tanum.isEmpty() || 
+					 pay == null || pay.isEmpty() || 
+					 pwd == null || pwd.isEmpty());
+		if(b) {
+			jsonResult = "请输入数据！";
+			return SUCCESS;
+		}
+		Integer id = Integer.parseInt(aid);
+		int t1 = accountManager.judgeTransPwd(id, pwd);
+		System.out.println("t1:"+t1);
+		if(t1 != 0)
+			jsonResult = "密码不正确！";
+		else {
+			Double p = Double.parseDouble(pay);
+			int t2 = accountManager.db_transfer(id, tanum, p);
+			System.out.println("t2:"+t2);
+			if(t2 == -1) {
+				System.out.println("account error");
+				return "error";
+			}
+			if(t2 == -2)
+				jsonResult = "目标账户不存在！";
+			else if(t2 == 1)
+				jsonResult = "账户余额不足！";
+			else
+				jsonResult = "转账成功！";
+		}
+		return SUCCESS;
 	}
 	
 	public String transfer_win() {
@@ -37,18 +130,31 @@ public class AccountAction extends ActionSupport {
 					 tanum == null || tanum.isEmpty() || 
 					 pay == null || pay.isEmpty() || 
 					 pwd == null || pwd.isEmpty());
-		if(b) return "transfer_win";
+		if(b) {
+			jsonResult = "请输入数据！";
+			return SUCCESS;
+		}
 		Integer id = Integer.parseInt(aid);
 		int t1 = accountManager.judgeTransPwd(id, pwd);
 		System.out.println("t1:"+t1);
 		if(t1 != 0)
-			return "transfer_win";
-		Double p = Double.parseDouble(pay);
-		int t2 = accountManager.transfer(id, tanum, p);
-		System.out.println("t2:"+t2);
-		if(t2 != 0)
-			return "transfer_win";
-		return "transfer";
+			jsonResult = "密码不正确！";
+		else {
+			Double p = Double.parseDouble(pay);
+			int t2 = accountManager.transfer(id, tanum, p);
+			System.out.println("t2:"+t2);
+			if(t2 == -1) {
+				System.out.println("account error");
+				return "error";
+			}
+			if(t2 == -2)
+				jsonResult = "目标账户不存在！";
+			else if(t2 == 1)
+				jsonResult = "账户余额不足！";
+			else
+				jsonResult = "转账成功！";
+		}
+		return SUCCESS;
 	}
 	
 	public String transdetail_win() {
@@ -64,33 +170,28 @@ public class AccountAction extends ActionSupport {
 		return "changepwd_win";
 	}
 	
-	public String changepwd() throws IOException {
+	public String changepwd() {
 		String tspwd = ServletActionContext.getRequest().getParameter("pwd");
 		String oldpwd = ServletActionContext.getRequest().getParameter("oldpwd");
 		String accountId = ServletActionContext.getRequest().getParameter("accountId");
 		if(accountId == null||accountId.isEmpty()) {
+			System.out.println("account empty");
 			return "error";
 		} else {
-			Map<String,Object> session = ActionContext.getContext().getSession();
 			Integer id = Integer.parseInt(accountId);
 			int temp = accountManager.judgeTransPwd(id, oldpwd);
 			System.out.println("t1:"+temp);
-			ServletActionContext.getResponse().getWriter().write("temp");
 			if(temp != 0)
-				session.put("passwordError","·账户或密码不正确！");
+				jsonResult = "密码不正确！";
 			else {
-				if(session.get("passwordError")!=null)
-				{
-					session.remove("passwordError");
-				}
 				temp = accountManager.changeTransPwd(id, tspwd);
 				System.out.println("t2:"+temp);
 				if(temp == 0) {
-					session.put("passwordError","修改成功！");
+					jsonResult = "修改成功！";
 				}
 			}
 		}
-		return "changepwd";
+		return SUCCESS;
 	}
 	
 	public String lockwin() {
@@ -101,30 +202,29 @@ public class AccountAction extends ActionSupport {
 		String tspwd = ServletActionContext.getRequest().getParameter("pwd");
 		String accountId = ServletActionContext.getRequest().getParameter("accountId");
 		if(accountId == null||accountId.isEmpty()) {
+			System.out.println("account empty");
 			return "error";
 		} else {
 			Map<String,Object> session = ActionContext.getContext().getSession();
 			Integer id = Integer.parseInt(accountId);
 			int temp1 = accountManager.judgeTransPwd(id, tspwd);
+			System.out.println("t1:"+temp1);
 			if(temp1 != 0)
-				session.put("passwordError","·密码不正确！");
+				jsonResult = "密码不正确！";
 			else {
-				if(session.get("passwordError")!=null)
-				{
-					session.remove("passwordError");
-				}
 				int temp2 = accountManager.lock(id);
-				//System.out.println("t:"+temp2);
-				if(temp2 == -1)
+				System.out.println("t2:"+temp2);
+				if(temp2 == -1) {
+					System.out.println("account error");
 					return "error";
-				else if(temp2 == 1)
-					session.put("passwordError","账户已经锁定！");
+				} else if(temp2 == 1)
+					jsonResult = "账户已经锁定！";
 				if(temp2 == 0) {
-					session.put("passwordError","修改成功！");
+					jsonResult = "修改成功！";
 				}
 			}
 		}
-		return "lock";
+		return SUCCESS;
 	}
 
 	public String create_win() {
@@ -137,11 +237,23 @@ public class AccountAction extends ActionSupport {
 		String accountNumber = ServletActionContext.getRequest().getParameter("accountNumber");
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		String userName = (String) session.get("loginInfo");
-		if(tspwd == null || tspwd.isEmpty() || accountNumber == null || accountNumber.isEmpty())
-			return "create_win";
+		if(tspwd == null || tspwd.isEmpty() || accountNumber == null || accountNumber.isEmpty()) {
+			jsonResult = "请输入数据！";
+			return SUCCESS;
+		}
 		int temp = accountManager.AddAccount(userName,accountNumber,tspwd);
 		System.out.println("t1:"+temp);
-		return "create";
+		if(temp == -1) {
+			System.out.println("user error");
+			return "error";
+		} 
+		if(temp == -2 || temp == -3)
+			jsonResult = "银行卡不存在！";
+		else if(temp == 1)
+			jsonResult = "银行卡已添加！";
+		else if(temp == 0)
+			jsonResult = "添加成功！";
+		return SUCCESS;
 	}
 
 	public String list() {

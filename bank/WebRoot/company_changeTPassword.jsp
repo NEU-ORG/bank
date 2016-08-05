@@ -33,7 +33,9 @@
                     <form action="company_changeTPassword.action?flag='notNull'" id＝"form" method="post">
                     	选择账号： <select name="accountID">
 						<c:forEach var="account" items="${companyAccounts}">
+						<c:if test="${account.isSigned!='none'}">
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
+						</c:if>
 						</c:forEach>
 					</select><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

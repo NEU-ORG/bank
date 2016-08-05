@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>跨行汇款</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
 		alert("\n2:"+tanum);
 		alert("\n3:"+paynum);
 		alert("\n4:"+pwd); */
-		$.post("transferAction",
+		$.post("dbTransferAction",
 			{accountId:aid,
 			 targetAccountNumber:tanum,
 			 pay:paynum,
@@ -82,7 +82,7 @@ function AddAccountSelect(selObj, data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-				<h1>转账</h1>
+				<h1>跨行汇款</h1>
 			
 				<div class="mdl-grid portfolio-max-width" id="a-card">
 	        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
@@ -90,9 +90,11 @@ function AddAccountSelect(selObj, data) {
 	                        <img class="article-image" src=" images/example-blog02.jpg" border="0" alt="">
 	                    </div>
 	                    <div class="mdl-card__title ">
-	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">转账业务</h2>
+	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">跨行汇款</h2>
 	                    </div>
 	                    <div class="mdl-card__supporting-text">
+	                    	<label>注意：跨行转账会收取一定的手续费</label>
+	                    	<br /><br />
 							 个人账号：<select id="user-account" name="accountId"></select>
 	                    	<br /><br />
 	                    	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

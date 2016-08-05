@@ -6,9 +6,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.dao.AccountDAO;
+import com.neusoft.dao.ConstantDAO;
 import com.neusoft.dao.TransactionDetailDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
+import com.neusoft.po.Constant;
 import com.neusoft.po.TransactionDetail;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,7 +19,64 @@ public class AccountManager extends ActionSupport{
 	private AccountDAO accountDAO;
 	private UserDAO userDAO;
 	private TransactionDetailDAO transDAO;
+	private ConstantDAO constantDAO;
 	private ApplicationContext ctx;
+	
+	public int db_transfer(int aid, String tanum, double pay) {
+		Account a = accountDAO.findById(aid);
+		if(a.equals(null)) {
+			System.out.println("a null");
+			return -1;
+		}
+		List<Account> talist = accountDAO.findByProperty("accountNumber", tanum);
+		if(talist.size() != 1) {
+			System.out.println("ta null");
+			return -2;
+		}
+		Account ta = talist.get(0);
+		double ab = a.getBalance();
+		double aab = a.getAvailableBalance();
+		double tab = ta.getBalance();
+		double taab = ta.getAvailableBalance();
+		Constant c = (Constant) constantDAO.findByProperty("text", "跨行转账").get(0);
+		double cpay = c.getValue();
+		if(ta.getBank().getType() == a.getBank().getType())
+			cpay = 0.00;
+		double pay2 = pay + pay * cpay;
+		if(aab < pay2) {
+			System.out.println("no");
+			return 1;
+		}
+		a.setAvailableBalance(aab-pay2);
+		a.setBalance(ab-pay2);
+		ta.setBalance(tab+pay);
+		ta.setAvailableBalance(taab+pay);
+		accountDAO.attachDirty(a);
+		accountDAO.attachDirty(ta);
+		TransactionDetail td1 = new TransactionDetail();
+		TransactionDetail td2 = new TransactionDetail();
+		td1.setAccountByAccountId(a);
+		td1.setAccountByTargetAccount(ta);
+		td2.setAccountByAccountId(ta);
+		td2.setAccountByTargetAccount(a);
+		td1.setAmountPaid(pay2);
+		td1.setAmountReceived(0.00);
+		td2.setAmountPaid(0.00);
+		td2.setAmountReceived(pay);
+		td1.setBalance(a.getBalance());
+		td2.setBalance(ta.getBalance());
+		td1.setType("转账");
+		td2.setType("收款");
+		td1.setCurrency("CNY");
+		td2.setCurrency("CNY");
+//		System.out.println("a1");
+//		TransactionDetail tdtest = transDAO.findById(1);
+//		tdtest.setMessage("cunkuan");
+//		transDAO.save(tdtest);
+		transDAO.save(td1);
+		transDAO.save(td2);
+		return 0;
+	}
 	
 	//0：成功；-1：无账户；-2：无目标账户
 	//1：金额不足
@@ -133,6 +192,22 @@ public class AccountManager extends ActionSupport{
 		return 0;
 	}
 
+	//0-成功；-1-无账户；1-已删除
+	public int delete(Integer aid) {
+		Account account = accountDAO.findById(aid);
+		if(account.equals(null)) {
+			System.out.println("null");
+			return -1;
+		}
+		if(account.getIsSigned().equals("none")) {
+			System.out.println("已删除");
+			return 1;
+		}
+		account.setIsSigned("none");
+		accountDAO.attachDirty(account);
+		return 0;
+	}
+	
 	public AccountDAO getAccountDAO() {
 		return accountDAO;
 	}
@@ -155,5 +230,13 @@ public class AccountManager extends ActionSupport{
 
 	public void setTransDAO(TransactionDetailDAO transDAO) {
 		this.transDAO = transDAO;
+	}
+
+	public ConstantDAO getConstantDAO() {
+		return constantDAO;
+	}
+
+	public void setConstantDAO(ConstantDAO constantDAO) {
+		this.constantDAO = constantDAO;
 	}
 }

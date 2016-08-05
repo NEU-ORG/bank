@@ -18,11 +18,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.AddressDAO;
+import com.neusoft.dao.CompanyAccountDAO;
+import com.neusoft.dao.CompanyDAO;
+import com.neusoft.dao.CompanyOperatorDAO;
+import com.neusoft.dao.CompanyTransactionDetailDAO;
 import com.neusoft.dao.ConstantDAO;
 import com.neusoft.dao.TransactionDetailDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
 import com.neusoft.po.Address;
+import com.neusoft.po.Company;
+import com.neusoft.po.CompanyAccount;
+import com.neusoft.po.CompanyOperator;
+import com.neusoft.po.CompanyTransactionDetail;
 import com.neusoft.po.Constant;
 import com.neusoft.po.TransactionDetail;
 import com.neusoft.po.User;
@@ -36,6 +44,83 @@ public class JsonAction extends ActionSupport{
 	
 	public String execute() {
 		return "success";
+	}
+	
+	public String QueryCompanyMsg() {
+		String operatorName = ServletActionContext.getRequest().getParameter("operatorName");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		CompanyOperatorDAO operatorDAO = (CompanyOperatorDAO) ctx.getBean("CompanyOperatorDAO");
+		List<CompanyOperator> ol = operatorDAO.findByProperty("managerName", operatorName);
+		if(ol.size() != 1) {
+			System.out.println("o null error");
+			return "error";
+		}
+		Company company = ol.get(0).getCompany();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("status", true);
+		map.put("result", company);
+		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
+		jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
+		jsonConfig.setExcludes(new String[]{"user","accounts","banks","companies","users",
+											"companyTransactionDetailsForAccountId",
+											"companyTransactionDetailsForTargetAccount",
+											"companyTransactionDetails","address","company",
+											"creditCards","companyOperators"});
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		jsonResult = JSONObject.fromObject(map,jsonConfig);
+		return SUCCESS;
+	}
+	
+	public String QueryComTransDetails() {
+		String companyAccountId = ServletActionContext.getRequest().getParameter("companyAccountId");
+		String btime = ServletActionContext.getRequest().getParameter("btime");
+		String etime = ServletActionContext.getRequest().getParameter("etime");
+		Integer caid = Integer.parseInt(companyAccountId);
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		CompanyAccountDAO caDAO = (CompanyAccountDAO) ctx.getBean("CompanyAccountDAO");
+		CompanyAccount ca = caDAO.findById(caid);
+		if(ca.equals(null)) {
+			System.out.println("null");
+			return "error";
+		}
+		CompanyTransactionDetailDAO ctdDAO = (CompanyTransactionDetailDAO) ctx.getBean("CompanyTransactionDetailDAO");
+		List<CompanyTransactionDetail> l = ctdDAO.findByProperty("companyAccountByAccountId", ca);
+		Long bt,et,time;
+		if(btime == null || btime.isEmpty())
+			bt = 0L;
+		else
+			bt = Long.parseLong(btime);
+		if(etime == null || etime.isEmpty())
+			et = Long.MAX_VALUE;
+		else
+			et = Long.parseLong(etime);
+		if(bt > et) {
+			System.out.println("bt>et");
+			return "error";
+		}
+		for(int i=0;i<l.size();i++) {
+			time = l.get(i).getTransactionTime().getTime();
+			if(bt>time || time>et)
+				l.remove(i);
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
+		if(l.size() == 0) {
+			map.put("status", false);
+			map.put("result", null);
+		} else {
+			map.put("status", true);
+			map.put("result", l);
+			jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
+			jsonConfig.setExcludes(new String[]{"user","accounts","banks","companies","users",
+												"companyTransactionDetailsForAccountId",
+												"companyTransactionDetailsForTargetAccount",
+												"companyTransactionDetails","address","company",
+												"creditCards","companyAccounts"});
+			jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		}
+		jsonResult = JSONObject.fromObject(map,jsonConfig);
+		return SUCCESS;
 	}
 	
 	public String QueryConstant() {
@@ -64,7 +149,8 @@ public class JsonAction extends ActionSupport{
 		map.put("result", l);
 		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
 		jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
-		jsonConfig.setExcludes(new String[]{"companies","banks","addresses","users"});
+		jsonConfig.setExcludes(new String[]{"companies","banks","addresses","users",
+											"companyAccounts","companies","companyOperators"});
 		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		jsonResult = JSONObject.fromObject(map,jsonConfig);
 		
@@ -117,7 +203,12 @@ public class JsonAction extends ActionSupport{
 				map.put("status", true);
 				map.put("result", l);
 				jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
-				jsonConfig.setExcludes(new String[]{"bank","users","address","creditCards","accounts","applycreditcards","payeeLists","companyaccounts","user","accounts","transactionDetailsForAccountId","transactionDetailsForTargetAccount"});
+				jsonConfig.setExcludes(new String[]{"bank","users","address",
+													"creditCards","accounts","applycreditcards",
+													"payeeLists","companyaccounts","user",
+													"accounts","transactionDetailsForAccountId",
+													"transactionDetailsForTargetAccount",
+													"companyAccounts","companies","companyOperators"});
 				
 				jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 			}
@@ -128,7 +219,7 @@ public class JsonAction extends ActionSupport{
 	
 	public String getUserAccounts() {
 		String userName = ServletActionContext.getRequest().getParameter("userName");
-		System.out.println("userName:"+userName);
+		//System.out.println("userName:"+userName);
 		if(userName == null||userName.isEmpty()) {
 			return "error";
 		} else {
@@ -150,7 +241,11 @@ public class JsonAction extends ActionSupport{
 					map.put("status", true);
 					map.put("result", la);
 					jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
-					jsonConfig.setExcludes(new String[]{"users","address","creditCards","accounts","applycreditcards","payeeLists","companyaccounts","user","accounts","transactionDetailsForAccountId","transactionDetailsForTargetAccount"});
+					jsonConfig.setExcludes(new String[]{"users","address","creditCards","accounts",
+														"applycreditcards","payeeLists","companyaccounts",
+														"user","accounts","transactionDetailsForAccountId",
+														"transactionDetailsForTargetAccount",
+														"companyAccounts","companies","companyOperators"});
 					jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 				}
 				jsonResult = JSONObject.fromObject(map,jsonConfig);
@@ -169,7 +264,7 @@ public class JsonAction extends ActionSupport{
 		map.put("result", userlist);
 		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
 		jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
-		jsonConfig.setExcludes(new String[]{"users","address","creditCards","accounts","applycreditcards","payeeLists","companyaccounts","transactionDetails"});
+		jsonConfig.setExcludes(new String[]{"users","address","creditCards","accounts","applycreditcards","payeeLists","companyaccounts","transactionDetails","companyAccounts","companies","companyOperators"});
 		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		jsonResult = JSONObject.fromObject(map,jsonConfig);
 		

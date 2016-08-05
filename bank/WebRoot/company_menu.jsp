@@ -7,7 +7,8 @@
     <li class="mdl-menu__item">网银交易查询</li>
     <li class="mdl-menu__item">对账单查询</li>
     <li class="mdl-menu__item" onclick="location='company_changeTPassword.action'">修改查询密码</li>
-    <li class="mdl-menu__item">增加删除上挂帐户</li>
+    <li class="mdl-menu__item" onclick="location='company_addAccount.action'">增加帐户</li>
+    <li class="mdl-menu__item" onclick="location='company_deleteAccount.action'">删除帐户</li>
     <li class="mdl-menu__item" onclick="location='company_reportLoss.action'">账户挂失</li>
     <li class="mdl-menu__item">票据挂失</li>
 </ul>
@@ -33,7 +34,7 @@
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="jituan">
     <li class="mdl-menu__item" >集团账户管理</li>
-    <li class="mdl-menu__item">账户查询</li>
+    <li class="mdl-menu__item" onclick="location='company_internalTransfer.action'">账户查询</li>
     <li class="mdl-menu__item">资金归集</li>
     <li class="mdl-menu__item">结算中心支付</li>
     <li class="mdl-menu__item">账户利息计算</li>
