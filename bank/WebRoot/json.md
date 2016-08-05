@@ -67,4 +67,10 @@ http://localhost:8080/bank/QueryConstant
 {"id":9,"text":"贷款二年","type":"贷款利率","value":0.0535}],
 "status":true}
 
-http://localhost:8080/bank/QueryCompanyMsg?companyId=1
+http://localhost:8080/bank/QueryCompanyMsg?operatorName=operator1
+
+http://localhost:8080/bank/QueryPayment
+
+http://localhost:8080/bank/QueryComTransDetails?companyAccountId=1&btime=0&etime=1470381020000
+
+http://localhost:8080/bank/QueryPayeeList?userName=lzn

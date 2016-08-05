@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>转账查询</title>
+<title>缴费查询</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -103,7 +103,7 @@ function AddTable(data) {
 	//alert("a:"+data.length);
 	var newRow;
 	for(var i=0;i<data.length;i++) {
-		if(data[i].type != "转账"&&data[i].type != "跨行转账")
+		if(data[i].type != "缴费")
 			continue;
 		var ta = "";
 		if("accountNumber" in data[i].accountByTargetAccount)
@@ -131,11 +131,11 @@ function AddTable(data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>转账查询</h1>
+			<h1>缴费查询</h1>
 				<div class="mdl-grid portfolio-max-width" id="a-card">
         		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
                     <div class="mdl-card__title ">
-                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">转账查询</h2>
+                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">缴费查询</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
 						 账号：<select id="user-account" name="accountId"></select>

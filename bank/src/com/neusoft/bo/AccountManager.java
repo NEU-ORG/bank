@@ -25,6 +25,49 @@ public class AccountManager extends ActionSupport{
 	private PayeeListDAO plDAO;
 	private ApplicationContext ctx;
 
+	public int payment(int aid, String tanum, double pay) {
+		Account a = accountDAO.findById(aid);
+		if(a.equals(null)) {
+			System.out.println("a null");
+			return -1;
+		}
+		List<Account> talist = accountDAO.findByProperty("accountNumber", tanum);
+		Account ta = talist.get(0);
+		double ab = a.getBalance();
+		double aab = a.getAvailableBalance();
+		double tab = ta.getBalance();
+		double taab = ta.getAvailableBalance();
+		if(aab < pay) {
+			System.out.println("no");
+			return 1;
+		}
+		a.setAvailableBalance(aab-pay);
+		a.setBalance(ab-pay);
+		ta.setBalance(tab+pay);
+		ta.setAvailableBalance(taab+pay);
+		accountDAO.attachDirty(a);
+		accountDAO.attachDirty(ta);
+		TransactionDetail td1 = new TransactionDetail();
+		TransactionDetail td2 = new TransactionDetail();
+		td1.setAccountByAccountId(a);
+		td1.setAccountByTargetAccount(ta);
+		td2.setAccountByAccountId(ta);
+		td2.setAccountByTargetAccount(a);
+		td1.setAmountPaid(pay);
+		td1.setAmountReceived(0.00);
+		td2.setAmountPaid(0.00);
+		td2.setAmountReceived(pay);
+		td1.setBalance(a.getBalance());
+		td2.setBalance(ta.getBalance());
+		td1.setType("½É·Ñ");
+		td2.setType("ÊÕ¿î");
+		td1.setCurrency("CNY");
+		td2.setCurrency("CNY");
+		transDAO.save(td1);
+		transDAO.save(td2);
+		return 0;
+	}
+	
 	public int addpayee(int userId, int accountId) {
 		PayeeList pl = new PayeeList();
 		pl.setUser(userDAO.findById(userId));

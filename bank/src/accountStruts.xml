@@ -33,6 +33,7 @@
 			<result name="create_win">/WEB-INF/jsp/account/account_create.jsp</result>
 			<result name="addaccount">/WEB-INF/jsp/account/account_create.jsp</result>
 			<result name="payment_win">/WEB-INF/jsp/account/payment.jsp</result>
+			<result name="paydetail_win">/WEB-INF/jsp/account/paydetail.jsp</result>
 			<result name="input">/WEB-INF/jsp/account/account_create.jsp</result>
 		</action>
 
@@ -76,6 +77,10 @@
 		</action>
 		<action name="deleteAction" class="com.neusoft.action.AccountAction"
 			method="delete">
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="paymentAction" class="com.neusoft.action.AccountAction"
+			method="payment">
 			<result type="json">jsonResult</result>	
 		</action>
 

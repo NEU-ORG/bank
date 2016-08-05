@@ -40,6 +40,48 @@ public class AccountAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String paydetail_win() {
+		return "paydetail_win";
+	}
+	
+	public String payment_win() {
+		return "payment_win";
+	}
+	
+	public String payment() {
+		String aid = ServletActionContext.getRequest().getParameter("accountId");
+		String tanum = ServletActionContext.getRequest().getParameter("targetAccountNumber");
+		String pay = ServletActionContext.getRequest().getParameter("pay");
+		String pwd = ServletActionContext.getRequest().getParameter("pwd");
+		boolean b = (aid == null || aid.isEmpty() || 
+					 tanum == null || tanum.isEmpty() || 
+					 pay == null || pay.isEmpty() || 
+					 pwd == null || pwd.isEmpty());
+		if(b) {
+			jsonResult = "请输入数据！";
+			return SUCCESS;
+		}
+		Integer id = Integer.parseInt(aid);
+		int t1 = accountManager.judgeTransPwd(id, pwd);
+		System.out.println("t1:"+t1);
+		if(t1 != 0)
+			jsonResult = "密码不正确！";
+		else {
+			Double p = Double.parseDouble(pay);
+			int t2 = accountManager.payment(id, tanum, p);
+			System.out.println("t2:"+t2);
+			if(t2 == -1) {
+				System.out.println("account error");
+				return "error";
+			}
+			else if(t2 == 1)
+				jsonResult = "账户余额不足！";
+			else
+				jsonResult = "缴费成功！";
+		}
+		return SUCCESS;
+	}
+	
 	public String paylist_win() {
 		return "paylist_win";
 	}

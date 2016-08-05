@@ -31,10 +31,8 @@
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="pay">
-    <li class="mdl-menu__item">Some Action</li>
-    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
-    <li disabled class="mdl-menu__item">Disabled Action</li>
-    <li class="mdl-menu__item">Yet Another Action</li>
+    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_payment_win.action'">自助缴费</li>
+    <li class="mdl-menu__item" onclick="location='account_paydetail_win.action'">缴费查询</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="setting">

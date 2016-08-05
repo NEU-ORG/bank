@@ -24,6 +24,7 @@ import com.neusoft.dao.CompanyOperatorDAO;
 import com.neusoft.dao.CompanyTransactionDetailDAO;
 import com.neusoft.dao.ConstantDAO;
 import com.neusoft.dao.PayeeListDAO;
+import com.neusoft.dao.PaymentDAO;
 import com.neusoft.dao.TransactionDetailDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
@@ -33,6 +34,8 @@ import com.neusoft.po.CompanyAccount;
 import com.neusoft.po.CompanyOperator;
 import com.neusoft.po.CompanyTransactionDetail;
 import com.neusoft.po.Constant;
+import com.neusoft.po.Group;
+import com.neusoft.po.Payment;
 import com.neusoft.po.TransactionDetail;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -45,6 +48,30 @@ public class JsonAction extends ActionSupport{
 	
 	public String execute() {
 		return "success";
+	}
+	
+	public String QueryPayment() {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		PaymentDAO pDAO = (PaymentDAO) ctx.getBean("PaymentDAO");
+		List<Payment> l = pDAO.findAll();
+		Map<String,Object> map = new HashMap<String,Object>();
+		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
+		if(l.size() == 0) {
+			map.put("status", false);
+			map.put("result", null);
+		} else {
+			map.put("status", true);
+			map.put("result", l);
+			jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
+			jsonConfig.setExcludes(new String[]{"users","address","creditCards","payments",
+												"applycreditcards","payeeLists","companyaccounts",
+												"user","accounts","transactionDetailsForAccountId",
+												"transactionDetailsForTargetAccount",
+												"companyAccounts","companies","companyOperators"});
+			jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		}
+		jsonResult = JSONObject.fromObject(map,jsonConfig);
+		return SUCCESS;
 	}
 	
 	public String QueryPayeeList() {
@@ -92,17 +119,19 @@ public class JsonAction extends ActionSupport{
 			System.out.println("o null error");
 			return "error";
 		}
-		Company company = ol.get(0).getCompany();
+		Group group = ol.get(0).getCompany().getGroup();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("status", true);
-		map.put("result", company);
+		map.put("result", group);
 		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
 		jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
-		jsonConfig.setExcludes(new String[]{"user","accounts","banks","companies","users",
+		jsonConfig.setExcludes(new String[]{"user","accounts","banks","bank","users",
 											"companyTransactionDetailsForAccountId",
 											"companyTransactionDetailsForTargetAccount",
 											"companyTransactionDetails","address","company",
-											"creditCards","companyOperators"});
+											"creditCards","companyOperators","group",
+											"draftsForAcceptorAccountId","draftsForDrawerAccountId",
+											"draftsForPayeeAccountId","endorsements"});
 		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		jsonResult = JSONObject.fromObject(map,jsonConfig);
 		return SUCCESS;
