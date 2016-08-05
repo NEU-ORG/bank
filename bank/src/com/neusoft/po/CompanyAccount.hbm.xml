@@ -48,15 +48,37 @@
   <property generated="never" lazy="false" name="availableBalance" type="java.lang.Double">
    <column name="availableBalance" not-null="true" precision="10"/>
   </property>
-  <set inverse="true" lazy="false"
-   name="companyTransactionDetailsForAccountId" sort="unsorted" cascade="save-update">
+  <set inverse="true" name="endorsements" sort="unsorted" lazy="false">
+   <key>
+    <column name="targetAccountId" not-null="true"/>
+   </key>
+   <one-to-many class="com.neusoft.po.Endorsement"/>
+  </set>
+  <set inverse="true" name="draftsForAcceptorAccountId" sort="unsorted" lazy="false">
+   <key>
+    <column name="acceptorAccountId" not-null="true"/>
+   </key>
+   <one-to-many class="com.neusoft.po.Draft"/>
+  </set>
+  <set inverse="true" name="draftsForPayeeAccountId" sort="unsorted" lazy="false">
+   <key>
+    <column name="payeeAccountId" not-null="true"/>
+   </key>
+   <one-to-many class="com.neusoft.po.Draft"/>
+  </set>
+  <set inverse="true" name="draftsForDrawerAccountId" sort="unsorted" lazy="false">
+   <key>
+    <column name="drawerAccountId" not-null="true"/>
+   </key>
+   <one-to-many class="com.neusoft.po.Draft"/>
+  </set>
+  <set inverse="true" name="companyTransactionDetailsForAccountId" sort="unsorted" lazy="false">
    <key>
     <column name="accountId" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.CompanyTransactionDetail"/>
   </set>
-  <set inverse="true" lazy="false"
-   name="companyTransactionDetailsForTargetAccount" sort="unsorted">
+  <set inverse="true" name="companyTransactionDetailsForTargetAccount" sort="unsorted" lazy="false">
    <key>
     <column name="targetAccount"/>
    </key>

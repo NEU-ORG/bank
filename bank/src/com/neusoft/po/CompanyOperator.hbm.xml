@@ -22,9 +22,12 @@
   <property generated="never" lazy="false" name="idNumber" type="java.lang.String">
    <column length="20" name="idNumber" not-null="true"/>
   </property>
-  <set inverse="true" lazy="false" name="companyTransactionDetails" sort="unsorted">
+  <property generated="never" lazy="false" name="type" type="java.lang.String">
+   <column length="3" name="type"/>
+  </property>
+  <set inverse="true" name="companyTransactionDetails" sort="unsorted" lazy="false">
    <key>
-    <column name="operatorId" not-null="true"/>
+    <column name="operatorId"/>
    </key>
    <one-to-many class="com.neusoft.po.CompanyTransactionDetail"/>
   </set>

@@ -62,7 +62,32 @@
 			<generator class="increment"></generator>
 		</primary-key>
 	</table>
+	<table name="draft" catalog="bank">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+	<table name="endorsement" catalog="bank">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+	<table name="group" catalog="bank">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+	<table name="log" catalog="bank">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
 	<table name="payee_list" catalog="bank">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+	<table name="payment" catalog="bank">
 		<primary-key>
 			<generator class="increment"></generator>
 		</primary-key>

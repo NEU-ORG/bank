@@ -29,10 +29,9 @@ public class CompanyTransactionDetail implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public CompanyTransactionDetail(CompanyOperator companyOperator,
-			CompanyAccount companyAccountByAccountId, Double amountPaid,
-			Double amountReceived, Double balance, String currency) {
-		this.companyOperator = companyOperator;
+	public CompanyTransactionDetail(CompanyAccount companyAccountByAccountId,
+			Double amountPaid, Double amountReceived, Double balance,
+			String currency) {
 		this.companyAccountByAccountId = companyAccountByAccountId;
 		this.amountPaid = amountPaid;
 		this.amountReceived = amountReceived;

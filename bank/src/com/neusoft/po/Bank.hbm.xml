@@ -19,31 +19,31 @@
   <property generated="never" lazy="false" name="type" type="java.lang.String">
    <column length="7" name="type" not-null="true"/>
   </property>
-  <set inverse="true" lazy="false" name="companyAccounts" sort="unsorted">
+  <set inverse="true" name="companyAccounts" sort="unsorted" lazy="false">
    <key>
     <column name="createBank" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.CompanyAccount"/>
   </set>
-  <set inverse="true" lazy="false" name="companies" sort="unsorted">
+  <set inverse="true" name="companies" sort="unsorted" lazy="false">
    <key>
     <column name="bankId"/>
    </key>
    <one-to-many class="com.neusoft.po.Company"/>
   </set>
-  <set inverse="true" lazy="false" name="accounts" sort="unsorted">
+  <set inverse="true" name="accounts" sort="unsorted" lazy="false">
    <key>
     <column name="createBank" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.Account"/>
   </set>
-  <set inverse="true" lazy="false" name="creditCards" sort="unsorted">
+  <set inverse="true" name="creditCards" sort="unsorted" lazy="false">
    <key>
     <column name="createBank" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.CreditCard"/>
   </set>
-  <set inverse="true" lazy="false" name="users" sort="unsorted">
+  <set inverse="true" name="users" sort="unsorted" lazy="false">
    <key>
     <column name="createBank" not-null="true"/>
    </key>

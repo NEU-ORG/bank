@@ -12,22 +12,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neusoft.po.Account;
+import com.neusoft.po.Draft;
 
 /**
- * A data access object (DAO) providing persistence and search support for
- * Account entities. Transaction control of the save(), update() and delete()
- * operations can directly support Spring container-managed transactions or they
- * can be augmented to handle user-managed Spring transactions. Each of these
- * methods provides additional information for how to configure it for the
- * desired type of transaction control.
+ * A data access object (DAO) providing persistence and search support for Draft
+ * entities. Transaction control of the save(), update() and delete() operations
+ * can directly support Spring container-managed transactions or they can be
+ * augmented to handle user-managed Spring transactions. Each of these methods
+ * provides additional information for how to configure it for the desired type
+ * of transaction control.
  * 
- * @see com.neusoft.po.Account
+ * @see com.neusoft.po.Draft
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-public class AccountDAO {
-	private static final Logger log = LoggerFactory.getLogger(AccountDAO.class);
+public class DraftDAO {
+	private static final Logger log = LoggerFactory.getLogger(DraftDAO.class);
 
 	private SessionFactory sessionFactory;
 
@@ -43,8 +43,8 @@ public class AccountDAO {
 		// do nothing
 	}
 
-	public void save(Account transientInstance) {
-		log.debug("saving Account instance");
+	public void save(Draft transientInstance) {
+		log.debug("saving Draft instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -54,8 +54,8 @@ public class AccountDAO {
 		}
 	}
 
-	public void delete(Account persistentInstance) {
-		log.debug("deleting Account instance");
+	public void delete(Draft persistentInstance) {
+		log.debug("deleting Draft instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -65,11 +65,11 @@ public class AccountDAO {
 		}
 	}
 
-	public Account findById(java.lang.Integer id) {
-		log.debug("getting Account instance with id: " + id);
+	public Draft findById(java.lang.Integer id) {
+		log.debug("getting Draft instance with id: " + id);
 		try {
-			Account instance = (Account) getCurrentSession().get(
-					"com.neusoft.po.Account", id);
+			Draft instance = (Draft) getCurrentSession().get(
+					"com.neusoft.po.Draft", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -77,11 +77,11 @@ public class AccountDAO {
 		}
 	}
 
-	public List findByExample(Account instance) {
-		log.debug("finding Account instance by example");
+	public List findByExample(Draft instance) {
+		log.debug("finding Draft instance by example");
 		try {
 			List results = getCurrentSession()
-					.createCriteria("com.neusoft.po.Account")
+					.createCriteria("com.neusoft.po.Draft")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -93,10 +93,10 @@ public class AccountDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Account instance with property: " + propertyName
+		log.debug("finding Draft instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from Account as model where model."
+			String queryString = "from Draft as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -108,9 +108,9 @@ public class AccountDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all Account instances");
+		log.debug("finding all Draft instances");
 		try {
-			String queryString = "from Account";
+			String queryString = "from Draft";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -119,11 +119,10 @@ public class AccountDAO {
 		}
 	}
 
-	public Account merge(Account detachedInstance) {
-		log.debug("merging Account instance");
+	public Draft merge(Draft detachedInstance) {
+		log.debug("merging Draft instance");
 		try {
-			Account result = (Account) getCurrentSession().merge(
-					detachedInstance);
+			Draft result = (Draft) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -132,8 +131,8 @@ public class AccountDAO {
 		}
 	}
 
-	public void attachDirty(Account instance) {
-		log.debug("attaching dirty Account instance");
+	public void attachDirty(Draft instance) {
+		log.debug("attaching dirty Draft instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -143,8 +142,8 @@ public class AccountDAO {
 		}
 	}
 
-	public void attachClean(Account instance) {
-		log.debug("attaching clean Account instance");
+	public void attachClean(Draft instance) {
+		log.debug("attaching clean Draft instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -155,7 +154,7 @@ public class AccountDAO {
 		}
 	}
 
-	public static AccountDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (AccountDAO) ctx.getBean("AccountDAO");
+	public static DraftDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (DraftDAO) ctx.getBean("DraftDAO");
 	}
 }

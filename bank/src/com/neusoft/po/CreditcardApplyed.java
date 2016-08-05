@@ -1,7 +1,6 @@
 package com.neusoft.po;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * CreditcardApplyed entity. @author MyEclipse Persistence Tools
@@ -26,7 +25,6 @@ public class CreditcardApplyed implements java.io.Serializable {
 	public CreditcardApplyed(User user, String creditCardNumber) {
 		this.user = user;
 		this.creditCardNumber = creditCardNumber;
-		this.applyDate = new Timestamp(System.currentTimeMillis());
 	}
 
 	/** full constructor */

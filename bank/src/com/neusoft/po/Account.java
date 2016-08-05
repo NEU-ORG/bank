@@ -27,6 +27,7 @@ public class Account implements java.io.Serializable {
 	private Double balance;
 	private Double availableBalance;
 	private Set payeeLists = new HashSet(0);
+	private Set payments = new HashSet(0);
 	private Set transactionDetailsForAccountId = new HashSet(0);
 	private Set transactionDetailsForTargetAccount = new HashSet(0);
 
@@ -59,7 +60,7 @@ public class Account implements java.io.Serializable {
 			String withdrawalPassword, String transactionPassword,
 			String currency, Timestamp createDate, String isSigned,
 			String status, String type, Double balance,
-			Double availableBalance, Set payeeLists,
+			Double availableBalance, Set payeeLists, Set payments,
 			Set transactionDetailsForAccountId,
 			Set transactionDetailsForTargetAccount) {
 		this.user = user;
@@ -76,6 +77,7 @@ public class Account implements java.io.Serializable {
 		this.balance = balance;
 		this.availableBalance = availableBalance;
 		this.payeeLists = payeeLists;
+		this.payments = payments;
 		this.transactionDetailsForAccountId = transactionDetailsForAccountId;
 		this.transactionDetailsForTargetAccount = transactionDetailsForTargetAccount;
 	}
@@ -200,6 +202,14 @@ public class Account implements java.io.Serializable {
 
 	public void setPayeeLists(Set payeeLists) {
 		this.payeeLists = payeeLists;
+	}
+
+	public Set getPayments() {
+		return this.payments;
+	}
+
+	public void setPayments(Set payments) {
+		this.payments = payments;
 	}
 
 	public Set getTransactionDetailsForAccountId() {

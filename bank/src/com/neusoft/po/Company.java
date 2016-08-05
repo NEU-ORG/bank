@@ -14,6 +14,7 @@ public class Company implements java.io.Serializable {
 	private Integer id;
 	private Address address;
 	private Bank bank;
+	private Group group;
 	private String companyName;
 	private String phoneNumber;
 	private Set companyAccounts = new HashSet(0);
@@ -33,10 +34,11 @@ public class Company implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Company(Address address, Bank bank, String companyName,
+	public Company(Address address, Bank bank, Group group, String companyName,
 			String phoneNumber, Set companyAccounts, Set companyOperators) {
 		this.address = address;
 		this.bank = bank;
+		this.group = group;
 		this.companyName = companyName;
 		this.phoneNumber = phoneNumber;
 		this.companyAccounts = companyAccounts;
@@ -67,6 +69,14 @@ public class Company implements java.io.Serializable {
 
 	public void setBank(Bank bank) {
 		this.bank = bank;
+	}
+
+	public Group getGroup() {
+		return this.group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	public String getCompanyName() {

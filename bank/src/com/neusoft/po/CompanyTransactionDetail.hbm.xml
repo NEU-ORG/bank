@@ -14,7 +14,7 @@
    <column name="targetAccount"/>
   </many-to-one>
   <many-to-one class="com.neusoft.po.CompanyOperator" fetch="select" name="companyOperator">
-   <column name="operatorId" not-null="true"/>
+   <column name="operatorId"/>
   </many-to-one>
   <many-to-one class="com.neusoft.po.CompanyAccount" fetch="select" name="companyAccountByAccountId">
    <column name="accountId" not-null="true"/>
@@ -35,7 +35,7 @@
    <column length="4" name="currency" not-null="true"/>
   </property>
   <property generated="never" lazy="false" name="type" type="java.lang.String">
-   <column length="3" name="type"/>
+   <column length="4" name="type"/>
   </property>
   <property generated="never" lazy="false" name="message" type="java.lang.String">
    <column length="50" name="message"/>

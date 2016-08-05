@@ -16,6 +16,7 @@ public class CompanyOperator implements java.io.Serializable {
 	private String managerName;
 	private String password;
 	private String idNumber;
+	private String type;
 	private Set companyTransactionDetails = new HashSet(0);
 
 	// Constructors
@@ -35,11 +36,13 @@ public class CompanyOperator implements java.io.Serializable {
 
 	/** full constructor */
 	public CompanyOperator(Company company, String managerName,
-			String password, String idNumber, Set companyTransactionDetails) {
+			String password, String idNumber, String type,
+			Set companyTransactionDetails) {
 		this.company = company;
 		this.managerName = managerName;
 		this.password = password;
 		this.idNumber = idNumber;
+		this.type = type;
 		this.companyTransactionDetails = companyTransactionDetails;
 	}
 
@@ -83,6 +86,14 @@ public class CompanyOperator implements java.io.Serializable {
 
 	public void setIdNumber(String idNumber) {
 		this.idNumber = idNumber;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Set getCompanyTransactionDetails() {

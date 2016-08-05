@@ -78,7 +78,7 @@ public class UserAction extends ActionSupport {
 		String result;
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		if(userName!=null&&userManager.checkOutLogin(userName, password)){
-			if(!(session.get("loginError")==null))
+			if(session.get("loginError")!=null)
 			{
 				session.remove("loginError");
 			}

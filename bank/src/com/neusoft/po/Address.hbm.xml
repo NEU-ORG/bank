@@ -22,25 +22,25 @@
   <property generated="never" lazy="false" name="type" type="java.lang.String">
    <column length="8" name="type" not-null="true"/>
   </property>
-  <set inverse="true" lazy="false" name="addresses" sort="unsorted">
+  <set inverse="true" name="addresses" sort="unsorted" lazy="false">
    <key>
     <column name="parentNode"/>
    </key>
    <one-to-many class="com.neusoft.po.Address"/>
   </set>
-  <set inverse="true" lazy="false" name="companies" sort="unsorted">
+  <set inverse="true" name="companies" sort="unsorted" lazy="false">
    <key>
     <column name="address" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.Company"/>
   </set>
-  <set inverse="true" lazy="false" name="banks" sort="unsorted">
+  <set inverse="true" name="banks" sort="unsorted" lazy="false">
    <key>
     <column name="address" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.Bank"/>
   </set>
-  <set inverse="true" lazy="false" name="users" sort="unsorted">
+  <set inverse="true" name="users" sort="unsorted" lazy="false">
    <key>
     <column name="address"/>
    </key>

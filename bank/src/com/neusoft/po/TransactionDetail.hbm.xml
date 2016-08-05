@@ -32,7 +32,7 @@
    <column length="4" name="currency" not-null="true"/>
   </property>
   <property generated="never" lazy="false" name="type" type="java.lang.String">
-   <column length="3" name="type"/>
+   <column length="4" name="type"/>
   </property>
   <property generated="never" lazy="false" name="message" type="java.lang.String">
    <column length="50" name="message"/>

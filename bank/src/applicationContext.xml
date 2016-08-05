@@ -26,7 +26,10 @@
 		</property>
 		<property name="mappingResources">
 			<list>
+			<value>com/neusoft/po/Group.hbm.xml</value>
 			<value>com/neusoft/po/Company.hbm.xml</value>
+			<value>com/neusoft/po/Payment.hbm.xml</value>
+			<value>com/neusoft/po/Draft.hbm.xml</value>
 			<value>com/neusoft/po/Admin.hbm.xml</value>
 			<value>com/neusoft/po/CompanyAccount.hbm.xml</value>
 			<value>com/neusoft/po/CompanyOperator.hbm.xml</value>
@@ -34,6 +37,7 @@
 			<value>com/neusoft/po/CreditcardApplyed.hbm.xml</value>
 			<value>com/neusoft/po/CreditCard.hbm.xml</value>
 			<value>com/neusoft/po/BillDetail.hbm.xml</value>
+			<value>com/neusoft/po/Log.hbm.xml</value>
 			<value>com/neusoft/po/TransactionDetail.hbm.xml</value>
 			<value>com/neusoft/po/Account.hbm.xml</value>
 			<value>
@@ -42,7 +46,8 @@
 			<value>com/neusoft/po/Bank.hbm.xml</value>
 			<value>com/neusoft/po/Address.hbm.xml</value>
 			<value>com/neusoft/po/PayeeList.hbm.xml</value>
-			<value>com/neusoft/po/Constant.hbm.xml</value></list>
+			<value>com/neusoft/po/Constant.hbm.xml</value>
+			<value>com/neusoft/po/Endorsement.hbm.xml</value></list>
 		</property>
 	</bean>
 	
@@ -82,7 +87,22 @@
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="GroupDAO" class="com.neusoft.dao.GroupDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	<bean id="CompanyDAO" class="com.neusoft.dao.CompanyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PaymentDAO" class="com.neusoft.dao.PaymentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DraftDAO" class="com.neusoft.dao.DraftDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
@@ -122,7 +142,12 @@
 	</bean>
 	<bean id="BillDetailDAO" class="com.neusoft.dao.BillDetailDAO">
 		<property name="sessionFactory">
-			<ref bean="sessionFactory"></ref>
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LogDAO" class="com.neusoft.dao.LogDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<bean id="TransactionDetailDAO"
@@ -158,6 +183,11 @@
 		</property>
 	</bean>
 	<bean id="ConstantDAO" class="com.neusoft.dao.ConstantDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EndorsementDAO" class="com.neusoft.dao.EndorsementDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

@@ -45,25 +45,25 @@
   <property generated="never" lazy="false" name="postCode" type="java.lang.String">
    <column length="10" name="postCode"/>
   </property>
-  <set inverse="true" lazy="false" name="creditcardApplyeds" sort="unsorted">
+  <set inverse="true" name="creditcardApplyeds" sort="unsorted" lazy="false">
    <key>
     <column name="userId" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.CreditcardApplyed"/>
   </set>
-  <set inverse="true" lazy="false" name="payeeLists" sort="unsorted">
+  <set inverse="true" name="payeeLists" sort="unsorted" lazy="false">
    <key>
     <column name="userId" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.PayeeList"/>
   </set>
-  <set inverse="true" lazy="false" name="creditCards" sort="unsorted">
+  <set inverse="true" name="creditCards" sort="unsorted" lazy="false">
    <key>
     <column name="userId" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.CreditCard"/>
   </set>
-  <set inverse="true" lazy="false" name="accounts" sort="unsorted">
+  <set inverse="true" name="accounts" sort="unsorted" lazy="false">
    <key>
     <column name="userId" not-null="true"/>
    </key>

@@ -25,6 +25,10 @@ public class CompanyAccount implements java.io.Serializable {
 	private String type;
 	private Double balance;
 	private Double availableBalance;
+	private Set endorsements = new HashSet(0);
+	private Set draftsForAcceptorAccountId = new HashSet(0);
+	private Set draftsForPayeeAccountId = new HashSet(0);
+	private Set draftsForDrawerAccountId = new HashSet(0);
 	private Set companyTransactionDetailsForAccountId = new HashSet(0);
 	private Set companyTransactionDetailsForTargetAccount = new HashSet(0);
 
@@ -56,7 +60,9 @@ public class CompanyAccount implements java.io.Serializable {
 	public CompanyAccount(Company company, Bank bank, String name,
 			String accountNumber, String transactionPassword, String currency,
 			Timestamp createDate, String isSigned, String status, String type,
-			Double balance, Double availableBalance,
+			Double balance, Double availableBalance, Set endorsements,
+			Set draftsForAcceptorAccountId, Set draftsForPayeeAccountId,
+			Set draftsForDrawerAccountId,
 			Set companyTransactionDetailsForAccountId,
 			Set companyTransactionDetailsForTargetAccount) {
 		this.company = company;
@@ -71,6 +77,10 @@ public class CompanyAccount implements java.io.Serializable {
 		this.type = type;
 		this.balance = balance;
 		this.availableBalance = availableBalance;
+		this.endorsements = endorsements;
+		this.draftsForAcceptorAccountId = draftsForAcceptorAccountId;
+		this.draftsForPayeeAccountId = draftsForPayeeAccountId;
+		this.draftsForDrawerAccountId = draftsForDrawerAccountId;
 		this.companyTransactionDetailsForAccountId = companyTransactionDetailsForAccountId;
 		this.companyTransactionDetailsForTargetAccount = companyTransactionDetailsForTargetAccount;
 	}
@@ -179,6 +189,38 @@ public class CompanyAccount implements java.io.Serializable {
 
 	public void setAvailableBalance(Double availableBalance) {
 		this.availableBalance = availableBalance;
+	}
+
+	public Set getEndorsements() {
+		return this.endorsements;
+	}
+
+	public void setEndorsements(Set endorsements) {
+		this.endorsements = endorsements;
+	}
+
+	public Set getDraftsForAcceptorAccountId() {
+		return this.draftsForAcceptorAccountId;
+	}
+
+	public void setDraftsForAcceptorAccountId(Set draftsForAcceptorAccountId) {
+		this.draftsForAcceptorAccountId = draftsForAcceptorAccountId;
+	}
+
+	public Set getDraftsForPayeeAccountId() {
+		return this.draftsForPayeeAccountId;
+	}
+
+	public void setDraftsForPayeeAccountId(Set draftsForPayeeAccountId) {
+		this.draftsForPayeeAccountId = draftsForPayeeAccountId;
+	}
+
+	public Set getDraftsForDrawerAccountId() {
+		return this.draftsForDrawerAccountId;
+	}
+
+	public void setDraftsForDrawerAccountId(Set draftsForDrawerAccountId) {
+		this.draftsForDrawerAccountId = draftsForDrawerAccountId;
 	}
 
 	public Set getCompanyTransactionDetailsForAccountId() {
