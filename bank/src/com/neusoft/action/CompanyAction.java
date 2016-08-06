@@ -31,6 +31,19 @@ public class CompanyAction {
 	private String exchangeble;
 	private String boodsmanName;
 	
+	public String logout(){
+		Map session = ActionContext.getContext().getSession();
+		session.remove("loginInfo");
+		return "login";
+	}
+	public String draftZhuisuo(){
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Set drafts = companyManager.getDraftByOwner((String)session.get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("drafts", drafts);
+		return "draftZhuisuo";
+	}
+	
 	public String draftFukuan(){
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Set drafts = companyManager.getDraftByOwner((String)session.get("loginInfo"));

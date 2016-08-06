@@ -23,36 +23,23 @@
 		<main class="mdl-layout__content">
 		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">背书转让</h2>
+				<h2 class="mdl-card__title-text">追索/清偿</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<form action="company_draftZhuanrang.action?flag='notNull'"
+				<form action="company_draftZhuisuo.action?flag='notNull'"
 					id＝"form" method="post">
-					选择转让汇票： 
+					选择待付款汇票： 
 					<select name="draftID">
 						<c:forEach var="draft" items="${drafts}">					
 							<option value="${draft.id}">${draft.id}(${draft.status})</option>							
 						</c:forEach>
-					</select><br /> <br/>
+					</select><br /> <br/><br/><br/><br/>
 					 
-					背书日期：<input name="createDate" type="datetime-local" /> <br/>
-
-					<div
-						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="sample3"
-							name="targetAccountNumber"> <label class="mdl-textfield__label"
-							for="sample3">被背书人账号...</label>
-					</div>
-					<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-						for="switch-1"> <span
-						class="mdl-switch__label">能否转让</span><input type="checkbox" id="switch-1" name="exchangeble"
-						class="mdl-switch__input" checked> 
-					</label>
 
 					<div class="mdl-card__actions">
 						<button onclick="document.getElementById('form').submit()"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-							style="float: right;">背书转让</button>
+							style="float: right;">提交追索申请</button>
 					</div>
 
 				</form>

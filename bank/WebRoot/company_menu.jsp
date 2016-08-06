@@ -4,13 +4,10 @@
     for="company_account">
     <li class="mdl-menu__item" onclick="location='company_account_info.action'">帐户查询</li>
     <li class="mdl-menu__item" onclick="location='company_transactionDetail.action'">账户明细查询</li>
-    <li class="mdl-menu__item">网银交易查询</li>
-    <li class="mdl-menu__item">对账单查询</li>
     <li class="mdl-menu__item" onclick="location='company_changeTPassword.action'">修改查询密码</li>
     <li class="mdl-menu__item" onclick="location='company_addAccount.action'">增加帐户</li>
     <li class="mdl-menu__item" onclick="location='company_deleteAccount.action'">删除帐户</li>
     <li class="mdl-menu__item" onclick="location='company_reportLoss.action'">账户挂失</li>
-    <li class="mdl-menu__item">票据挂失</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="operator">
@@ -45,13 +42,15 @@
     <li class="mdl-menu__item" onclick="location='company_draftChupiao.action'">出票</li>
     <li class="mdl-menu__item" onclick="location='company_draftZhuanrang.action'">背书转让</li>
     <li class="mdl-menu__item" onclick="location='company_draftTiexian.action'">贴现</li>
-      <li class="mdl-menu__item" onclick="location='company_draftdraftFukuan.action'">提示付款</li>
-       <li class="mdl-menu__item">追索/清偿</li>
-        <li class="mdl-menu__item">企业账号验证</li>
-         <li class="mdl-menu__item">商票扣款通知</li>
+      <li class="mdl-menu__item" onclick="location='company_draftFukuan.action'">提示付款</li>
+       <li class="mdl-menu__item" onclick="location='company_draftZhuisuo.action'">追索/清偿</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="互联">
     <li class="mdl-menu__item" >他行网银账户查询</li>
     <li class="mdl-menu__item">他行网银资金操作</li>
+</ul>
+<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+    for="setting">
+    <li class="mdl-menu__item" onclick="location='company_logout.action'">退出系统</li>
 </ul>
