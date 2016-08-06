@@ -182,7 +182,9 @@ public class JsonAction extends ActionSupport{
 												"companyTransactionDetailsForAccountId",
 												"companyTransactionDetailsForTargetAccount",
 												"companyTransactionDetails","address","company",
-												"creditCards","companyAccounts"});
+												"creditCards","companyAccounts",
+												"draftsForAcceptorAccountId","draftsForDrawerAccountId",
+												"draftsForPayeeAccountId","endorsements"});
 			jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		}
 		jsonResult = JSONObject.fromObject(map,jsonConfig);

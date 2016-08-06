@@ -53,5 +53,6 @@
 	</package>
 	<include file="creditCardStruts.xml"></include>
 	<include file="accountStruts.xml"></include>
+	<include file="CompanyGroupStruts.xml"></include>
 	<include file="Json.xml"></include>
 </struts>    

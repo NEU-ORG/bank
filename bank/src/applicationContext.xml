@@ -87,6 +87,12 @@
 		<property name="transDAO" ref="TransactionDetailDAO"></property>
 	</bean>
 	
+	<bean id="groupManager" class="com.neusoft.bo.GroupManager">
+		<property name="caDAO" ref="CompanyAccountDAO" />
+		<property name="coDAO" ref="CompanyOperatorDAO" />
+		<property name="ctDAO" ref="CompanyTransactionDetailDAO" />
+	</bean>
+	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean id="GroupDAO" class="com.neusoft.dao.GroupDAO">
 		<property name="sessionFactory">
