@@ -9,13 +9,6 @@
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 <style>
-.demo-card-event.mdl-card {
-	width: 256px;
-	height: 256px;
-	margin-top: 30px;
-	padding: 10px;
-	padding-top:40px;
-}
 </style>
 </head>
 <body>
@@ -24,75 +17,74 @@
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 		<div class="mdl-grid portfolio-max-width">
-
-                <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
-                    <div class="mdl-card__media">
-                        <img class="article-image" src=" images/example-blog07.jpg" border="0" alt="">
-                    </div>
-                    <div class="mdl-card__title ">
-                        <h2 class="mdl-card__title-text">Loren</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">
-                          View Updates
-                        </a>
-                    </div>
-                </div>
-                
-            </div>
-
-
-		
-			<c:if test="${empty creditCards}">
-				<a>您还未拥有信用卡！！</a>
-				<br />
-				<a href="creditCard_apply.action">申请信用卡</a>
-				<br />
-			</c:if>
-			<div class="mdl-grid" style="max-width:800px; text-align: center">
-				<c:forEach var="card" items="${creditCards}">
-					<div
-						class="mdl-cell mdl-cell--3-col demo-card-event mdl-card mdl-shadow--4dp">
-						<c:out value="卡号：${card.cardNumber}"></c:out>
-						<br />
-						<c:out value="类型：${card.type}"></c:out>
-						<br />
-						<c:out value="额度：${card.creditLimit}"></c:out>
-						<br />
-						<c:out value="已用额度：${card.balance}"></c:out>
-						<br />
-						<c:out value="币种：${card.currency}"></c:out>
-						<br />
-						<c:out value="状态：${card.status}"></c:out>
-						<br />
-						<c:out value="积分：${card.score}"></c:out>
-						<br />
-						<c:out value="账单日：每月${card.statementDate}号"></c:out>
-						<br />
-						<a href="creditCard_uncheckedBill.action?flag='notNull'&creditCardID=${card.id}">未出账单查询</a>
-						<a href="creditCard_checkedBill.action?flag='notNull'&creditCardID=${card.id}">已出账单查询</a>
-	
+			<c:forEach var="card" items="${creditCards}">
+				<div
+					class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact"
+					style="margin-top: 30px">
+					<div class="mdl-card__media">
+						<img class="article-image" src=" images/example-blog07.jpg"
+							border="0" alt="">
 					</div>
-				</c:forEach>
-			</div>
+					<div class="mdl-card__title ">
+						<h2 class="mdl-card__title-text">${card.name}</h2>
+					</div>
+					<div class="mdl-card__supporting-text">
+						<table>
+							<tr>
+								<td>卡号：</td>
+								<td>${card.cardNumber}</td>
+							</tr>
+							<tr>
+								<td>类型：</td>
+								<td>${card.type}</td>
+							</tr>
+							<tr>
+								<td>额度：</td>
+								<td>${card.creditLimit}</td>
+							</tr>
+							<tr>
+								<td>已用额度：</td>
+								<td>${card.balance}</td>
+							</tr>
+							<tr>
+								<td>币种：</td>
+								<td>${card.currency}</td>
+							</tr>
+							<tr>
+								<td>状态：</td>
+								<td>${card.status}</td>
+							</tr>
+							<tr>
+								<td>积分：</td>
+								<td>${card.score}</td>
+							</tr>
+							<tr>
+								<td>账单日：</td>
+								<td>每月${card.statementDate}号</td>
+							</tr>
+						</table>
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<a
+						href="creditCard_uncheckedBill.action?flag='notNull'&creditCardID=${card.id}">未出账单查询</a>
+					
+					<a
+						href="creditCard_checkedBill.action?flag='notNull'&creditCardID=${card.id}" style="float:right">已出账单查询</a>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 
-		
-
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-	
-		<%@include file="/footer.jsp"%>
-		</main>
+		<%@include file="/footer.jsp"%> </main>
 
 	</div>
 	<script src="material.min.js"></script>

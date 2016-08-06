@@ -27,6 +27,12 @@ public class UserAction extends ActionSupport {
 	private String address;
 	private String postCode;
 	
+	public String logout(){
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		session.remove("loginInfo");
+		return "login";
+	}
+	
 	public String changeUserName(){
 		Map request = (Map) ActionContext.getContext().get("request");
 		Map<String,Object> session = ActionContext.getContext().getSession();
