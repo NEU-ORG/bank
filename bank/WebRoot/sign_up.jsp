@@ -62,14 +62,14 @@
 					</div>
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" name="password"
+						<input class="mdl-textfield__input" type="password" name="password"
 							id="sample3"> <label class="mdl-textfield__label"
 							for="sample3">密码...</label>
 
 					</div>
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="sample3">
+						<input class="mdl-textfield__input" type="password" id="sample3">
 						<label class="mdl-textfield__label" for="sample3">确认密码...</label>
 
 					</div>
