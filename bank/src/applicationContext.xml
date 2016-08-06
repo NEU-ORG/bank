@@ -78,7 +78,9 @@
 		<property name="constantDao" ref="ConstantDAO" />
 		
 	</bean>
-	
+	<bean id="logManager" class="com.neusoft.bo.LogManager">
+		<property name="logDao" ref="LogDAO" />
+	</bean>
 	<bean id="accountManager" class="com.neusoft.bo.AccountManager">
 		<property name="userDAO" ref="UserDAO" />
 		<property name="accountDAO" ref="AccountDAO" />

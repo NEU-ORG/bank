@@ -29,11 +29,9 @@
 			<div class="mdl-card__title">
 				<h2 class="mdl-card__title-text">注册</h2>
 			</div>
-			<div class="mdl-card__supporting-text">
-				<c:if test="${!empty ErrorMessage}">
-					<c:out value="${ErrorMessage}" />
-				</c:if>
-				<form action="user_signUp.action"id＝"form">
+			<div class="mdl-card__supporting-text">				
+					<c:out value="${errorMessage}" />				
+				<form action="userSignUp.action"id＝"form" method="post">
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text"
@@ -74,7 +72,8 @@
 
 					</div>
 					<div class="mdl-card__actions">
-						<button onclick="location='sign_up.jsp'"
+					<a href="sign_in.jsp" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">返回登陆</a>
+						<button 
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 							style="float: right;">注册</button>
 					</div>

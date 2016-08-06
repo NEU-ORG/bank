@@ -15,6 +15,7 @@ import com.neusoft.dao.ConstantDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
 import com.neusoft.po.Admin;
+import com.neusoft.po.CompanyAccount;
 import com.neusoft.po.Constant;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -28,14 +29,29 @@ public class AdminManager {
 	//private double value;
 	private String text;
 	
-	
-	
+	public void changeTPassword(String name, String password) {
+		Admin account = (Admin)adminDao.findByProperty("name", name).get(0);
+		account.setPassword(password);
+		adminDao.attachDirty(account);
+	}
 
+	public boolean checkOutTPassword(String name, String password) {
+		Admin account = (Admin)adminDao.findByProperty("name", name).get(0);
+		if (account != null
+				&& account.getPassword().equals(password)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	
 	public List getBenefitList()
 	{
 		return constantDao.findAll();
 	}
-
+	
 	public boolean checkOutLogin(String name, String password) {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"applicationContext.xml");

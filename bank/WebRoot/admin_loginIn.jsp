@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +14,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
+<script src="material.min.js"></script>
 <style>
 .mdl-card {
 	margin-top: 100px;
@@ -17,55 +24,48 @@
 </style>
 </head>
 <body>
-	<%@include file="/company_menu.jsp"%>
+	<%-- <%@include file="/admin_menu.jsp"%> --%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<%@include file="/company_header.jsp"%>
+		<%-- <%@include file="/admin_header.jsp"%> --%>
+		<header class="mdl-layout__header portfolio-header">
+            <div class="mdl-layout__header-row "></div>
+        </header>
 		<main class="mdl-layout__content">
 		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">删除账户</h2>
+				<h2 class="mdl-card__title-text">登录</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<c:out value="${passwordError}" />
-				<c:out value="${errorMessage}"/>
-				<c:set var="passwordError" value="" />
-				<form action="company_deleteAccount.action?flag='notNull'"
-					id＝"form" method="post">
-					选择账号： 
-					<select name="accountID">
-						<c:forEach var="account" items="${companyAccounts}">
-							<c:if test="${account.isSigned!='none'}">
-							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
-							</c:if>
-						</c:forEach>
-					</select><br /> 
-					
+	
+					<c:out value="${FailLogin}" />
+					<c:set var="FailLogin" value=""/>
+				<form action="admin_signUp.action" id＝"form" method="post">
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="sample3"
-							name="password"> <label class="mdl-textfield__label"
-							for="sample3">交易密码...</label>
+							name="name"> <label class="mdl-textfield__label"
+							for="sample3">用户名...</label>
 					</div>
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="password" id="sample3"
+							name="password"> <label class="mdl-textfield__label"
+							for="sample3">密码...</label>
 
+					</div>
 					<div class="mdl-card__actions">
+						<a 
+							class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记用户名</a>
+						<a 
+							class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">忘记密码</a>
 						<button onclick="document.getElementById('form').submit()"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-							style="float: right;">删除</button>
+							style="float: right;">登录</button>
 					</div>
 
 				</form>
 			</div>
-			<div class="mdl-card__menu">
-				<button
-					class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-					取消</button>
-			</div>
 		</div>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
 		<%@include file="/footer.jsp"%> </main>
 	</div>
 	<script src="material.min.js"></script>

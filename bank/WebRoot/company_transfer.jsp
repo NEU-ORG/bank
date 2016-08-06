@@ -26,8 +26,7 @@
 				<h2 class="mdl-card__title-text">行内转账</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<c:out value="${passwordError}" />
-				<c:set var="passwordError" value="" />
+				<c:out value="${errorMessage}" />
 				<form action="company_transfer.action?flag='notNull'"
 					id＝"form" method="post">
 					选择账号： 

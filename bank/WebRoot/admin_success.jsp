@@ -27,32 +27,10 @@
 
 	<%@include file="/admin_menu.jsp"%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<header
-			class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
-		<div class="mdl-layout__header-row portfolio-logo-row">
-			<span class="mdl-layout__title">
-				<div class="portfolio-logo"></div> <span class="mdl-layout__title">Simple
-					portfolio website</span>
-			</span>
-		</div>
-		<div
-			class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
-			<button id="my-account" class="mdl-button mdl-js-button">个人信息管理</button>
-			<button id="transfer" class="mdl-button mdl-js-button">利率设置</button>
-			<button id="credit-card" class="mdl-button mdl-js-button">系统参数管理</button>
-			<button id="pay" class="mdl-button mdl-js-button">利率设置</button>
-			<button id="setting" class="mdl-button mdl-js-button">设置</button>
-		</div>
-		</header>
-		<div class="mdl-layout__drawer mdl-layout--small-screen-only">
-			<button id="my-account" class="mdl-button mdl-js-button">个人信息管理</button>
-			<button id="transfer" class="mdl-button mdl-js-button">利率设置</button>
-			<button id="credit-card" class="mdl-button mdl-js-button">系统参数管理</button>
-			<button id="pay" class="mdl-button mdl-js-button">利率设置</button>
-			<button id="setting" class="mdl-button mdl-js-button">设置</button>
-		</div>
+		<%@include file="/admin_header.jsp"%>
 		<main class="mdl-layout__content">
 		<h1>修改成功</h1>
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 		<%@include file="/footer.jsp"%> </main>
 	</div>
 	<script src="material.min.js"></script>

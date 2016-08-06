@@ -10,7 +10,6 @@
     </div>
     <div class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
         <button id="company_account" class="mdl-button mdl-js-button">账户服务</button>
-        <button id="operator" class="mdl-button mdl-js-button">客户服务</button>
 		<button id="transfer" class="mdl-button mdl-js-button">转账汇款</button>
 		<button id="pay" class="mdl-button mdl-js-button">代付业务</button>
 		<button id="jituan" class="mdl-button mdl-js-button">集团服务</button>

@@ -17,40 +17,42 @@
 </style>
 </head>
 <body>
-	<%@include file="/company_menu.jsp"%>
+	<%@include file="/admin_menu.jsp"%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<%@include file="/company_header.jsp"%>
+		<%@include file="/admin_header.jsp"%>
 		<main class="mdl-layout__content">
 		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">删除账户</h2>
+				<h2 class="mdl-card__title-text">修改密码</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
 				<c:out value="${passwordError}" />
-				<c:out value="${errorMessage}"/>
-				<c:set var="passwordError" value="" />
-				<form action="company_deleteAccount.action?flag='notNull'"
+				<form action="admin_changeTPassword.action?flag='notNull'"
 					id＝"form" method="post">
-					选择账号： 
-					<select name="accountID">
-						<c:forEach var="account" items="${companyAccounts}">
-							<c:if test="${account.isSigned!='none'}">
-							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
-							</c:if>
-						</c:forEach>
-					</select><br /> 
-					
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="sample3"
 							name="password"> <label class="mdl-textfield__label"
-							for="sample3">交易密码...</label>
+							for="sample3">原密码...</label>
 					</div>
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="password" id="sample3"
+							name="newPassword"> <label class="mdl-textfield__label"
+							for="sample3">新密码...</label>
 
+					</div>
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="password" id="sample3"
+							name="rPassword"> <label class="mdl-textfield__label"
+							for="sample3">确认密码...</label>
+
+					</div>
 					<div class="mdl-card__actions">
 						<button onclick="document.getElementById('form').submit()"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-							style="float: right;">删除</button>
+							style="float: right;">修改</button>
 					</div>
 
 				</form>
