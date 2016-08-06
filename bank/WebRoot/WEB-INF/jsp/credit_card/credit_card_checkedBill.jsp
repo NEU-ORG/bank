@@ -27,7 +27,7 @@
 				<div class="mdl-grid portfolio-max-width" id="a-card">
         		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
                     <div class="mdl-card__title ">
-                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">未出出账单查询</h2>
+                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">已出出账单查询</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
                     <c:out value="${errorMessage}"></c:out>

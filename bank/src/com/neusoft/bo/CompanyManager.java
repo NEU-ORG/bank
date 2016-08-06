@@ -143,12 +143,20 @@ public class CompanyManager {
 		CompanyAccount account = accountDao.findById(accountID);
 		List tempsList = accountDao.findByProperty("accountNumber",
 				targetAccountNumber);
-		if (!tempsList.isEmpty() && account != null) {
+		if (tempsList.isEmpty() || account == null) {
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "ÕËºÅ²»´æÔÚ£¡£¡£¡£¡");
+			return;
+		}
 			CompanyAccount targetAccount = (CompanyAccount) tempsList.get(0);
 			if (account.getStatus().equals("normal")
 					&& targetAccount.getStatus().equals("normal")) {
 				Double temp = account.getBalance();
-				if (temp >= amount) {
+				if (temp < amount) {
+					Map request = (Map) ActionContext.getContext().get("request");
+					request.put("errorMessage", "Óà¶î²»×ã£¡£¡£¡£¡");
+					return;
+				}
 					account.setBalance(temp - amount);
 					targetAccount.setBalance(targetAccount.getBalance()
 							+ amount);
@@ -170,9 +178,7 @@ public class CompanyManager {
 							.add(detail2);
 					accountDao.attachDirty(account);
 					accountDao.attachDirty(targetAccount);
-				}
 			}
-		}
 	}
 
 	public void internalTransfer(Integer accountID, Integer targetAccountID,
@@ -180,16 +186,27 @@ public class CompanyManager {
 		List operatorsList = operatorDao.findByProperty("managerName",
 				ActionContext.getContext().getSession().get("loginInfo"));
 		CompanyOperator operator=null;
-		if(!operatorsList.isEmpty()){
-			operator = (CompanyOperator) operatorsList.get(0);
+		if(operatorsList.isEmpty()){
+			
+			return;
 		}
+		operator = (CompanyOperator) operatorsList.get(0);
 		CompanyAccount account = accountDao.findById(accountID);
 		CompanyAccount targetAccount = accountDao.findById(targetAccountID);
-		if (account != null && targetAccount != null
-				&& account.getStatus().equals("normal")
-				&& targetAccount.getStatus().equals("normal")) {
+		if (account == null || targetAccount == null
+				|| !account.getStatus().equals("normal")
+				|| !targetAccount.getStatus().equals("normal")) {
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage","ÕËºÅÒÑËø¶¨£¡£¡£¡");
+			return;
+			
+		}
 			Double temp = account.getBalance();
-			if (amount!=null&&temp >= amount) {
+			if (amount!=null&&temp < amount) {
+				Map request = (Map) ActionContext.getContext().get("request");
+				request.put("errorMessage","Óà¶î²»×ã£¡£¡£¡");
+				return;
+			}
 				account.setBalance(temp - amount);
 				targetAccount.setBalance(targetAccount.getBalance() + amount);
 				account.setAvailableBalance(account.getBalance());
@@ -208,9 +225,8 @@ public class CompanyManager {
 						detail2);
 				accountDao.attachDirty(account);
 				accountDao.attachDirty(targetAccount);
-			}
+	
 			// balance is not enough.
-		}
 	}
 
 	public void reportLoss(Integer accountID) {

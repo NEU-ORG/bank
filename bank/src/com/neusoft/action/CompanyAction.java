@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.neusoft.bo.CompanyManager;
+import com.neusoft.bo.LogManager;
 import com.neusoft.po.CreditCard;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -30,9 +31,11 @@ public class CompanyAction {
 	private String acceptorAccount;
 	private String exchangeble;
 	private String boodsmanName;
+	private LogManager logManager;
 	
 	public String logout(){
 		Map session = ActionContext.getContext().getSession();
+		logManager.addLog((String)session.get("loginInfo"), "登出", "登出系统");
 		session.remove("loginInfo");
 		return "login";
 	}
@@ -92,6 +95,8 @@ public class CompanyAction {
 				exchangeble="可以转让";
 			}
 			companyManager.chupiao(boodsmanName,accountID,draftType,createDate,dueDate,amount,payeeAccount,acceptorAccount, exchangeble);
+			Map session = ActionContext.getContext().getSession();
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "汇票出票");
 		}
 		return "draftChupiao";
 	}
@@ -115,6 +120,8 @@ public class CompanyAction {
 			if (companyManager.checkOutTPassword(accountID, password)) {
 				companyManager.deleteAccount((String) ActionContext
 						.getContext().getSession().get("loginInfo"), accountID);
+				Map session = ActionContext.getContext().getSession();
+				logManager.addLog((String)session.get("loginInfo"), "信息修改", "删除账户");
 			}else{
 				Map request = (Map) ActionContext.getContext().get("request");
 				request.put("errorMessage", "密码错误！！");
@@ -137,6 +144,8 @@ public class CompanyAction {
 		if (flag != null) {
 			if (companyManager.checkOutTPassword(accountID, password)){
 				companyManager.transfer(accountID, targetAccountNumber, amount);
+				Map session = ActionContext.getContext().getSession();
+				logManager.addLog((String)session.get("loginInfo"), "交易", "银行内部转账");
 			}else{
 				request.put("errorMessage", "密码错误！！");
 			}
@@ -153,6 +162,8 @@ public class CompanyAction {
 		if (flag != null) {
 			if (companyManager.checkOutTPassword(accountID, password)){
 				companyManager.internalTransfer(accountID, targetAccountID, amount);
+				Map session = ActionContext.getContext().getSession();
+				logManager.addLog((String)session.get("loginInfo"), "交易", "公司内部转账");
 			}else{
 				request.put("errorMessage", "密码错误！！");
 			}
@@ -168,6 +179,8 @@ public class CompanyAction {
 		request.put("companyAccounts", companyAccounts);
 		if (flag != null) {
 			companyManager.reportLoss(accountID);
+			Map session = ActionContext.getContext().getSession();
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "账户挂失");
 		}
 		return "reportLoss";
 	}
@@ -182,6 +195,8 @@ public class CompanyAction {
 		if(flag!=null){
 		if (companyManager.checkOutTPassword(accountID, password)) {
 			companyManager.changeTPassword(accountID, newPassword);
+			
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "修改查询密码");
 		} else {
 			request.put("passwordError", "密码不正确！！");
 		}}
@@ -236,6 +251,8 @@ public class CompanyAction {
 			}
 			session.put("loginInfo", operatorName);
 			result = "loginSuccess";
+		
+			logManager.addLog((String)session.get("loginInfo"), "登录", "公司操作员登录");
 		} else {
 			Map request = (Map) ActionContext.getContext().get("request");
 			request.put("loginError", "用户名或密码不正确！！");
@@ -418,5 +435,11 @@ public class CompanyAction {
 
 	public void setDraftID(int draftID) {
 		this.draftID = draftID;
+	}
+	public LogManager getLogManager() {
+		return logManager;
+	}
+	public void setLogManager(LogManager logManager) {
+		this.logManager = logManager;
 	}
 }

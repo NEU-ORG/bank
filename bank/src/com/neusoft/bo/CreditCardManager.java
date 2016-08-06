@@ -1,5 +1,6 @@
 package com.neusoft.bo;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -65,7 +66,7 @@ public class CreditCardManager {
 		List users = userDao.findByProperty("userName", userName);
 		if (!users.isEmpty()) {
 			User user = (User) users.get(0);
-			CreditcardApplyed item = new CreditcardApplyed(user, cardNumber);
+			CreditcardApplyed item = new CreditcardApplyed(user, cardNumber,new Timestamp(System.currentTimeMillis()));
 			// user.getApplycreditcards().add(item);
 			applyDao.save(item);
 		}
@@ -97,18 +98,32 @@ public class CreditCardManager {
 	}
 
 	public void changeTPasssword(Integer cardID, String password) {
+		if(password==null||password.equals("")){
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "密码不能为空！！！");
+			return;
+		}
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if (creditCard != null) {
 			creditCard.setTransactionPassword(password);
 			creditCardDao.attachDirty(creditCard);
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "修改成功！");
 		}
 	}
 
 	public void changeSPassword(Integer cardID, String password) {
+		if(password==null||password.equals("")){
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "密码不能为空！！！");
+			return;
+		}
 		CreditCard creditCard = creditCardDao.findById(cardID);
 		if (creditCard != null) {
 			creditCard.setQueryPassword(password);
 			creditCardDao.attachDirty(creditCard);
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "修改成功！");
 		}
 	}
 
@@ -123,14 +138,12 @@ public class CreditCardManager {
 		}
 		Set<BillDetail> billDetails = creditCard.getBillDetails();
 		Set<BillDetail> temp = new HashSet<BillDetail>();
-		Calendar a = Calendar.getInstance();
-		a.setTime(time);
 		GregorianCalendar gc=new GregorianCalendar(); 
 		gc.setTime(time);
-		gc.add(2,-1);
+		gc.add(2,-1);//月份减一
 		Date date2 = gc.getTime();
 		gc.setTime(time);
-		gc.add(2,20);
+		gc.add(5,20);//天加20
 		Date date3 = gc.getTime();
 		for (BillDetail detail : billDetails) {
 			if (detail.getTransactionTime().after(date2)&&detail.getTransactionTime().before(time)) {

@@ -26,7 +26,7 @@
 				<h2 class="mdl-card__title-text">行内转账</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<c:out value="${errorMessage}" />
+				
 				<form action="company_transfer.action?flag='notNull'"
 					id＝"form" method="post">
 					选择账号： 
@@ -54,9 +54,9 @@
 						<input class="mdl-textfield__input" type="text" id="sample3"
 							name="password"> <label class="mdl-textfield__label"
 							for="sample3">交易密码...</label>
-					</div>
+					</div><br/>
 
-
+					<c:out value="${errorMessage }"></c:out>
 					<div class="mdl-card__actions">
 						<button onclick="document.getElementById('form').submit()"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"

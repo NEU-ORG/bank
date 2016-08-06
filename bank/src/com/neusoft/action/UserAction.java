@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.neusoft.bo.LogManager;
 import com.neusoft.bo.UserManager;
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.AddressDAO;
@@ -16,6 +17,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UserAction extends ActionSupport {
+	private LogManager logManager;
 	private String realName;
 	private String idNumber;
 	private String cardNumber;
@@ -30,7 +32,9 @@ public class UserAction extends ActionSupport {
 	
 	public String logout(){
 		Map<String,Object> session = ActionContext.getContext().getSession();
+		logManager.addLog((String)session.get("loginInfo"), "登出", "登出系统");
 		session.remove("loginInfo");
+		
 		return "login";
 	}
 	
@@ -41,6 +45,7 @@ public class UserAction extends ActionSupport {
 		if(userManager.checkOutLogin((String)session.get("loginInfo"), password)){
 			userManager.changeUserName((String)session.get("loginInfo"),userName);
 			request.put("loginInfo", userName);
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "修改登录名");
 		}else{
 			request.put("passwordError","密码不正确！！");
 		}
@@ -51,6 +56,7 @@ public class UserAction extends ActionSupport {
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		if(userManager.checkOutLogin((String)session.get("loginInfo"), password)){
 			userManager.changePassword((String)session.get("loginInfo"),newPassword);
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "修改登陆密码");
 		}else{
 			Map request = (Map) ActionContext.getContext().get("request");
 			request.put("passwordError","密码不正确！！");
@@ -74,6 +80,7 @@ public class UserAction extends ActionSupport {
 		request.put("addresses",l);
 		
 		request.put("user",userManager.getUserInfo((String) session.get("loginInfo")));
+		logManager.addLog((String)session.get("loginInfo"), "信息修改", "修改用户信息");
 		return "changeUserInfo";
 	}
 	
@@ -84,6 +91,7 @@ public class UserAction extends ActionSupport {
 		if(userName!=null&&userManager.checkOutLogin(userName, password)){
 				session.put("loginInfo",userName);
 				result = "success";
+				logManager.addLog(userName, "登录", "登入系统");
 		}else{
 			request.put("loginError","用户名或密码不正确！！");
 			result = "signIn";
@@ -96,6 +104,7 @@ public class UserAction extends ActionSupport {
 		if(userManager.checkOutRegister(realName, idNumber, cardNumber,
 				userName, password))
 		{
+			logManager.addLog(userName, "注册", "新用户注册");
 			return "success";
 		}
 		else
@@ -162,5 +171,21 @@ public class UserAction extends ActionSupport {
 	}
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+
+	public LogManager getLogManager() {
+		return logManager;
+	}
+
+	public void setLogManager(LogManager logManager) {
+		this.logManager = logManager;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 }

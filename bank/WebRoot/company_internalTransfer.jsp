@@ -26,7 +26,7 @@
 				<h2 class="mdl-card__title-text">企业内部转账</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<c:out value="${errorMessage}" />
+				
 				<form action="company_internalTransfer.action?flag='notNull'"
 					id＝"form" method="post">
 					选择账号： 
@@ -36,7 +36,7 @@
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
 							</c:if>
 						</c:forEach>
-					</select><br /> 
+					</select><br /> <br /> 
 					选择目标账号： 
 					<select name="targetAccountID">
 						<c:forEach var="account" items="${companyAccounts}">
@@ -57,7 +57,7 @@
 							name="password"> <label class="mdl-textfield__label"
 							for="sample3">交易密码...</label>
 					</div>
-
+					<c:out value="${errorMessage }"></c:out>
 
 					<div class="mdl-card__actions">
 						<button onclick="document.getElementById('form').submit()"

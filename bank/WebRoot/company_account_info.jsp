@@ -8,6 +8,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
+<style type="text/css">
+.mdl-card {
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+	min-width: 300px;
+	width: 300px;
+}
+</style>
 </head>
 <body>
 	<%@include file="/company_menu.jsp"%>
@@ -16,6 +25,7 @@
 		<main class="mdl-layout__content">
 		<div class="mdl-grid portfolio-max-width">
 			<c:forEach var="account" items="${companyAccounts}">
+			<c:if test="${account.isSigned!='none' }">
 				<div
 					class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact"
 					style="margin-top: 30px">
@@ -63,6 +73,7 @@
 						<a href="company_transactionDetail" style="float:right">交易详情查询</a>
 					</div>
 				</div>
+				</c:if>
 			</c:forEach>
 		</div>
 

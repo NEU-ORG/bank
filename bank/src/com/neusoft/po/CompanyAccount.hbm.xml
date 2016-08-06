@@ -72,13 +72,13 @@
    </key>
    <one-to-many class="com.neusoft.po.Draft"/>
   </set>
-  <set inverse="true" name="companyTransactionDetailsForAccountId" sort="unsorted" lazy="false">
+  <set inverse="true" name="companyTransactionDetailsForAccountId" sort="unsorted" lazy="false" cascade="save-update">
    <key>
     <column name="accountId" not-null="true"/>
    </key>
    <one-to-many class="com.neusoft.po.CompanyTransactionDetail"/>
   </set>
-  <set inverse="true" name="companyTransactionDetailsForTargetAccount" sort="unsorted" lazy="false">
+  <set inverse="true" name="companyTransactionDetailsForTargetAccount" sort="unsorted" lazy="false" cascade="save-update">
    <key>
     <column name="targetAccount"/>
    </key>

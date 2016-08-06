@@ -1,5 +1,6 @@
 package com.neusoft.bo;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ public class LogManager {
 		log.setOperator(operator);
 		log.setType(type);
 		log.setMessage(message);
+		log.setTime(new Timestamp(System.currentTimeMillis()));
 		logDao.save(log);
 		//log.attachDirty(log);
 	}

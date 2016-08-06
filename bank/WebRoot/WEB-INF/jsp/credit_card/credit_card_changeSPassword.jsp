@@ -26,8 +26,8 @@
 				<h2 class="mdl-card__title-text">修改查询密码</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-			<c:out value="${passwordError}"/>
-                	<c:set var="passwordError" value=""/>
+			
+                	
 				<form action="creditCard_changeSPassword.action?flag='notNull'"
 					id＝"form" method="post">
 					账号： <select name="creditCardID">
@@ -37,7 +37,7 @@
 					</select>
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="sample3"
+						<input class="mdl-textfield__input" type="password" id="sample3"
 							name="password"> <label class="mdl-textfield__label"
 							for="sample3">旧密码...</label>
 					</div>
@@ -55,6 +55,7 @@
 							for="sample3">确认密码...</label>
 
 					</div>
+					<c:out value="${errorMessage}"/>
 					<div class="mdl-card__actions">
 						<a href="#"
 							class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">取消</a>

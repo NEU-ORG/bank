@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.bo.CreditCardManager;
+import com.neusoft.bo.LogManager;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.CreditCard;
 import com.neusoft.po.User;
@@ -25,6 +26,7 @@ public class CreditCardAction extends ActionSupport {
 	private String newPassword;
 	private String flag;
 	private Date billDate;
+	private LogManager logManager;
 	public String info() {
 		Set cards = creditCardManager.getCardInfo((String) ActionContext
 				.getContext().getSession().get("loginInfo"));
@@ -34,8 +36,11 @@ public class CreditCardAction extends ActionSupport {
 	}
 
 	public String apply() {// 申请信用卡
+		
 		if(flag!=null){
+			Map session = ActionContext.getContext().getSession();
 			creditCardManager.applyCreditCard((String) ActionContext.getContext().getSession().get("loginInfo"));
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "申请信用卡");
 		}
 		return "apply";
 	}
@@ -55,6 +60,8 @@ public class CreditCardAction extends ActionSupport {
 		request.put("creditCards", cards);
 		if(flag!=null){
 			creditCardManager.reportLoss(creditCardID);
+			Map session = ActionContext.getContext().getSession();
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "信用卡挂失");
 		}
 		return "report_loss";
 	}
@@ -66,6 +73,8 @@ public class CreditCardAction extends ActionSupport {
 		request.put("creditCards", cards);
 		if(flag!=null){
 			creditCardManager.activeCard(creditCardID);
+			Map session = ActionContext.getContext().getSession();
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "激活信用卡");
 		}
 		return "active";
 	}
@@ -103,13 +112,10 @@ public class CreditCardAction extends ActionSupport {
 		request.put("cards", cards);
 		if(flag!=null){
 		if(creditCardManager.checkQueryPassword(creditCardID, password)){
-			if(session.get("passwordError")!=null)
-			{
-				session.remove("passwordError");
-			}
 			creditCardManager.changeSPassword(creditCardID,newPassword);
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "修改查询密码");
 		}else{
-			request.put("passwordError","密码不正确！！");
+			request.put("errorMessage","密码不正确！！");
 		}}
 		return "changeSPassword";
 	}
@@ -121,13 +127,10 @@ public class CreditCardAction extends ActionSupport {
 		request.put("cards", cards);
 		if(flag!=null){
 		if(creditCardManager.checkTransactionPassword(creditCardID, password)){
-			if(session.get("passwordError")!=null)
-			{
-				session.remove("passwordError");
-			}
 			creditCardManager.changeTPasssword(creditCardID,newPassword);
+			logManager.addLog((String)session.get("loginInfo"), "信息修改", "修改交易密码");
 		}else{
-			request.put("passwordError","密码不正确！！");
+			request.put("errorMessage","密码不正确！！");
 		}}
 		return "changeTPassword";
 	}
@@ -181,6 +184,14 @@ public class CreditCardAction extends ActionSupport {
 
 	public void setBillDate(Date billDate) {
 		this.billDate = billDate;
+	}
+
+	public LogManager getLogManager() {
+		return logManager;
+	}
+
+	public void setLogManager(LogManager logManager) {
+		this.logManager = logManager;
 	}
 
 }

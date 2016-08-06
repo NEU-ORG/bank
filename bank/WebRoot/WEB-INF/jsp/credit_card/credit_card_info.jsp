@@ -8,7 +8,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
-<style>
+<style type="text/css">
+.mdl-card {
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+	min-width: 300px;
+	width: 300px;
+}
 </style>
 </head>
 <body>
@@ -18,6 +25,7 @@
 		<main class="mdl-layout__content">
 		<div class="mdl-grid portfolio-max-width">
 			<c:forEach var="card" items="${creditCards}">
+				<c:if test="${card.status!='unactive' }">
 				<div
 					class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact"
 					style="margin-top: 30px">
@@ -72,6 +80,7 @@
 						href="creditCard_checkedBill.action" style="float:right">已出账单查询</a>
 					</div>
 				</div>
+				</c:if>
 			</c:forEach>
 		</div>
 		<br />
