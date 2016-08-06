@@ -1,17 +1,21 @@
 package com.neusoft.action;
 
 import java.util.List;
+import java.util.Map;
 
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.neusoft.bo.GroupManager;
+import com.neusoft.bo.LogManager;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GroupAction extends ActionSupport {
 	private String jsonResult;
 	private GroupManager groupManager;
+	private LogManager logManager;
 	
 	public String query_win() {
 		return "query_win";
@@ -35,6 +39,12 @@ public class GroupAction extends ActionSupport {
 	
 	public String wagedetail_win() {
 		return "wagedetail_win";
+	}
+	
+	public void addlogmsg(String type, String message) {
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		String operator = (String) session.get("loginInfo");
+		logManager.addLog(operator, type, message);
 	}
 	
 	public String cashsweep() {
@@ -61,6 +71,7 @@ public class GroupAction extends ActionSupport {
 				System.out.println("t2:"+t2);
 			}
 			jsonResult = "资金归集成功！";
+			this.addlogmsg("交易", "资金归集"+aid);
 		}
 		return SUCCESS;
 	}
@@ -96,8 +107,10 @@ public class GroupAction extends ActionSupport {
 				jsonResult = "账户余额不足！";
 			else if(t2 == -4)
 				jsonResult = "账户不能相同";
-			else
+			else {
 				jsonResult = "转账成功！";
+				this.addlogmsg("交易", "资金调拨"+taid);
+			}
 		}
 		return SUCCESS;
 	}
@@ -116,5 +129,13 @@ public class GroupAction extends ActionSupport {
 
 	public void setGroupManager(GroupManager groupManager) {
 		this.groupManager = groupManager;
+	}
+
+	public LogManager getLogManager() {
+		return logManager;
+	}
+
+	public void setLogManager(LogManager logManager) {
+		this.logManager = logManager;
 	}
 }
