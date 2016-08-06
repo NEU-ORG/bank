@@ -26,14 +26,14 @@
 				<h2 class="mdl-card__title-text">提示付款</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<form action="company_draftdraftFukuan.action?flag='notNull'"
+				<form action="company_draftFukuan.action?flag='notNull'"
 					id＝"form" method="post">
 					选择待付款汇票： 
 					<select name="draftID">
 						<c:forEach var="draft" items="${drafts}">					
 							<option value="${draft.id}">${draft.id}(${draft.status})</option>							
 						</c:forEach>
-					</select><br /> 
+					</select><br /> <br/><br/><br/>
 					 
 
 					<div class="mdl-card__actions">

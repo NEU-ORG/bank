@@ -15,6 +15,7 @@
 		<button id="pay" class="mdl-button mdl-js-button">代付业务</button>
 		<button id="jituan" class="mdl-button mdl-js-button">集团服务</button>
 		<button id="huipiao" class="mdl-button mdl-js-button">电子汇票</button>
+		<button id="setting" class="mdl-button mdl-js-button">设置</button>
     </div>
 </header>
 <div class="mdl-layout__drawer mdl-layout--small-screen-only">

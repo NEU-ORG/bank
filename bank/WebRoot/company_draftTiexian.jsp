@@ -33,7 +33,7 @@
 						<c:forEach var="draft" items="${drafts}">					
 							<option value="${draft.id}">${draft.id}(${draft.status})</option>							
 						</c:forEach>
-					</select><br /> 
+					</select><br /> <br/>
 					 
 					贴现日期：<input name="createDate" type="datetime-local" /> <br/>
 

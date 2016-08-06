@@ -35,12 +35,12 @@
 							<option value="${account.id}">${account.accountNumber}(${account.name})</option>
 							</c:if>
 						</c:forEach>
-					</select><br /> 
+					</select><br /> <br/>
 					汇票类型： <select name="draftType">
 						<option value="银行承兑汇票">银行承兑汇票</option>
 						<option value="商业承兑汇票">商业承兑汇票</option>
-					</select><br /> 
-					出票日：<input name="createDate" type="datetime-local" /> <br/>
+					</select><br /> <br/>
+					出票日：<input name="createDate" type="datetime-local" /> <br/><br/>
 					到期日：<input name="dueDate" type="datetime-local" />
 
 					<div
