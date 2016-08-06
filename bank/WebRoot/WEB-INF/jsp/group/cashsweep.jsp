@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>集团账户管理</title>
+<title>资金归集</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -14,8 +14,8 @@
 	margin-top: 0px;
 	margin-right: auto;
 	margin-left: auto;
-	min-width: 600px;		
-	width: 600px;
+	min-width: 700px;		
+	width: 700px;
 }
 </style>
 
@@ -30,7 +30,43 @@ $(document).ready(function() {
 		//alert("i:"+index);
 		AddTable(clist,index);
 	});
+	$("#ca-list").change(function() {
+		var index = $("#company-list option:selected").val();
+		AddTable(clist,index);
+	});
 });
+
+function cashsweep() {
+	var checklist=[];
+	var i=0;
+	$(".mycheckbox").each(function() {
+		if($(this).is(':checked')) {
+			//alert("id:"+$(this).val());
+			checklist[i]=$(this).val();
+			i++;
+		}
+	});
+	var cl = "{\"list\":[";
+	for(var i=0;i<checklist.length;i++) {
+		//alert(checklist[i]); 
+		if(i == (checklist.length-1))
+			cl = cl + checklist[i];
+		else 
+			cl = cl + checklist[i] + ',';
+	}
+	cl = cl + ']}';
+	//alert(cl);
+	var aid = $("#ca-list option:selected").val();
+	var pwd = $("#pwd").val();
+	$.post("cashsweepAction",
+			{
+				accountId:aid,
+				checklist:cl,
+				pwd:pwd,
+			},function(a,b) {
+				$("#msg-label").html(a.jsonResult);
+			},dataType="json");
+}
 
 function init() {
 	var loginInfo = "operatorName="+"<c:out value="${loginInfo}" />";
@@ -45,6 +81,7 @@ function init() {
 				//alert("success");
 				clist = data.result.companies;
 				AddSelect(clist);
+				AddSelect2(clist,-1);
 				AddTable(clist,-1);
 			} else
 				alert("status=false");
@@ -65,13 +102,39 @@ function AddSelect(data) {
 	selObj.value = -1;
 }
 
+function AddSelect2(data, index) {
+	$("#ca-list").html("");
+	var selObj = document.getElementById("ca-list");
+	if(index == -1) {
+		for(var i=0;i<data.length;i++) {
+			for(var j=0;j<data[i].companyAccounts.length;j++) {
+				selObj.options.add(new Option(data[i].companyAccounts[j].name,data[i].companyAccounts[j].id));
+			}
+		}
+	} else {
+		for(var i=0;i<data.length;i++) {
+			if(data[i].id != index)
+				continue;
+			for(var j=0;j<data[i].companyAccounts.length;j++) {
+				selObj.options.add(new Option(data[i].companyAccounts[j].name,data[i].companyAccounts[j].id));
+			}
+		}
+	}
+}
+
 function AddTable(data, index) {
+	var str1 = "<input type=\"checkbox\" class=\"mycheckbox\" class=\"mdl-switch__input\" value=\"";
+	var str2 = "\" >"
+	var noid = $("#ca-list option:selected").val();
 	$("#a-list tbody").empty();
 	var newRow;
 	if(index == -1) {
 		for(var i=0;i<data.length;i++) {
 			for(var j=0;j<data[i].companyAccounts.length;j++) {
-				newRow = "<tr><td>"+data[i].companyAccounts[j].accountNumber+
+				if(data[i].companyAccounts[j].id == noid)
+					continue;
+				newRow = "<tr><td>"+str1+data[i].companyAccounts[j].id+str2+
+						 "</td><td>"+data[i].companyAccounts[j].accountNumber+
 						 "</td><td>"+data[i].companyAccounts[j].name+
 						 "</td><td>"+data[i].companyAccounts[j].status+
 						 "</td><td>"+data[i].companyAccounts[j].type+
@@ -87,7 +150,10 @@ function AddTable(data, index) {
 			if(data[i].id != index)
 				continue;
 			for(var j=0;j<data[i].companyAccounts.length;j++) {
-				newRow = "<tr><td>"+data[i].companyAccounts[j].accountNumber+
+				if(data[i].companyAccounts[j].id == noid)
+					continue;
+				newRow = "<tr><td>"+str1+data[i].companyAccounts[j].id+str2+
+						 "</td><td>"+data[i].companyAccounts[j].accountNumber+
 						 "</td><td>"+data[i].companyAccounts[j].name+
 						 "</td><td>"+data[i].companyAccounts[j].status+
 						 "</td><td>"+data[i].companyAccounts[j].type+
@@ -110,19 +176,34 @@ function AddTable(data, index) {
 		<%@include file="/company_header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>集团账户管理:<c:out value="${loginInfo}" /></h1>
+			<h1>资金归集:<c:out value="${loginInfo}" /></h1>
 
 				<div class="mdl-grid portfolio-max-width" id="a-card">
 	        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
 	                    <div class="mdl-card__title ">
-	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">集团账户管理</h2>
+	                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">资金归集</h2>
 	                    </div>
 	                    <div class="mdl-card__supporting-text">
-							 公司：<select id="company-list"></select>
+	                    	 归集账户：<select id="ca-list"></select>
 	                    	<br /><br />
+	                    	公司：<select id="company-list"></select>
+	                    	<br />
+	                    	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<input class="mdl-textfield__input" type="password" id="pwd"
+									name="password"> <label class="mdl-textfield__label"
+									for="pwd">请输入交易密码...</label>
+							</div><br />
+							<label id="msg-label"></label>
+							<br />
+	                    	<button id="trans-button"
+								class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+								style="float:left;" onclick="cashsweep();">资金归集</button>
+							<br /><br /><br />
+							<label>集中账户：</label>
 							<table id="a-list" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 								<thead>
 								    <tr>
+								      <th></th>
 								      <th class="mdl-data-table__cell--non-numeric">账号</th>
 								      <th>账户名</th>
 								      <th>状态</th>

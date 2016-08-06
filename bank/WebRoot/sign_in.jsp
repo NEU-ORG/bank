@@ -60,8 +60,8 @@
                     <h2 class="mdl-card__title-text">登录</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
+                	
                 	<c:out value="${loginError}"/>
-                	<c:set var="loginError" value=""/>
              
                     <form action="userSignIn.action" id＝"form" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

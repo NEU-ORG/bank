@@ -40,4 +40,5 @@
     <li onclick="location='user_changeUserInfo.action'" class="mdl-menu__item">个人资料修改</li>
     <li onclick="location='user_changeUserName.jsp'" class="mdl-menu__item">修改登录名</li>
     <li onclick="location='user_changePassword.jsp'" class="mdl-menu__item">修改登录密码</li>
+    <li onclick="location='user_logout.action'" class="mdl-menu__item">退出系统</li>
 </ul>

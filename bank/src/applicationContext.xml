@@ -59,7 +59,8 @@
 		class="com.neusoft.bo.CompanyManager">
 		<property name="operatorDao" ref="CompanyOperatorDAO" />
 		<property name="accountDao" ref="CompanyAccountDAO" />
-		
+		<property name="draftDao" ref="DraftDAO" />
+		<property name="endorsementDao" ref="EndorsementDAO" />
 	</bean>
 	<bean id="creditCardManager"
 		class="com.neusoft.bo.CreditCardManager">
@@ -86,6 +87,12 @@
 		<property name="constantDAO" ref="ConstantDAO" />
 		<property name="plDAO" ref="PayeeListDAO" />
 		<property name="transDAO" ref="TransactionDetailDAO"></property>
+	</bean>
+	
+	<bean id="groupManager" class="com.neusoft.bo.GroupManager">
+		<property name="caDAO" ref="CompanyAccountDAO" />
+		<property name="coDAO" ref="CompanyOperatorDAO" />
+		<property name="ctDAO" ref="CompanyTransactionDetailDAO" />
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />

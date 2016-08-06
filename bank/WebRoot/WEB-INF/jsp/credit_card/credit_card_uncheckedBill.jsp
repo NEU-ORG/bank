@@ -8,11 +8,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
-<style>
+<style type="text/css">
 .mdl-card {
-	margin-top: 100px;
+	margin-top: 0px;
 	margin-right: auto;
 	margin-left: auto;
+	min-width: 800px;
+	width: 1600px;
 }
 </style>
 </head>
@@ -21,40 +23,62 @@
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
-		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
-			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">未出账单</h2>
-			</div>
-			<div class="mdl-card__supporting-text">
-				<form action="creditCard_uncheckedBill.action?flag='notNull'" id＝"form" method="post">
-					选择账号： <select name="creditCardID">
+		<div>
+				<div class="mdl-grid portfolio-max-width" id="a-card">
+        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
+                    <div class="mdl-card__title ">
+                        <br /><br /><h2 class="mdl-card__title-text" id="a-num">未出出账单查询</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                    <form action="creditCard_uncheckedBill.action?flag='notNull'" id＝"form" method="post">
+						选择账号： <select name="creditCardID">
 						<c:forEach var="card" items="${creditCards}">
 							<option value="${card.id}">${card.cardNumber}(${card.name})</option>
-						</c:forEach>
+						</c:forEach>			
 					</select>
-					<div class="mdl-card__actions">
-						<button onclick="document.getElementById('form').submit()"
+					<button onclick="document.getElementById('form').submit()"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-							style="float: right;">查询</button>
-					</div>
-
-				</form>
-				<c:forEach var="detail" items="${uncheckedBill}">
-					<c:out value="${detail.transactionTime}"></c:out>
-					<c:out value="${detail.amountPaid}"></c:out>
-					<c:out value="${detail.amountReceived}"></c:out>
-					<c:out value="${detail.currency}"></c:out>
-					<c:out value="${detail.type}"></c:out>
-					<c:out value="${detail.message}"></c:out>
-					<br />
-				</c:forEach>
+						>查询</button>
+					</form>
+                    	<br /><br />
+                    	
+						<br /><br /><br />
+						<table id="t-detail" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+							<thead>
+							    <tr>
+							      <th class="mdl-data-table__cell--non-numeric">交易时间</th>
+							      <th>支出</th>
+							      <th>收入</th>
+							      <th>币种</th>
+							      <th>交易类型</th>
+							      <th class="mdl-data-table__cell--non-numeric">备注</th>
+							    </tr>
+							</thead>
+							<tbody>
+							<c:forEach var="detail" items="${uncheckedBill}">
+							<tr>
+							<td>${detail.transactionTime}</td>
+							<td>${detail.amountPaid}</td>
+							<td>${detail.amountReceived}</td>
+							<td>${detail.currency}</td>
+							<td>${detail.type}</td>
+							<td>${detail.message}</td>
+							</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        
+                    </div>
+                </div>
+               
+            </div> 
 			</div>
-			<div class="mdl-card__menu">
-				<button
-					class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-					取消</button>
-			</div>
-		</div>
+			<br /><br /><br /><br /><br /><br /><br /><br /><br />
+			
+			
+		
 
 		<%@include file="/footer.jsp"%> </main>
 

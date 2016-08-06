@@ -90,6 +90,8 @@ public class AccountManager extends ActionSupport{
 			return -2;
 		}
 		Account ta = talist.get(0);
+		if(a.getId().equals(ta.getId()))
+			return -4;
 		double ab = a.getBalance();
 		double aab = a.getAvailableBalance();
 		double tab = ta.getBalance();
@@ -154,6 +156,8 @@ public class AccountManager extends ActionSupport{
 		if(!ta.getBank().getType().equals(a.getBank().getType())) {
 			return -3;
 		}
+		if(a.getId().equals(ta.getId()))
+			return -4;
 		double ab = a.getBalance();
 		double aab = a.getAvailableBalance();
 		double tab = ta.getBalance();

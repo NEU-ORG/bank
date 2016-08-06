@@ -28,7 +28,7 @@
 			<div class="mdl-card__supporting-text">
 			<c:out value="${passwordError}"/>
                 	<c:set var="passwordError" value=""/>
-				<form action="creditCard_changeSPassword.action"
+				<form action="creditCard_changeSPassword.action?flag='notNull'"
 					id＝"form" method="post">
 					账号： <select name="creditCardID">
 						<c:forEach var="card" items="${cards}">
