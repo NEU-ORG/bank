@@ -35,7 +35,7 @@
 				<br />
 				<c:out value="创建时间：${user.createDate}"></c:out>
 				<br /> --%>
-				<form action="admin_transferTimeSet" id＝"form" method="post">
+				<form action="admin_transferTimeSet?flag=mmm" id＝"form" method="post">
 				<div
 					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					大额转账时间:  ${bigTime}

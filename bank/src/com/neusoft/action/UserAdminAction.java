@@ -32,6 +32,8 @@ public class UserAdminAction  extends ActionSupport{
 	private String text;
 	private int benefitID;
 	private int id;
+	private String type;
+	private String bigTime;
 	private String flag;
 	private int nameID;
 	private int adminName;
@@ -39,6 +41,7 @@ public class UserAdminAction  extends ActionSupport{
 	private String operator;
 	private int operatorID;
 	private Date beginTime;
+	private double bigTimeSet;
 	private Date endTime;
 	public String changeTPassword() {
 		//Map<String, Object> session = ActionContext.getContext().getSession();
@@ -59,8 +62,15 @@ public class UserAdminAction  extends ActionSupport{
 		return "changeTPassword";
 	}
 	public String transferTimeSet(){
-		Map request = (Map) ActionContext.getContext().get("request");
 		
+		if(flag != null)
+		{
+			Constant a = adminManager.transferTime(bigTimeSet);
+		}
+		
+		Map request = (Map) ActionContext.getContext().get("request");
+		double b = adminManager.transferTTime();
+		request.put("bigTime", b);
 		return "transferTimeSet";
 	}
 	public String logShow() {
@@ -216,6 +226,24 @@ public class UserAdminAction  extends ActionSupport{
 	}
 	public void setOperatorID(int operatorID) {
 		this.operatorID = operatorID;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getBigTime() {
+		return bigTime;
+	}
+	public void setBigTime(String bigTime) {
+		this.bigTime = bigTime;
+	}
+	public double getBigTimeSet() {
+		return bigTimeSet;
+	}
+	public void setBigTimeSet(int bigTimeSet) {
+		this.bigTimeSet = bigTimeSet;
 	}
 	
 	
