@@ -22,6 +22,13 @@
 			<result name="transfer_win">/WEB-INF/jsp/group/grouptransfer.jsp</result>
 			<result name="transdetail_win">/WEB-INF/jsp/group/grouptransdetail.jsp</result>
 			<result name="cashsweep_win">/WEB-INF/jsp/group/cashsweep.jsp</result>
+			<result name="payroll_win">/WEB-INF/jsp/group/payroll.jsp</result>
+			<result name="wagedetail_win">/WEB-INF/jsp/group/wagedetail.jsp</result>
+		</action>
+		
+		<action name="upload" class="com.neusoft.action.PayrollAction">
+			<interceptor-ref name="mystack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/group/payroll.jsp</result>
 		</action>
 
 	</package>

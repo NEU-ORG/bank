@@ -27,8 +27,8 @@
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="pay">
-    <li class="mdl-menu__item" >代发工资</li>
-    <li class="mdl-menu__item" >代发工资查询</li>
+    <li class="mdl-menu__item" onclick="location='group_payroll_win.action'">代发工资</li>
+    <li class="mdl-menu__item" onclick="location='group_wagedetail_win.action'">代发工资查询</li>
     <li class="mdl-menu__item">费用报销和预借</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
