@@ -7,7 +7,7 @@
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="transfer">
     <li onclick="location='admin_benefitShow'"class="mdl-menu__item">查询利率</li>
-    <li onclick="location='admin_changeBenefit'"class="mdl-menu__item mdl-menu__item--full-bleed-divider">查询用户信息</li>
+    <!-- <li onclick="location='admin_message'"class="mdl-menu__item mdl-menu__item--full-bleed-divider">查询用户信息</li> -->
 
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"

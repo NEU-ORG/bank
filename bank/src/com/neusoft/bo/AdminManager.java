@@ -52,6 +52,16 @@ public class AdminManager {
 		return constantDao.findAll();
 	}
 	
+	public Constant transferTime(double bigTimeSet){
+		Constant a = (Constant)constantDao.findByProperty("text", "大额转账时间").get(0);
+		a.setValue(bigTimeSet);
+		constantDao.attachDirty(a);
+		return a;
+	}
+	public double transferTTime(){
+		Constant a = (Constant)constantDao.findByProperty("text", "大额转账时间").get(0);
+		return a.getValue();
+	}
 	public boolean checkOutLogin(String name, String password) {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"applicationContext.xml");
