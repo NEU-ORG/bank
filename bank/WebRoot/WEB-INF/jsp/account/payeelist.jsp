@@ -33,7 +33,7 @@ function init() {
 				pl = data.result;
 				AddTable(pl)
 			} else
-				alert("status=false");
+				alert("缺少数据");
 		},
 		error:function() {
 			alert("ajax error");
@@ -63,7 +63,7 @@ function AddTable(data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>收款人列表</h1>
+			<!-- <h1>收款人列表</h1> -->
 				<div class="mdl-grid portfolio-max-width" id="a-card">
         		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
                     <div class="mdl-card__title ">

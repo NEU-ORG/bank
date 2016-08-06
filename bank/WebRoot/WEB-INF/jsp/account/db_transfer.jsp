@@ -60,7 +60,7 @@ function init() {
 				var selObj = document.getElementById("user-account");
 				AddAccountSelect(selObj, alist);
 			} else
-				alert("status=false");
+				alert("缺少数据");
 		},
 		error:function() {
 			alert("ajax error");
@@ -82,7 +82,7 @@ function AddAccountSelect(selObj, data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-				<h1>跨行汇款</h1>
+				<!-- <h1>跨行汇款</h1> -->
 			
 				<div class="mdl-grid portfolio-max-width" id="a-card">
 	        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">

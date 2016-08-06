@@ -84,7 +84,7 @@ function init() {
 				AddSelect2(clist,-1);
 				AddTable(clist,-1);
 			} else
-				alert("status=false");
+				alert("缺少数据");
 		},
 		error:function() {
 			alert("ajax error");
@@ -176,7 +176,7 @@ function AddTable(data, index) {
 		<%@include file="/company_header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>资金归集:<c:out value="${loginInfo}" /></h1>
+			<%-- <h1>资金归集:<c:out value="${loginInfo}" /></h1> --%>
 
 				<div class="mdl-grid portfolio-max-width" id="a-card">
 	        		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">

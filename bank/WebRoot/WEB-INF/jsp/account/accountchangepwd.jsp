@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>交易密码修改</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -55,7 +55,7 @@ function init() {
 				var selObj = document.getElementById("user-account");
 				AddAccountSelect(selObj, alist);
 			} else
-				alert("status=false");
+				alert("缺少数据");
 		},
 		error:function() {
 			alert("ajax error");
@@ -79,7 +79,7 @@ function AddAccountSelect(selObj, data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>交易密码修改:<c:out value="${loginInfo}" /></h1>
+			<%-- <h1>交易密码修改:<c:out value="${loginInfo}" /></h1> --%>
 			
 			<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">

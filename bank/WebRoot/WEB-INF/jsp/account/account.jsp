@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>我的账户</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
 <style type="text/css">
 .mdl-card {
-	margin-top: 0px;
+	margin-top: 80px;
 	margin-right: auto;
 	margin-left: auto;
 	min-width: 300px;
@@ -45,7 +45,7 @@ function init() {
 				AddAccountCard(data.result);
 				
 			} else
-				alert("status=false");
+				alert("缺少数据");
 		},
 		error:function() {
 			alert("ajax error");
@@ -92,9 +92,11 @@ function AddAccountCard(data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			
-			<h1>我的账户:<c:out value="${loginInfo}" /></h1>
+			<%-- <h1>我的账户:<c:out value="${loginInfo}" /></h1> --%>
 			
 			<div class="mdl-grid portfolio-max-width" id="a-card"></div> 
+			
+			<br /><br />
 			
 			<%@include file="/footer.jsp"%>
 		</main>
