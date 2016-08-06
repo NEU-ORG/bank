@@ -96,6 +96,62 @@ public class GroupManager  extends ActionSupport {
 		return 0;
 	}
 	
+	public int transferall(int aid, int taid) {
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		String operator = (String) session.get("loginInfo");
+		CompanyOperator co = (CompanyOperator) coDAO.findByProperty("managerName", operator).get(0);
+		//System.out.println("o:"+operator);
+		CompanyAccount ca = caDAO.findById(aid);
+		if(ca.equals(null)) {
+			System.out.println("a null");
+			return -1;
+		}
+		CompanyAccount tca = caDAO.findById(taid);
+		if(tca.equals(null)) {
+			System.out.println("a null");
+			return -1;
+		}
+		if(ca.getId().equals(tca.getId()))
+			return -4;
+//		if(!tca.getBank().getType().equals(ca.getBank().getType())) {
+//			return -3;
+//		}
+		double ab = ca.getBalance();
+		double aab = ca.getAvailableBalance();
+		double tab = tca.getBalance();
+		double taab = tca.getAvailableBalance();
+		
+		double pay = ca.getAvailableBalance();
+		
+		ca.setAvailableBalance(aab-pay);
+		ca.setBalance(ab-pay);
+		tca.setBalance(tab+pay);
+		tca.setAvailableBalance(taab+pay);
+		caDAO.attachDirty(ca);
+		caDAO.attachDirty(tca);
+		CompanyTransactionDetail td1 = new CompanyTransactionDetail();
+		CompanyTransactionDetail td2 = new CompanyTransactionDetail();
+		td1.setCompanyOperator(co);
+		td2.setCompanyOperator(co);
+		td1.setCompanyAccountByAccountId(ca);
+		td1.setCompanyAccountByTargetAccount(tca);
+		td2.setCompanyAccountByAccountId(tca);
+		td2.setCompanyAccountByTargetAccount(ca);
+		td1.setAmountPaid(pay);
+		td1.setAmountReceived(0.00);
+		td2.setAmountPaid(0.00);
+		td2.setAmountReceived(pay);
+		td1.setBalance(ca.getBalance());
+		td2.setBalance(tca.getBalance());
+		td1.setType("×ªÕË");
+		td2.setType("ÊÕ¿î");
+		td1.setCurrency("CNY");
+		td2.setCurrency("CNY");
+		ctDAO.save(td1);
+		ctDAO.save(td2);
+		return 0;
+	}
+	
 	public CompanyAccountDAO getCaDAO() {
 		return caDAO;
 	}

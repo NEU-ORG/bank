@@ -1,5 +1,9 @@
 package com.neusoft.action;
 
+import java.util.List;
+
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.neusoft.bo.GroupManager;
@@ -19,6 +23,38 @@ public class GroupAction extends ActionSupport {
 	
 	public String transdetail_win() {
 		return "transdetail_win";
+	}
+	
+	public String cashsweep_win() {
+		return "cashsweep_win";
+	}
+	
+	public String cashsweep() {
+		String aid = ServletActionContext.getRequest().getParameter("accountId");
+		JSONObject json = JSONObject.fromObject(ServletActionContext.getRequest().getParameter("checklist"));
+		String pwd = ServletActionContext.getRequest().getParameter("pwd");
+		List l = json.getJSONArray("list");
+		System.out.println((int)l.get(0)+1);
+		System.out.println("pwd:"+pwd);
+		boolean b = (aid == null || aid.isEmpty() || 
+				 pwd == null || pwd.isEmpty() || l.size() == 0);
+		if(b) {
+			jsonResult = "请输入数据！";
+			return SUCCESS;
+		}
+		Integer id = Integer.parseInt(aid);
+		int t1 = groupManager.judgeTransPwd(id, pwd);
+		System.out.println("t1:"+t1);
+		if(t1 != 0)
+			jsonResult = "密码不正确！";
+		else {
+			for(int i=0;i<l.size();i++) {
+				int t2 = groupManager.transferall((int)l.get(i), id);
+				System.out.println("t2:"+t2);
+			}
+			jsonResult = "资金归集成功！";
+		}
+		return SUCCESS;
 	}
 	
 	public String transfer() {
