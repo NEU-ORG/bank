@@ -59,7 +59,8 @@
 		class="com.neusoft.bo.CompanyManager">
 		<property name="operatorDao" ref="CompanyOperatorDAO" />
 		<property name="accountDao" ref="CompanyAccountDAO" />
-		
+		<property name="draftDao" ref="DraftDAO" />
+		<property name="endorsementDao" ref="EndorsementDAO" />
 	</bean>
 	<bean id="creditCardManager"
 		class="com.neusoft.bo.CreditCardManager">

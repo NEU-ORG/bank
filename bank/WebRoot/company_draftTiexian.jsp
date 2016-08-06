@@ -17,69 +17,54 @@
 </style>
 </head>
 <body>
-	<%@include file="/menu.jsp"%>
+	<%@include file="/company_menu.jsp"%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<%@include file="/header.jsp"%>
+		<%@include file="/company_header.jsp"%>
 		<main class="mdl-layout__content">
 		<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 			<div class="mdl-card__title">
-				<h2 class="mdl-card__title-text">修改交易密码</h2>
+				<h2 class="mdl-card__title-text">电票贴现申请</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-			<c:out value="${passwordError}"/>
-                	<c:set var="passwordError" value=""/>
-				<form action="creditCard_changeTPassword.action?flag=notNull"
+				<form action="company_draftTiexian.action?flag='notNull'"
 					id＝"form" method="post">
-					账号： <select name="creditCardID">
-						<c:forEach var="card" items="${cards}">
-							<option value="${card.id}">${card.cardNumber}</option>
+					选择贴现汇票： 
+					<select name="draftID">
+						<c:forEach var="draft" items="${drafts}">					
+							<option value="${draft.id}">${draft.id}(${draft.status})</option>							
 						</c:forEach>
-					</select>
+					</select><br /> 
+					 
+					贴现日期：<input name="createDate" type="datetime-local" /> <br/>
+
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" type="text" id="sample3"
-							name="password"> <label class="mdl-textfield__label"
-							for="sample3">旧密码...</label>
+							name="targetAccountNumber"> <label class="mdl-textfield__label"
+							for="sample3">贴入行账号...</label>
 					</div>
-					<div
-						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="password" id="sample3"
-							name="newPassword"> <label class="mdl-textfield__label"
-							for="sample3">新密码...</label>
 
-					</div>
-					<div
-						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="password" id="sample3"
-							name="rPassword"> <label class="mdl-textfield__label"
-							for="sample3">确认密码...</label>
-
-					</div>
 					<div class="mdl-card__actions">
-						<a href="#"
-							class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">取消</a>
-
 						<button onclick="document.getElementById('form').submit()"
 							class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-							style="float: right;">修改</button>
+							style="float: right;">提交贴现申请</button>
 					</div>
 
 				</form>
 			</div>
+			<div class="mdl-card__menu">
+				<button
+					class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+					取消</button>
+			</div>
 		</div>
-
+		<br />
 		<br />
 		<br />
 		<br />
 		<br />
 		<%@include file="/footer.jsp"%> </main>
-
 	</div>
 	<script src="material.min.js"></script>
-</body>
-</html>
-</form>
-</div>
-</div>
 </body>
 </html>

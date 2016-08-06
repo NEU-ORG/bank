@@ -27,30 +27,31 @@ public class UserAction extends ActionSupport {
 	private String address;
 	private String postCode;
 	
+	public String logout(){
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		session.remove("loginInfo");
+		return "login";
+	}
+	
 	public String changeUserName(){
+		Map request = (Map) ActionContext.getContext().get("request");
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		if(userManager.checkOutLogin((String)session.get("loginInfo"), password)){
-			if(session.get("passwordError")!=null)
-			{
-				session.remove("passwordError");
-			}
 			userManager.changeUserName((String)session.get("loginInfo"),userName);
-			session.put("loginInfo", userName);
+			request.put("loginInfo", userName);
 		}else{
 			session.put("passwordError","密码不正确！！");
 		}
 		return "changeUserName";
 	}
 	public String changePassword(){
+		
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		if(userManager.checkOutLogin((String)session.get("loginInfo"), password)){
-			if(session.get("passwordError")!=null)
-			{
-				session.remove("passwordError");
-			}
 			userManager.changePassword((String)session.get("loginInfo"),newPassword);
 		}else{
-			session.put("passwordError","密码不正确！！");
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("passwordError","密码不正确！！");
 		}
 		return "changePassword";
 	}
@@ -74,18 +75,15 @@ public class UserAction extends ActionSupport {
 		return "changeUserInfo";
 	}
 	
-	public String signIn() {
+	public String signIn() {	
 		String result;
 		Map<String,Object> session = ActionContext.getContext().getSession();
+		Map request = (Map) ActionContext.getContext().get("request");
 		if(userName!=null&&userManager.checkOutLogin(userName, password)){
-			if(session.get("loginError")!=null)
-			{
-				session.remove("loginError");
-			}
 				session.put("loginInfo",userName);
 				result = "success";
 		}else{
-			session.put("loginError","用户名或密码不正确！！");
+			request.put("loginError","用户名或密码不正确！！");
 			result = "signIn";
 		}
 		return result;
@@ -106,8 +104,7 @@ public class UserAction extends ActionSupport {
 		}
 		else
 		{
-			Map<String,Object> session = ActionContext.getContext().getSession();
-			session.put("ErrorMessage", "注册信息错误");
+			request.put("ErrorMessage", "注册信息错误");
 			return "sign_up";
 		}
 	}

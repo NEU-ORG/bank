@@ -13,18 +13,83 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.CompanyAccountDAO;
 import com.neusoft.dao.CompanyOperatorDAO;
+import com.neusoft.dao.DraftDAO;
+import com.neusoft.dao.EndorsementDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
 import com.neusoft.po.CompanyAccount;
 import com.neusoft.po.CompanyOperator;
 import com.neusoft.po.CompanyTransactionDetail;
 import com.neusoft.po.CreditCard;
+import com.neusoft.po.Draft;
+import com.neusoft.po.Endorsement;
 import com.neusoft.po.User;
 import com.opensymphony.xwork2.ActionContext;
 
 public class CompanyManager {
 	private CompanyOperatorDAO operatorDao;
 	private CompanyAccountDAO accountDao;
+	private DraftDAO draftDao;
+	private EndorsementDAO endorsementDao;
+	
+	public void draftTiexian(Integer draftID,Timestamp time,String accountNumber){
+		Draft draft = draftDao.findById(draftID);
+		List accounts = accountDao.findByProperty("accountNumber", accountNumber);
+		if(accounts.isEmpty())
+			return;
+		CompanyAccount account = (CompanyAccount) accounts.get(0);
+		Endorsement endorsement = new Endorsement(null,
+				null,account,
+				draft, "贴现", time,null,
+				null, null);
+		draft.setStatus("贴现待签收");
+		draftDao.attachDirty(draft);
+		endorsementDao.save(endorsement);	
+	}
+	
+	public void draftZhuanrang(Integer draftID,Timestamp time,String accountNumber,String exchangeble){
+		Draft draft = draftDao.findById(draftID);
+		List accounts = accountDao.findByProperty("accountNumber", accountNumber);
+		if(accounts.isEmpty())
+			return;
+		CompanyAccount account = (CompanyAccount) accounts.get(0);
+		Endorsement endorsement = new Endorsement(null,
+				null,account,
+				draft, "转让", time,exchangeble,
+				null, null);
+		draft.setStatus("背书转让待签收");
+		draftDao.attachDirty(draft);
+		endorsementDao.save(endorsement);		
+	}
+	
+	public Set getDraftByOwner(String operatorName){
+		List operatorList = operatorDao.findByProperty("managerName", operatorName);
+		if(operatorList.isEmpty())
+			return null;
+		CompanyOperator operator = (CompanyOperator) operatorList.get(0);
+		Set draftsSet = new HashSet();
+		for(Object account: operator.getCompany().getCompanyAccounts()){
+			draftsSet.addAll(((CompanyAccount)account).getDraftsForPayeeAccountId());
+		}
+		return draftsSet;
+	}
+	
+	public void chupiao(String boodsmanName,Integer drawerAccountId,String type,Timestamp createdate,Timestamp duoDate,Double amount,String payeeAccountNumber,String acceptorAccountNumber,String exchangeble){
+		List list2 = accountDao.findByProperty("accountNumber", payeeAccountNumber);
+		List list3 = accountDao.findByProperty("accountNumber", acceptorAccountNumber);
+		if(!list2.isEmpty()&&!list3.isEmpty()){
+			CompanyAccount drawerAccount =accountDao.findById(drawerAccountId);
+			CompanyAccount payeeAccount =(CompanyAccount) list2.get(0);
+			CompanyAccount acceptorAccount =(CompanyAccount) list3.get(0);
+			Draft newDraft = new Draft(drawerAccount,
+					payeeAccount,
+					acceptorAccount,type,
+					createdate, duoDate, "出票已登记",
+					null,boodsmanName, amount,
+					exchangeble, null);
+			draftDao.save(newDraft);
+		}
+	}
 	
 	//0：成功；-1：operator不存在；-2：银行卡不存在
 	//-3：非本人的卡；1：已删除
@@ -113,14 +178,17 @@ public class CompanyManager {
 			Double amount) {// can not be same ID
 		List operatorsList = operatorDao.findByProperty("managerName",
 				ActionContext.getContext().getSession().get("loginInfo"));
-		CompanyOperator operator = (CompanyOperator) operatorsList.get(0);
+		CompanyOperator operator=null;
+		if(!operatorsList.isEmpty()){
+			operator = (CompanyOperator) operatorsList.get(0);
+		}
 		CompanyAccount account = accountDao.findById(accountID);
 		CompanyAccount targetAccount = accountDao.findById(targetAccountID);
 		if (account != null && targetAccount != null
 				&& account.getStatus().equals("normal")
 				&& targetAccount.getStatus().equals("normal")) {
 			Double temp = account.getBalance();
-			if (temp >= amount) {
+			if (amount!=null&&temp >= amount) {
 				account.setBalance(temp - amount);
 				targetAccount.setBalance(targetAccount.getBalance() + amount);
 				account.setAvailableBalance(account.getBalance());
@@ -244,6 +312,22 @@ public class CompanyManager {
 
 	public void setAccountDao(CompanyAccountDAO accountDao) {
 		this.accountDao = accountDao;
+	}
+
+	public DraftDAO getDraftDao() {
+		return draftDao;
+	}
+
+	public void setDraftDao(DraftDAO draftDao) {
+		this.draftDao = draftDao;
+	}
+
+	public EndorsementDAO getEndorsementDao() {
+		return endorsementDao;
+	}
+
+	public void setEndorsementDao(EndorsementDAO endorsementDao) {
+		this.endorsementDao = endorsementDao;
 	}
 
 }

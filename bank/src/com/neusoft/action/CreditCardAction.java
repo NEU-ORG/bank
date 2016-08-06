@@ -98,7 +98,7 @@ public class CreditCardAction extends ActionSupport {
 		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
 		Set<CreditCard> cards = creditCardManager.getCardInfo((String) session.get("loginInfo"));
 		request.put("cards", cards);
-		
+		if(flag!=null){
 		if(creditCardManager.checkQueryPassword(creditCardID, password)){
 			if(session.get("passwordError")!=null)
 			{
@@ -106,8 +106,8 @@ public class CreditCardAction extends ActionSupport {
 			}
 			creditCardManager.changeSPassword(creditCardID,newPassword);
 		}else{
-			session.put("passwordError","密码不正确！！");
-		}
+			request.put("passwordError","密码不正确！！");
+		}}
 		return "changeSPassword";
 	}
 
@@ -116,7 +116,7 @@ public class CreditCardAction extends ActionSupport {
 		Map<String,Object> request = (Map) ActionContext.getContext().get("request");
 		Set<CreditCard> cards = creditCardManager.getCardInfo((String) session.get("loginInfo"));
 		request.put("cards", cards);
-		
+		if(flag!=null){
 		if(creditCardManager.checkTransactionPassword(creditCardID, password)){
 			if(session.get("passwordError")!=null)
 			{
@@ -124,8 +124,8 @@ public class CreditCardAction extends ActionSupport {
 			}
 			creditCardManager.changeTPasssword(creditCardID,newPassword);
 		}else{
-			session.put("passwordError","密码不正确！！");
-		}
+			request.put("passwordError","密码不正确！！");
+		}}
 		return "changeTPassword";
 	}
 	public String returnMain(){
