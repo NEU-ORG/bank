@@ -47,7 +47,7 @@ function init() {
 			if(data.status==true) {
 				alist = data.result;
 			} else
-				alert("status=false");
+				alert("无数据");
 		},
 		error:function() {
 			alert("ajax error");
@@ -64,8 +64,8 @@ function init() {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>添加银行卡 :<c:out value="${loginInfo}" /></h1>
-			<br />
+			<%-- <h1>添加银行卡 :<c:out value="${loginInfo}" /></h1>
+			<br /> --%>
 			
 			<div class="demo-card-wide mdl-card mdl-shadow--8dp">
 					<div class="mdl-card__media">

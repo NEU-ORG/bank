@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.bo.AccountManager;
+import com.neusoft.bo.LogManager;
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.UserDAO;
 import com.neusoft.po.Account;
@@ -20,6 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AccountAction extends ActionSupport {
 	private AccountManager accountManager;
 	private String jsonResult;
+	private LogManager logManager;
 
 	public String getJsonResult() {
 		return jsonResult;
@@ -38,6 +40,12 @@ public class AccountAction extends ActionSupport {
 		System.out.println("val:"+val);
 		jsonResult = "4567";
 		return SUCCESS;
+	}
+	
+	public void addlogmsg(String type, String message) {
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		String operator = (String) session.get("loginInfo");
+		logManager.addLog(operator, type, message);
 	}
 	
 	public String paydetail_win() {
@@ -76,9 +84,12 @@ public class AccountAction extends ActionSupport {
 			}
 			else if(t2 == 1)
 				jsonResult = "账户余额不足！";
-			else
+			else {
 				jsonResult = "缴费成功！";
+				this.addlogmsg("交易", "缴费"+tanum);
+			}
 		}
+		
 		return SUCCESS;
 	}
 	
@@ -113,9 +124,11 @@ public class AccountAction extends ActionSupport {
 					jsonResult = "银行卡已经删除！";
 				if(temp2 == 0) {
 					jsonResult = "银行卡删除成功！";
+					this.addlogmsg("信息修改", "删除银行卡"+accountId);
 				}
 			}
 		}
+		
 		return SUCCESS;
 	}
 	
@@ -159,9 +172,12 @@ public class AccountAction extends ActionSupport {
 				jsonResult = "账户不能相同";
 			else if(t2 == 1)
 				jsonResult = "账户余额不足！";
-			else
+			else {
 				jsonResult = "转账成功！";
+				this.addlogmsg("交易", "跨行转账"+aid);
+			}
 		}
+		
 		return SUCCESS;
 	}
 	
@@ -203,9 +219,12 @@ public class AccountAction extends ActionSupport {
 				jsonResult = "账户不能相同";
 			else if(t2 == 1)
 				jsonResult = "账户余额不足！";
-			else
+			else {
 				jsonResult = "转账成功！";
+				this.addlogmsg("交易", "转账"+aid);
+			}
 		}
+		
 		return SUCCESS;
 	}
 	
@@ -240,6 +259,7 @@ public class AccountAction extends ActionSupport {
 				System.out.println("t2:"+temp);
 				if(temp == 0) {
 					jsonResult = "修改成功！";
+					this.addlogmsg("信息修改", "修改密码");
 				}
 			}
 		}
@@ -273,9 +293,11 @@ public class AccountAction extends ActionSupport {
 					jsonResult = "账户已经锁定！";
 				if(temp2 == 0) {
 					jsonResult = "修改成功！";
+					this.addlogmsg("信息修改", "挂失"+accountId);
 				}
 			}
 		}
+		
 		return SUCCESS;
 	}
 
@@ -303,8 +325,10 @@ public class AccountAction extends ActionSupport {
 			jsonResult = "银行卡不存在！";
 		else if(temp == 1)
 			jsonResult = "银行卡已添加！";
-		else if(temp == 0)
+		else if(temp == 0) {
 			jsonResult = "添加成功！";
+			this.addlogmsg("信息修改", "添加银行卡");
+		}
 		return SUCCESS;
 	}
 
@@ -342,6 +366,14 @@ public class AccountAction extends ActionSupport {
 
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
+	}
+
+	public LogManager getLogManager() {
+		return logManager;
+	}
+
+	public void setLogManager(LogManager logManager) {
+		this.logManager = logManager;
 	}
 	
 	

@@ -66,6 +66,7 @@
 				</form>
 			</div>
 		</div>
+		<br /><br /><br /><br /><br />
 		<%@include file="/footer.jsp"%> </main>
 	</div>
 	<script src="material.min.js"></script>

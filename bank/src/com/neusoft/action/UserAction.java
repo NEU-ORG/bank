@@ -96,6 +96,7 @@ public class UserAction extends ActionSupport {
 			request.put("loginError","用户名或密码不正确！！");
 			result = "signIn";
 		}
+		request.put("user",userManager.getUserInfo((String) session.get("loginInfo")));
 		return result;
 		
 	}

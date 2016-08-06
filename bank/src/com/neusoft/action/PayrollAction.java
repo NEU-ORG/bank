@@ -15,6 +15,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 
 import com.neusoft.bo.GroupManager;
+import com.neusoft.bo.LogManager;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,10 +24,17 @@ public class PayrollAction extends ActionSupport{
 	private String[] uploadImagesContentType; // 得到文件的类型
 	private String[] uploadImagesFileName; // 得到文件的名
 	private GroupManager groupManager;
+	private LogManager logManager;
 	
 	private String aselect;
 	private String pwd;
 
+	public void addlogmsg(String type, String message) {
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		String operator = (String) session.get("loginInfo");
+		logManager.addLog(operator, type, message);
+	}
+	
 	public String upload() throws Exception {
 //		System.out.println("aid:"+aselect);
 //		System.out.println("pwd:"+pwd);
@@ -93,6 +101,7 @@ public class PayrollAction extends ActionSupport{
 			}
 		}
 		request.put("errormsg", "代发工资成功");
+		this.addlogmsg("交易", "代发工资"+aid);
 		return "success";
 	}
 
@@ -146,5 +155,13 @@ public class PayrollAction extends ActionSupport{
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+
+	public LogManager getLogManager() {
+		return logManager;
+	}
+
+	public void setLogManager(LogManager logManager) {
+		this.logManager = logManager;
 	}
 }

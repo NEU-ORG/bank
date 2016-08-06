@@ -4,8 +4,7 @@
 	class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
 	<div class="mdl-layout__header-row portfolio-logo-row">
 		<span class="mdl-layout__title">
-			<div class="portfolio-logo"></div> <span class="mdl-layout__title">Simple
-				portfolio website</span>
+			<div class="portfolio-logo"></div> <span class="mdl-layout__title">网上银行系统</span>
 		</span>
 	</div>
 	<div

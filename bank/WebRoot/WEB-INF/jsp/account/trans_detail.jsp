@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>交易明细查询</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
 
@@ -44,7 +44,7 @@ function init() {
 				var selObj = document.getElementById("user-account");
 				AddAccountSelect(selObj, alist);
 			} else
-				alert("status=false");
+				alert("缺少数据");
 		},
 		error:function() {
 			alert("ajax error");
@@ -129,7 +129,7 @@ function AddTable(data) {
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
-			<h1>交易明细查询:<c:out value="${loginInfo}" /></h1>
+			<%-- <h1>交易明细查询:<c:out value="${loginInfo}" /></h1> --%>
 				<div class="mdl-grid portfolio-max-width" id="a-card">
         		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
                     <div class="mdl-card__title ">
