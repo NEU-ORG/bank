@@ -1,6 +1,7 @@
 package com.neusoft.action;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Session;
@@ -27,23 +28,46 @@ public class UserAdminAction  extends ActionSupport{
 	private String text;
 	private int benefitID;
 	private int id;
-	
+	private String flag;
+	private int nameID;
+	private int adminName;
+	private String newPassword;
+	public String changeTPassword() {
+		//Map<String, Object> session = ActionContext.getContext().getSession();
+		/*Set companyAccounts = companyManager
+				.getAccountInfo((String) ActionContext.getContext()
+						.getSession().get("loginInfo"));*/
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		String name = (String)session.get("loginInfo");
+		Map request = (Map) ActionContext.getContext().get("request");
+		//request.put("companyAccounts", companyAccounts);
+		if()
+		if (adminManager.checkOutTPassword(name, password)) {
+			adminManager.changeTPassword(name, newPassword);
+		} else {
+			request.put("passwordError", "ÃÜÂë²»ÕýÈ·£¡£¡");
+		}
+		return "changeTPassword";
+	}
+	public String loginOut(){
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		session.remove("loginInfo");
+		return "loginOut";
+	}
 	public String signUp(){
 		/*Map request = (Map) ActionContext.getContext().get("request");*/
 		Map<String, Object> session = ActionContext.getContext().getSession();
+		Map request = (Map)ActionContext.getContext().get("request");
 		if(adminManager.checkOutLogin(name, password))
 		{
-			if(session.get("FailLogin")!=null)
-			{
-				session.remove("FailLogin");
-			}
+			
 			session.put("loginInfo", name);
 			return "success_admin";
 		}
 		else
 		{
 			//Map<String, Object> session = ActionContext.getContext().getSession();
-			session.put("FailLogin", "µÇÂ½Ê§°Ü");
+			request.put("FailLogin", "µÇÂ½Ê§°Ü");
 			return "error2";
 		}
 	}
@@ -113,6 +137,31 @@ public class UserAdminAction  extends ActionSupport{
 	}
 	public void setBenefitID(int benefitID) {
 		this.benefitID = benefitID;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	public void setNameID(int nameID) {
+		this.nameID = nameID;
+	}
+	public void setAdminName(int adminName) {
+		this.adminName = adminName;
+	}
+	public int getNameID() {
+		return nameID;
+	}
+	public int getAdminName() {
+		return adminName;
 	}
 	
 	

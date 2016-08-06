@@ -8,6 +8,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="material.min.css" />
 <link rel="stylesheet" href="styles.css" />
+<style type="text/css">
+.mdl-card {
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+}
+</style>
 <script type="text/javascript" charset="utf8" src="js/jquery-1.10.2.min.js"></script>
 
 <script type="text/javascript">
@@ -51,11 +58,11 @@ function AddAccountsTable(tabObj, data) {
 	<%@include file="/admin_menu.jsp"%>
 	<%-- <%@include file="/menu.jsp"%> --%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<%@include file="/header.jsp"%>
+		<%@include file="/admin_header.jsp"%>
 		<main class="mdl-layout__content">
 			<div>
 			<h1>利率浏览</h1>
-			<div class="mdl-grid portfolio-max-width">
+			<div class="mdl-card mdl-grid portfolio-max-width">
 				<table id="benefit_show" 	class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 					<thead>
 				    	<tr>
@@ -67,6 +74,7 @@ function AddAccountsTable(tabObj, data) {
 				</table>
 			</div>
 			</div>
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 			<%@include file="/footer.jsp"%>
 		</main>
 	</div>
