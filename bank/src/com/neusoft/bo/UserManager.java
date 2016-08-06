@@ -88,6 +88,18 @@ public class UserManager {
 
 		if (!(account.getUser().getRealName().equals(realName) && account
 				.getUser().getIdNumber().equals(idNumber))) {
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "账号与用户信息不符！！！");
+			return false;
+		}
+		if(!account.getUser().getIsSigned().equals("none")){
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "您已经注册，请直接登录！！");
+			return false;
+		}
+		if(userName==null||password==null){
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "登录名密码不能为空！！！");
 			return false;
 		}
 		account.getUser().setUserName(userName);

@@ -22,6 +22,10 @@
 			<result name="success">/WEB-INF/jsp/main.jsp</result>
 			<result name="signIn">/sign_in.jsp</result>
 		</action>
+		<action name="userSignUp" class="com.neusoft.action.UserAction" method="signUp">		
+			<result name="success">/sign_in.jsp</result>
+			<result name="sign_up">/sign_up.jsp</result>
+		</action>
 		<action name="user_*" class="com.neusoft.action.UserAction" method="{1}">
 			<interceptor-ref name="mystack"></interceptor-ref>
 			<result name="sign_up">/sign_up.jsp</result>
@@ -39,7 +43,6 @@
 			<result name="transferTimeSet">/admin_transferTimeSet.jsp</result>
 			<result name="logList">/admin_logList.jsp</result>
 			<result name="logPartlyShow">/admin_logPartlyShow.jsp</result>
-			<result name="transferTimeSet">/admin_transferTimeSet.jsp</result>
 			
 			
 			

@@ -101,6 +101,9 @@ public class CompanyAction {
 			if (companyManager.checkOutTPassword(accountNumber, password)) {
 				companyManager.addAccount((String) ActionContext.getContext()
 						.getSession().get("loginInfo"), accountNumber);
+			}else{
+				Map request = (Map) ActionContext.getContext().get("request");
+				request.put("errorMessage", "ÃÜÂë´íÎó£¡£¡");
 			}
 		}
 		return "addAccount";
@@ -112,6 +115,9 @@ public class CompanyAction {
 			if (companyManager.checkOutTPassword(accountID, password)) {
 				companyManager.deleteAccount((String) ActionContext
 						.getContext().getSession().get("loginInfo"), accountID);
+			}else{
+				Map request = (Map) ActionContext.getContext().get("request");
+				request.put("errorMessage", "ÃÜÂë´íÎó£¡£¡");
 			}
 		}
 		Set companyAccounts = companyManager
@@ -129,7 +135,11 @@ public class CompanyAction {
 		Map request = (Map) ActionContext.getContext().get("request");
 		request.put("companyAccounts", companyAccounts);
 		if (flag != null) {
-			companyManager.transfer(accountID, targetAccountNumber, amount);
+			if (companyManager.checkOutTPassword(accountID, password)){
+				companyManager.transfer(accountID, targetAccountNumber, amount);
+			}else{
+				request.put("errorMessage", "ÃÜÂë´íÎó£¡£¡");
+			}
 		}
 		return "transfer";
 	}
@@ -141,7 +151,11 @@ public class CompanyAction {
 		Map request = (Map) ActionContext.getContext().get("request");
 		request.put("companyAccounts", companyAccounts);
 		if (flag != null) {
-			companyManager.internalTransfer(accountID, targetAccountID, amount);
+			if (companyManager.checkOutTPassword(accountID, password)){
+				companyManager.internalTransfer(accountID, targetAccountID, amount);
+			}else{
+				request.put("errorMessage", "ÃÜÂë´íÎó£¡£¡");
+			}
 		}
 		return "internalTransfer";
 	}

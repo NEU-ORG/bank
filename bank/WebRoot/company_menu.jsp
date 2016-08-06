@@ -10,23 +10,15 @@
     <li class="mdl-menu__item" onclick="location='company_reportLoss.action'">账户挂失</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-    for="operator">
-    <li class="mdl-menu__item">操作员管理</li>
-    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='account_lockwin.action'">账户权限管理</li>
-</ul>
-<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="transfer">
     <li class="mdl-menu__item" onclick="location='company_internalTransfer.action'">企业内部转账</li>
     <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="location='company_transfer.action'">行内转账</li>
-    <li class="mdl-menu__item">跨行转账</li>
-    <li class="mdl-menu__item">收款人名册</li>
     <li class="mdl-menu__item" onclick="location='company_transferDetail'">转账查询</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="pay">
-    <li class="mdl-menu__item" >代发工资</li>
-    <li class="mdl-menu__item" >代发工资查询</li>
-    <li class="mdl-menu__item">费用报销和预借</li>
+    <li class="mdl-menu__item" onclick="location='group_payroll_win.action'">代发工资</li>
+    <li class="mdl-menu__item" onclick="location='group_wagedetail_win.action'">代发工资查询</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="jituan">
@@ -34,8 +26,6 @@
     <li class="mdl-menu__item" onclick="location='group_transdetail_win.action'">账户查询</li>
     <li class="mdl-menu__item" onclick="location='group_transfer_win.action'">资金调拨</li>
     <li class="mdl-menu__item" onclick="location='group_cashsweep_win.action'">资金归集</li>
-    <li class="mdl-menu__item">结算中心支付</li>
-    <li class="mdl-menu__item">账户利息计算</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="huipiao">
@@ -44,11 +34,6 @@
     <li class="mdl-menu__item" onclick="location='company_draftTiexian.action'">贴现</li>
       <li class="mdl-menu__item" onclick="location='company_draftFukuan.action'">提示付款</li>
        <li class="mdl-menu__item" onclick="location='company_draftZhuisuo.action'">追索/清偿</li>
-</ul>
-<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-    for="互联">
-    <li class="mdl-menu__item" >他行网银账户查询</li>
-    <li class="mdl-menu__item">他行网银资金操作</li>
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="setting">

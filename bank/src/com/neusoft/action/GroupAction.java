@@ -29,6 +29,14 @@ public class GroupAction extends ActionSupport {
 		return "cashsweep_win";
 	}
 	
+	public String payroll_win() {
+		return "payroll_win";
+	}
+	
+	public String wagedetail_win() {
+		return "wagedetail_win";
+	}
+	
 	public String cashsweep() {
 		String aid = ServletActionContext.getRequest().getParameter("accountId");
 		JSONObject json = JSONObject.fromObject(ServletActionContext.getRequest().getParameter("checklist"));

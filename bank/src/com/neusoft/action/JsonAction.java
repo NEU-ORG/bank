@@ -50,6 +50,33 @@ public class JsonAction extends ActionSupport{
 		return "success";
 	}
 	
+	public String QueryComAccounts() {
+		String operatorName = ServletActionContext.getRequest().getParameter("operatorName");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		CompanyOperatorDAO operatorDAO = (CompanyOperatorDAO) ctx.getBean("CompanyOperatorDAO");
+		List<CompanyOperator> ol = operatorDAO.findByProperty("managerName", operatorName);
+		if(ol.size() != 1) {
+			System.out.println("o null error");
+			return "error";
+		}
+		Company c = ol.get(0).getCompany();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("status", true);
+		map.put("result", c);
+		JsonConfig jsonConfig = new JsonConfig();  //建立配置文件
+		jsonConfig.setIgnoreDefaultExcludes(false);  //设置默认忽略
+		jsonConfig.setExcludes(new String[]{"user","accounts","banks","bank","users",
+											"companyTransactionDetailsForAccountId",
+											"companyTransactionDetailsForTargetAccount",
+											"companyTransactionDetails","address","company",
+											"creditCards","companyOperators","group",
+											"draftsForAcceptorAccountId","draftsForDrawerAccountId",
+											"draftsForPayeeAccountId","endorsements"});
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		jsonResult = JSONObject.fromObject(map,jsonConfig);
+		return SUCCESS;
+	}
+	
 	public String QueryPayment() {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		PaymentDAO pDAO = (PaymentDAO) ctx.getBean("PaymentDAO");

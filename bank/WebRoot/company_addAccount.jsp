@@ -27,6 +27,7 @@
 			</div>
 			<div class="mdl-card__supporting-text">
 				<c:out value="${passwordError}" />
+				<c:out value="${errorMessage}"/>
 				<c:set var="passwordError" value="" />
 				<form action="company_addAccount.action?flag='notNull'"
 					id＝"form" method="post">

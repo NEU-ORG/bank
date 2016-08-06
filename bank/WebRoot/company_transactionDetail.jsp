@@ -36,7 +36,8 @@
 						<h2 class="mdl-card__title-text" id="a-num">部分日志查询</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
-						<form action="admin_transactionDetail?flag='notNull'"
+						<c:out value="${errorMessage}"></c:out>
+						<form action="company_transactionDetail?flag='notNull'"
 							id＝"form" method="post">
 							选择账户： <select name="accountID">
 								<c:forEach var="account" items="${companyAccounts}">

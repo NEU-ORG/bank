@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
@@ -221,6 +222,11 @@ public class CompanyManager {
 	}
 	
 	public Set getTransferDetail(Integer accountID, Date begin, Date end) {
+		if(begin==null||end==null){
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "请选择时间！！！！");
+			return null;
+		}
 
 		CompanyAccount account = accountDao.findById(accountID);
 		Set<CompanyTransactionDetail> out = account
@@ -236,6 +242,11 @@ public class CompanyManager {
 	}
 
 	public Set getTransactionDetail(Integer accountID, Date begin, Date end) {
+		if(begin==null||end==null){
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "请选择时间！！！！");
+			return null;
+		}
 
 		CompanyAccount account = accountDao.findById(accountID);
 		Set<CompanyTransactionDetail> out = account
