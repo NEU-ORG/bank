@@ -21,7 +21,7 @@
 			<result name="query_win">/WEB-INF/jsp/group/ComAccountQuery.jsp</result>
 			<result name="transfer_win">/WEB-INF/jsp/group/grouptransfer.jsp</result>
 			<result name="transdetail_win">/WEB-INF/jsp/group/grouptransdetail.jsp</result>
-
+			<result name="cashsweep_win">/WEB-INF/jsp/group/cashsweep.jsp</result>
 		</action>
 
 	</package>
@@ -41,6 +41,11 @@
 		
 		<action name="GroupTransferAction" class="com.neusoft.action.GroupAction"
 			method="transfer">
+			<interceptor-ref name="mystack"></interceptor-ref>
+			<result type="json">jsonResult</result>	
+		</action>
+		<action name="cashsweepAction" class="com.neusoft.action.GroupAction"
+			method="cashsweep">
 			<interceptor-ref name="mystack"></interceptor-ref>
 			<result type="json">jsonResult</result>	
 		</action>
