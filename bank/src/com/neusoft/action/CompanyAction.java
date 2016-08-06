@@ -1,5 +1,6 @@
 package com.neusoft.action;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
@@ -14,6 +15,7 @@ public class CompanyAction {
 	private String newPassword;
 	private CompanyManager companyManager;
 	private int accountID;
+	private int draftID;
 	private int targetAccountID;
 	private String accountNumber;
 	private Date beginTime;
@@ -21,6 +23,65 @@ public class CompanyAction {
 	private String flag;
 	private Double amount;
 	private String targetAccountNumber;
+	private String draftType;
+	private Timestamp createDate;
+	private Timestamp dueDate;
+	private String payeeAccount;
+	private String acceptorAccount;
+	private String exchangeble;
+	private String boodsmanName;
+	
+	public String draftFukuan(){
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Set drafts = companyManager.getDraftByOwner((String)session.get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("drafts", drafts);
+		return "draftFukuan";
+	}
+	
+	public String draftTiexian(){
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Set drafts = companyManager.getDraftByOwner((String)session.get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("drafts", drafts);
+		if(flag!=null){
+			companyManager.draftTiexian(draftID, createDate, targetAccountNumber);
+		}
+		return "draftTiexian";
+	}
+	
+	public String draftZhuanrang(){
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Set drafts = companyManager.getDraftByOwner((String)session.get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("drafts", drafts);
+		if(flag!=null){
+			if(exchangeble==null){
+				exchangeble="不可转让";
+			}else{
+				exchangeble="可以转让";
+			}
+			companyManager.draftZhuanrang(draftID,createDate,targetAccountNumber,exchangeble);
+		}
+		return "draftZhuanrang";
+	}
+	
+	public String draftChupiao(){
+		Set companyAccounts = companyManager
+				.getAccountInfo((String) ActionContext.getContext()
+						.getSession().get("loginInfo"));
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("companyAccounts", companyAccounts);
+		if(flag!=null){
+			if(exchangeble==null){
+				exchangeble="不可转让";
+			}else{
+				exchangeble="可以转让";
+			}
+			companyManager.chupiao(boodsmanName,accountID,draftType,createDate,dueDate,amount,payeeAccount,acceptorAccount, exchangeble);
+		}
+		return "draftChupiao";
+	}
 
 	public String addAccount() {
 		if (flag != null) {
@@ -91,15 +152,12 @@ public class CompanyAction {
 						.getSession().get("loginInfo"));
 		Map request = (Map) ActionContext.getContext().get("request");
 		request.put("companyAccounts", companyAccounts);
-
+		if(flag!=null){
 		if (companyManager.checkOutTPassword(accountID, password)) {
-			if (session.get("passwordError") != null) {
-				session.remove("passwordError");
-			}
 			companyManager.changeTPassword(accountID, newPassword);
 		} else {
-			session.put("passwordError", "密码不正确！！");
-		}
+			request.put("passwordError", "密码不正确！！");
+		}}
 		return "changeTPassword";
 	}
 
@@ -152,7 +210,8 @@ public class CompanyAction {
 			session.put("loginInfo", operatorName);
 			result = "loginSuccess";
 		} else {
-			session.put("loginError", "用户名或密码不正确！！");
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("loginError", "用户名或密码不正确！！");
 			result = "sign_in";
 		}
 		return result;
@@ -256,5 +315,81 @@ public class CompanyAction {
 
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	public String getPayeeAccount() {
+		return payeeAccount;
+	}
+
+	public void setPayeeAccount(String payeeAccount) {
+		this.payeeAccount = payeeAccount;
+	}
+
+	public String getAcceptorAccount() {
+		return acceptorAccount;
+	}
+
+	public void setAcceptorAccount(String acceptorAccount) {
+		this.acceptorAccount = acceptorAccount;
+	}
+
+
+
+	public String getDraftType() {
+		return draftType;
+	}
+
+	public void setDraftType(String draftType) {
+		this.draftType = draftType;
+	}
+
+	public String getBoodsmanName() {
+		return boodsmanName;
+	}
+
+	public void setBoodsmanName(String boodsmanName) {
+		this.boodsmanName = boodsmanName;
+	}
+
+	
+
+	public void setCreatedate(Timestamp createdate) {
+		this.createDate = createdate;
+	}
+
+	public Timestamp getCreatedate() {
+		return createDate;
+	}
+
+
+	public String getExchangeble() {
+		return exchangeble;
+	}
+
+	public void setExchangeble(String exchangeble) {
+		this.exchangeble = exchangeble;
+	}
+
+	public Timestamp getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Timestamp dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public Timestamp getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public int getDraftID() {
+		return draftID;
+	}
+
+	public void setDraftID(int draftID) {
+		this.draftID = draftID;
 	}
 }

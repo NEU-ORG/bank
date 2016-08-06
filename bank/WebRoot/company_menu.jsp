@@ -42,12 +42,10 @@
 </ul>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
     for="huipiao">
-    <li class="mdl-menu__item"">出票</li>
-    <li class="mdl-menu__item ">保证</li>
-    <li class="mdl-menu__item">背书转让</li>
-    <li class="mdl-menu__item">贴现/赎回</li>
-     <li class="mdl-menu__item">质押解质押</li>
-      <li class="mdl-menu__item">提示付款</li>
+    <li class="mdl-menu__item" onclick="location='company_draftChupiao.action'">出票</li>
+    <li class="mdl-menu__item" onclick="location='company_draftZhuanrang.action'">背书转让</li>
+    <li class="mdl-menu__item" onclick="location='company_draftTiexian.action'">贴现</li>
+      <li class="mdl-menu__item" onclick="location='company_draftdraftFukuan.action'">提示付款</li>
        <li class="mdl-menu__item">追索/清偿</li>
         <li class="mdl-menu__item">企业账号验证</li>
          <li class="mdl-menu__item">商票扣款通知</li>

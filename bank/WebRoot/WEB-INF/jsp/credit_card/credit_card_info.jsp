@@ -23,7 +23,26 @@
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<%@include file="/header.jsp"%>
 		<main class="mdl-layout__content">
+		<div class="mdl-grid portfolio-max-width">
 
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-card  mdl-card mdl-shadow--4dp portfolio-blog-card-compact">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src=" images/example-blog07.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title ">
+                        <h2 class="mdl-card__title-text">Loren</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+                          View Updates
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
 
 
 		

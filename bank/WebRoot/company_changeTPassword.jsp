@@ -29,7 +29,6 @@
                 </div>
                 <div class="mdl-card__supporting-text">
              		<c:out value="${passwordError}"/>
-                	<c:set var="passwordError" value=""/>
                     <form action="company_changeTPassword.action?flag='notNull'" id＝"form" method="post">
                     	选择账号： <select name="accountID">
 						<c:forEach var="account" items="${companyAccounts}">
