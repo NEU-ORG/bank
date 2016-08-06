@@ -36,6 +36,14 @@
 			<result name="success">/admin_success.jsp</result>
 			<result name="loginOut">/admin_loginIn.jsp</result>
 			<result name="changeTPassword">/admin_changePassword.jsp</result>
+			<result name="transferTimeSet">/admin_transferTimeSet.jsp</result>
+			<result name="logList">/admin_logList.jsp</result>
+			<result name="logPartlyShow">/admin_logPartlyShow.jsp</result>
+			<result name="transferTimeSet">/admin_transferTimeSet.jsp</result>
+			
+			
+			
+			
 			<!-- <result name="{1}">/admin_{1}.jsp</result>  -->
 <!-- 			<result name=""> -->
 			<!-- <result name="signUp">/sign_up.jsp</result>-->

@@ -1,5 +1,7 @@
 package com.neusoft.action;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.neusoft.bo.AdminManager;
+import com.neusoft.bo.LogManager;
 import com.neusoft.dao.AccountDAO;
 import com.neusoft.dao.AdminDAO;
 import com.neusoft.dao.UserDAO;
@@ -22,6 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UserAdminAction  extends ActionSupport{
 	private AdminManager adminManager;
+	private LogManager logManager;
 	private String name;
 	private String password;
 	private double value;
@@ -32,6 +36,10 @@ public class UserAdminAction  extends ActionSupport{
 	private int nameID;
 	private int adminName;
 	private String newPassword;
+	private String operator;
+	private int operatorID;
+	private Date beginTime;
+	private Date endTime;
 	public String changeTPassword() {
 		//Map<String, Object> session = ActionContext.getContext().getSession();
 		/*Set companyAccounts = companyManager
@@ -41,13 +49,35 @@ public class UserAdminAction  extends ActionSupport{
 		String name = (String)session.get("loginInfo");
 		Map request = (Map) ActionContext.getContext().get("request");
 		//request.put("companyAccounts", companyAccounts);
-		if()
-		if (adminManager.checkOutTPassword(name, password)) {
-			adminManager.changeTPassword(name, newPassword);
-		} else {
-			request.put("passwordError", "密码不正确！！");
+		if(flag!=null){
+			if (adminManager.checkOutTPassword(name, password)) {
+				adminManager.changeTPassword(name, newPassword);
+			} else {
+				request.put("passwordError", "密码不正确！！");
+			}
 		}
 		return "changeTPassword";
+	}
+	public String transferTimeSet(){
+		Map request = (Map) ActionContext.getContext().get("request");
+		
+		return "transferTimeSet";
+	}
+	public String logShow() {
+		List logList = logManager.getLogList();
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("logList", logList);
+		return "logList";
+	}
+	public String logPartlyShow(){
+		//Map<String, Object> session = ActionContext.getContext().getSession();
+		
+		Map request = (Map) ActionContext.getContext().get("request");
+		if (flag != null) {
+			List transactionDetails = logManager.getTransactionDetail(beginTime, endTime);
+			request.put("transactionDetails", transactionDetails);
+		}
+		return "logPartlyShow";
 	}
 	public String loginOut(){
 		Map<String, Object> session = ActionContext.getContext().getSession();
@@ -75,12 +105,6 @@ public class UserAdminAction  extends ActionSupport{
 	{
 		return "benefitShow";
 	}
-	//public String 
-/*	public String setCurrent()
-	{
-		adminManager.currentBenefitSet(value);
-		return "";
-	}*/
 	public String changeBenefit()
 	{
 		Map<String, Object> request = (Map)ActionContext.getContext().get("request");
@@ -162,6 +186,36 @@ public class UserAdminAction  extends ActionSupport{
 	}
 	public int getAdminName() {
 		return adminName;
+	}
+	public LogManager getLogManager() {
+		return logManager;
+	}
+	public void setLogManager(LogManager logManager) {
+		this.logManager = logManager;
+	}
+	public String getOperator() {
+		return operator;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	public Date getBeginTime() {
+		return beginTime;
+	}
+	public void setBeginTime(Date beginTime) {
+		this.beginTime = beginTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	public int getOperatorID() {
+		return operatorID;
+	}
+	public void setOperatorID(int operatorID) {
+		this.operatorID = operatorID;
 	}
 	
 	

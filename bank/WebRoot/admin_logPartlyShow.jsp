@@ -19,9 +19,9 @@
 </style>
 </head>
 <body>
-	<%@include file="/company_menu.jsp"%>
+	<%@include file="/admin_menu.jsp"%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<%@include file="/company_header.jsp"%>
+		<%@include file="/admin_header.jsp"%>
 		<main class="mdl-layout__content">
 
 
@@ -33,18 +33,18 @@
 					<div class="mdl-card__title ">
 						<br />
 						<br />
-						<h2 class="mdl-card__title-text" id="a-num">部分日志查询</h2>
+						<h2 class="mdl-card__title-text" id="a-num">交易详情</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
-						<form action="admin_transactionDetail?flag='notNull'"
+						<form action="admin_logPartlyShow?flag='notNull'"
 							id＝"form" method="post">
-							选择账户： <select name="accountID">
-								<c:forEach var="account" items="${companyAccounts}">
+<%-- 							选择用户： <select name="operatorID">
+								<c:forEach var="account" items="${operators}">
 									<c:if test="${account.isSigned!='none'}">
-										<option value="${account.id}">${account.accountNumber}(${account.name})</option>
+										<option value="${account.id}">${account.operator}</option>
 									</c:if>
 								</c:forEach>
-							</select><br />
+							</select><br /> --%>
 							<br /> 开始日期：<input type="date" name="beginTime" /><br />
 							<br /> 结束日期：<input type="date" name="endTime" /><br />
 							<button onclick="document.getElementById('form').submit()"
@@ -59,24 +59,18 @@
 							class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 							<thead>
 								<tr>
-									<th class="mdl-data-table__cell--non-numeric">交易时间</th>
-									<th>操作人</th>
-									<th>支出</th>
-									<th>收入</th>
-									<th>币种</th>
+									<th class="mdl-data-table__cell--non-numeric">交易人</th>
 									<th>交易类型</th>
-									<th class="mdl-data-table__cell--non-numeric">备注</th>
+									<th>交易时间</th>
+									<th class="mdl-data-table__cell--non-numeric">交易信息</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="detail" items="${transactionDetails}">
 									<tr>
-										<td>${detail.transactionTime}</td>
-										<td>${detail.companyOperator.managerName}</td>
-										<td>${detail.amountPaid}</td>
-										<td>${detail.amountReceived}</td>
-										<td>${detail.currency}</td>
+										<td>${detail.operator}</td>
 										<td>${detail.type}</td>
+										<td>${detail.time}</td>
 										<td>${detail.message}</td>
 									</tr>
 								</c:forEach>
