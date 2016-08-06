@@ -36,6 +36,7 @@
 						<h2 class="mdl-card__title-text" id="a-num">交易详情</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
+						<c:out value="${errorMessage}"></c:out>
 						<form action="company_transactionDetail?flag='notNull'"
 							id＝"form" method="post">
 							选择账号： <select name="accountID">

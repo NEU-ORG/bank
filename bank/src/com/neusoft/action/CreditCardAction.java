@@ -1,5 +1,6 @@
 package com.neusoft.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class CreditCardAction extends ActionSupport {
 	private String password;
 	private String newPassword;
 	private String flag;
+	private Date billDate;
 	public String info() {
 		Set cards = creditCardManager.getCardInfo((String) ActionContext
 				.getContext().getSession().get("loginInfo"));
@@ -74,9 +76,10 @@ public class CreditCardAction extends ActionSupport {
 		Map request = (Map) ActionContext.getContext().get("request");
 		request.put("creditCards", cards);
 		
-	
-		//CreditCardBill checkedBill = creditCardManager.getCheckedBill(creditCardID);
-		//request.put("checkedBill",checkedBill);
+		if(flag!=null){
+			request.put("bill", creditCardManager.getCheckedBill(creditCardID,billDate));
+		}
+
 		return "checkedBill";
 	}
 
@@ -170,6 +173,14 @@ public class CreditCardAction extends ActionSupport {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	public Date getBillDate() {
+		return billDate;
+	}
+
+	public void setBillDate(Date billDate) {
+		this.billDate = billDate;
 	}
 
 }

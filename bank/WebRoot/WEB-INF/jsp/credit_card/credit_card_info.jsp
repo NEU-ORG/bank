@@ -69,7 +69,7 @@
 						href="creditCard_uncheckedBill.action?flag='notNull'&creditCardID=${card.id}">未出账单查询</a>
 					
 					<a
-						href="creditCard_checkedBill.action?flag='notNull'&creditCardID=${card.id}" style="float:right">已出账单查询</a>
+						href="creditCard_checkedBill.action" style="float:right">已出账单查询</a>
 					</div>
 				</div>
 			</c:forEach>

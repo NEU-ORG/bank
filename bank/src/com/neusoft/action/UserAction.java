@@ -26,6 +26,7 @@ public class UserAction extends ActionSupport {
 	private String email;
 	private String address;
 	private String postCode;
+	private String flag;
 	
 	public String logout(){
 		Map<String,Object> session = ActionContext.getContext().getSession();
@@ -36,11 +37,12 @@ public class UserAction extends ActionSupport {
 	public String changeUserName(){
 		Map request = (Map) ActionContext.getContext().get("request");
 		Map<String,Object> session = ActionContext.getContext().getSession();
+		
 		if(userManager.checkOutLogin((String)session.get("loginInfo"), password)){
 			userManager.changeUserName((String)session.get("loginInfo"),userName);
 			request.put("loginInfo", userName);
 		}else{
-			session.put("passwordError","密码不正确！！");
+			request.put("passwordError","密码不正确！！");
 		}
 		return "changeUserName";
 	}
@@ -98,7 +100,6 @@ public class UserAction extends ActionSupport {
 		}
 		else
 		{
-			request.put("ErrorMessage", "注册信息错误");
 			return "sign_up";
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -18,6 +19,8 @@ import com.neusoft.po.BillDetail;
 import com.neusoft.po.CreditCard;
 import com.neusoft.po.CreditcardApplyed;
 import com.neusoft.po.User;
+import com.neusoft.vo.CreditCardBill;
+import com.opensymphony.xwork2.ActionContext;
 
 public class CreditCardManager {
 	private UserDAO userDao;
@@ -41,6 +44,7 @@ public class CreditCardManager {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 
@@ -108,11 +112,47 @@ public class CreditCardManager {
 		}
 	}
 
-	public void getCheckedBill(Integer cardID) {
+	public CreditCardBill getCheckedBill(Integer cardID,Date time) {
 		CreditCard creditCard = creditCardDao.findById(cardID);
-		if (creditCard != null) {
-			Set<BillDetail> billDetails = creditCard.getBillDetails();
+		if(creditCard==null)
+			return null;
+		if(time==null){
+			Map request = (Map) ActionContext.getContext().get("request");
+			request.put("errorMessage", "«Î—°‘Ò’Àµ•»’£°£°£°");
+			return null;
 		}
+		Set<BillDetail> billDetails = creditCard.getBillDetails();
+		Set<BillDetail> temp = new HashSet<BillDetail>();
+		Calendar a = Calendar.getInstance();
+		a.setTime(time);
+		GregorianCalendar gc=new GregorianCalendar(); 
+		gc.setTime(time);
+		gc.add(2,-1);
+		Date date2 = gc.getTime();
+		gc.setTime(time);
+		gc.add(2,20);
+		Date date3 = gc.getTime();
+		for (BillDetail detail : billDetails) {
+			if (detail.getTransactionTime().after(date2)&&detail.getTransactionTime().before(time)) {
+				temp.add((BillDetail) detail);
+			}
+		}
+		double statement_balance=0;
+		double amount_paid = 0;
+		double amount_received = 0;
+		
+		for (BillDetail detail : temp) {
+			if(detail.getBalance()>statement_balance){
+				statement_balance = detail.getBalance();
+			}
+			amount_paid += detail.getAmountPaid();
+			amount_received += detail.getAmountReceived();
+		}
+		double min_payment = statement_balance/10;
+		return new CreditCardBill(time.toLocaleString(), date3.toLocaleString(), "CNY",
+				statement_balance,min_payment,
+				amount_paid,
+				amount_received);
 	}
 
 	public Set<BillDetail> getUncheckedBill(Integer cardID) {
@@ -132,7 +172,6 @@ public class CreditCardManager {
 				date = gc.getTime();
 			}
 			
-			System.out.println(date);
 			for (BillDetail detail : billDetails) {
 				if (detail.getTransactionTime().after(date)) {
 					uncheckedBill.add((BillDetail) detail);
